@@ -35,9 +35,11 @@ export const HeaderNavUl = styled.ul`
   margin-left: 40px;
   li {
     font-size: 1.5rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 15px;
     cursor: pointer;
     &:hover {
-      text-decoration: underline solid;
+      background-color: rgba(255, 255, 255, 0.2);
       color: #00aad9;
     }
   }
@@ -55,7 +57,7 @@ export const HeaderLogin = styled.div`
   justify-content: center;
   gap: 10px;
 `;
-export const BotaoEntrar = styled.button`
+export const HeaderLoginBotao = styled.button`
   background-color: transparent;
   padding: 0.5rem 1.5rem;
   border-radius: 15px;
@@ -65,20 +67,8 @@ export const BotaoEntrar = styled.button`
   border: none;
   color: #f9f9f9;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
-`;
-export const BotaoCadastrar = styled.button`
-  background-color: transparent;
-  padding: 0.5rem 1.5rem;
-  border-radius: 15px;
-  cursor: pointer;
-  font-size: 1.5rem;
-  font-style: italic;
-  border: none;
-  color: #f9f9f9;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #00aad9;
   }
 `;
 

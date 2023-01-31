@@ -17,7 +17,7 @@ const Footer = () => {
       <FooterComponent>
         <FooterLogo src={logo} alt="logo" />
         <FooterTexto>
-          REC - Filmes <sup>©</sup>, Alguns direitos reservados.
+          REC <sup>©</sup>, Alguns direitos reservados.
         </FooterTexto>
         <FooterSociais>
           <SociaisImg src={instagram} alt="instagram" />

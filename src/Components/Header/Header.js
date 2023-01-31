@@ -1,10 +1,9 @@
 import React from "react";
 import {
-  BotaoCadastrar,
-  BotaoEntrar,
   HeaderComponent,
   HeaderLink,
   HeaderLogin,
+  HeaderLoginBotao,
   HeaderLogo,
   HeaderNav,
   HeaderNavUl,
@@ -72,9 +71,9 @@ const Header = () => {
         </HeaderNavUl>
       </HeaderNav>
       <HeaderLogin>
-        <BotaoEntrar onClick={abrirModalLogin}>Entrar</BotaoEntrar>
+        <HeaderLoginBotao onClick={abrirModalLogin}>Entrar</HeaderLoginBotao>
         <Link to="/cadastro">
-          <BotaoCadastrar>Cadastrar</BotaoCadastrar>
+          <HeaderLoginBotao>Cadastrar</HeaderLoginBotao>
         </Link>
         <HeaderPesquisarContainer onSubmit={pesquisar}>
           <HeaderPesquisarContainerBarra>

@@ -8,8 +8,8 @@ export const ContainerFormulario = styled.form`
   align-items: center;
   flex-direction: column;
   margin: 0 auto;
-  margin-bottom: 100px;
   height: 100vh;
+  margin-top: 100px;
   ${responsivo(breakpoints.desktop)} {
     padding: 0 50px;
   }

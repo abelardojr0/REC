@@ -16,11 +16,11 @@ export const LoginModal = styled.div`
   width: 400px;
   padding: 40px;
   position: relative;
-  height: 60vh;
+  height: 50vh;
   margin: 20px;
-  background-color: #0f2451;
+  background-color: rgba(255, 255, 255, 0.5);
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   border-radius: 15px;
@@ -28,7 +28,7 @@ export const LoginModal = styled.div`
 `;
 
 export const LoginBotaoFechar = styled.button`
-  background-color: #00f4ff;
+  background-color: #068ecc;
   font-size: 1.5rem;
   width: 40px;
   height: 40px;
@@ -36,9 +36,11 @@ export const LoginBotaoFechar = styled.button`
   position: absolute;
   top: -5px;
   right: -5px;
+  color: #f9f9f9;
+  border: none;
   cursor: pointer;
   &:hover {
-    background-color: #00aad9;
+    transform: scale(1.05);
   }
 `;
 
@@ -66,9 +68,10 @@ export const LoginBotaoEntrar = styled.button`
   border-radius: 10px;
   margin-top: 20px;
   width: 100%;
+  border: none;
   cursor: pointer;
   &:hover {
-    background-color: #0a3094;
+    transform: scale(1.05);
   }
 `;
 

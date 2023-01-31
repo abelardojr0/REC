@@ -24,26 +24,6 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
               ))}
           </Carousel>
         </>
-
-        // <ContainerCardsContainer>
-        //   <ContainerCardsContainerConteudo>
-        //     <ContainerCardsTituloSection>{titulo}</ContainerCardsTituloSection>
-        //     <ContainerCardsContainerLista>
-        //       {lista &&
-        //         lista.map((filme) => (
-        //           <li key={filme.title}>
-        //             <Card
-        //               titulo={filme.title}
-        //               imagem={filme.poster_path}
-        //               nota={filme.vote_average}
-        //               id={filme.id}
-        //               tipo={"movie"}
-        //             />
-        //           </li>
-        //         ))}
-        //     </ContainerCardsContainerLista>
-        //   </ContainerCardsContainerConteudo>
-        // </ContainerCardsContainer>
       )}
       {tipo === "serie" && (
         <>
@@ -63,25 +43,6 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
               ))}
           </Carousel>
         </>
-        // <ContainerCardsContainer>
-        //   <ContainerCardsContainerConteudo>
-        //     <ContainerCardsTituloSection>{titulo}</ContainerCardsTituloSection>
-        //     <ContainerCardsContainerLista>
-        //       {lista &&
-        //         lista.map((serie) => (
-        //           <li key={serie.title}>
-        //             <CardSerie
-        //               titulo={serie.name}
-        //               imagem={serie.poster_path}
-        //               nota={serie.vote_average}
-        //               id={serie.id}
-        //               tipo={"tv"}
-        //             />
-        //           </li>
-        //         ))}
-        //     </ContainerCardsContainerLista>
-        //   </ContainerCardsContainerConteudo>
-        // </ContainerCardsContainer>
       )}
     </>
   );
