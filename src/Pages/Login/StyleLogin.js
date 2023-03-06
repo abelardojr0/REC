@@ -13,12 +13,11 @@ export const LoginModalContainer = styled.div`
 `;
 
 export const LoginModal = styled.div`
-  width: 400px;
+  width: 300px;
   padding: 40px;
   position: relative;
-  height: 50vh;
   margin: 20px;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -28,7 +27,7 @@ export const LoginModal = styled.div`
 `;
 
 export const LoginBotaoFechar = styled.button`
-  background-color: #068ecc;
+  background-color: transparent;
   font-size: 1.5rem;
   width: 40px;
   height: 40px;
@@ -52,8 +51,9 @@ export const LoginFormulario = styled.form`
   width: 100%;
 `;
 export const LoginTitulo = styled.h1`
-  font-size: 3rem;
-  color: #f9f9f9;
+  font-size: 2rem;
+  color: #000600;
+  text-transform: uppercase;
   margin-bottom: 20px;
   margin-top: 20px;
 `;

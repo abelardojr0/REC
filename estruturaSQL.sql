@@ -1,0 +1,10 @@
+CREATE TABLE filmes(
+	id INT GENERATED ALWAYS AS IDENTITY,
+	titulo VARCHAR(255) NOT NULL,
+	imagem VARCHAR(255),
+	nota VARCHAR(5),
+	tipo VARCHAR(45),
+	id_api VARCHAR(45),
+	
+	PRIMARY KEY (id)
+)

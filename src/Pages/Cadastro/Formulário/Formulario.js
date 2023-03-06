@@ -14,10 +14,29 @@ import {
 import facebook from "../../../Images/logo_facebook.png";
 import google from "../../../Images/logo_google.png";
 import { EntrarCom, FormularioSociais } from "../../Login/StyleLogin";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Formulario = () => {
-  function finalizar() {
-    window.history.pushState({}, null, "/finalizado");
+  const navigate = useNavigate();
+  const [usuario, setUsuario] = React.useState();
+  const [email, setEmail] = React.useState();
+  const [senha, setSenha] = React.useState();
+  function finalizar(e) {
+    e.preventDefault();
+    axios
+      .post("http://localhost:5000/inserirUsuario", {
+        usuario,
+        email,
+        senha,
+      })
+      .then((response) => {
+        console.log(response);
+        navigate("/finalizado");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   return (
     <>
@@ -32,6 +51,7 @@ const Formulario = () => {
           id={"usuario"}
           tamanho={"grande"}
           required={true}
+          setDados={setUsuario}
         />
         <Input
           htmlFor={"email"}
@@ -41,6 +61,7 @@ const Formulario = () => {
           id={"email"}
           tamanho={"grande"}
           required
+          setDados={setEmail}
         />
         <Input
           htmlFor={"senha"}
@@ -50,6 +71,7 @@ const Formulario = () => {
           id={"senha"}
           tamanho={"grande"}
           required
+          setDados={setSenha}
         />
         <Input
           htmlFor={"confirmarSenha"}
@@ -59,6 +81,7 @@ const Formulario = () => {
           id={"confirmarSenha"}
           tamanho={"grande"}
           required
+          setDados={setSenha}
         />
         <Botao type="submit">Cadastrar</Botao>
 

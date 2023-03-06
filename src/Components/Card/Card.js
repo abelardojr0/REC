@@ -1,12 +1,11 @@
 import React from "react";
 import { LinksApi } from "../../ConsultasParaApi";
 import {
-  CardAdicionar,
   CardAdicionarTexto,
+  CardBotao,
   CardComponent,
   CardContainerInfos,
   CardContainerNota,
-  CardDetalhes,
   CardDivDasEstrelas,
   CardDivInfos,
   CardFavorito,
@@ -17,17 +16,44 @@ import star from "../../Images/estrela.png";
 import favorito from "../../Images/favorito.png";
 import adicionar from "../../Images/adicionar.png";
 import detalhes from "../../Images/detalhes.png";
-
+import assistido_img from "../../Images/assistido.png";
+import axios from "axios";
 const img = LinksApi.IMG;
 
 const Card = ({ titulo, imagem, nota, id, tipo }) => {
   const [habilitando, setHabilitando] = React.useState("");
-
+  const [assistido, setAssistido] = React.useState(false);
+  React.useEffect(() => {
+    axios.get("http://localhost:5000/filmes").then((response) => {
+      response.data.forEach((filme) => {
+        if (filme[1] === titulo) {
+          setAssistido(true);
+        }
+      });
+    }, []);
+  });
   function habilitandoInfos() {
     setHabilitando("ativo");
   }
   function desabilitandoInfos() {
     setHabilitando("");
+  }
+  function marcarAssistido() {
+    setAssistido(true);
+    axios
+      .post("http://localhost:5000/inserirFilme", {
+        titulo,
+        imagem,
+        nota,
+        tipo,
+        id_api: id,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   return (
     <>
@@ -46,14 +72,20 @@ const Card = ({ titulo, imagem, nota, id, tipo }) => {
           </CardDivDasEstrelas>
           <CardTitulo to={`/${tipo}/${id}`}>{titulo}</CardTitulo>
           <CardContainerInfos>
-            <CardAdicionar>
-              <img src={adicionar} alt="adicionar" />
-              <CardAdicionarTexto>Assistidos</CardAdicionarTexto>
-            </CardAdicionar>
-            <CardDetalhes to={`/${tipo}/${id}`}>
+            <CardBotao>
+              {assistido ? (
+                <img src={assistido_img} alt="icon-assistido" />
+              ) : (
+                <>
+                  <CardAdicionarTexto onClick={marcarAssistido}>
+                    <img src={adicionar} alt="adicionar" />
+                  </CardAdicionarTexto>
+                </>
+              )}
+            </CardBotao>
+            <CardBotao to={`/${tipo}/${id}`}>
               <img src={detalhes} alt="more" />
-              Detalhes
-            </CardDetalhes>
+            </CardBotao>
           </CardContainerInfos>
         </CardDivInfos>
       </CardComponent>

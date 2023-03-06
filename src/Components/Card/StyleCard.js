@@ -9,6 +9,13 @@ export const CardComponent = styled.div`
   position: relative;
 `;
 
+export const CardCarregando = styled.div`
+  background-color: #000600;
+  height: 300px;
+  width: 250px;
+  border-radius: 15px;
+`;
+
 export const CardImagem = styled.img`
   padding: 1rem;
   width: 100%;
@@ -75,10 +82,12 @@ export const CardFavorito = styled.img`
 
 export const CardContainerInfos = styled.div`
   height: 100%;
+  width: 95%;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 10px;
+  /* flex-direction: column; */
   margin-bottom: 5px;
 `;
 export const CardTitulo = styled(Link)`
@@ -94,14 +103,11 @@ export const CardTitulo = styled(Link)`
   }
 `;
 
-export const CardDetalhes = styled(Link)`
+export const CardBotao = styled(Link)`
   text-decoration: none;
   text-align: center;
-  padding: 0.5rem 0.8rem;
-  background-color: #b33737;
   border-radius: 10px;
   border: none;
-  width: 70%;
   margin-bottom: 5px;
   margin-top: 5px;
   font-size: 1.2rem;
@@ -110,30 +116,31 @@ export const CardDetalhes = styled(Link)`
   justify-content: center;
   align-items: center;
   gap: 15px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   img {
     max-width: 30px;
   }
-  &:visited {
-    color: black;
-  }
   &:hover {
-    color: white;
+    transform: scale(1.05);
   }
 `;
 export const CardAdicionar = styled.div`
-  background-color: #005da8;
+  /* background-color: #005da8; */
+  background-color: rgba(255, 255, 255, 0.4);
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 10px;
-  padding: 0.5rem 0.8rem;
+  padding: 0.2rem 0.5rem;
   margin-top: 10px;
   color: black;
   gap: 5px;
   font-size: 1.2rem;
-
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   &:hover {
     color: white;

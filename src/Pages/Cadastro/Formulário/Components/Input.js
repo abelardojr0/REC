@@ -1,7 +1,16 @@
 import React from "react";
 import { LabelInput, InputComponent, InputContainer } from "./StylesInput";
 
-const Input = ({ htmlFor, texto, tipo, nome, id, tamanho, placeholder }) => {
+const Input = ({
+  htmlFor,
+  texto,
+  tipo,
+  nome,
+  id,
+  tamanho,
+  placeholder,
+  setDados,
+}) => {
   const [focus, setFocus] = React.useState("");
   function inputFocado() {
     setFocus("ativo");
@@ -12,6 +21,9 @@ const Input = ({ htmlFor, texto, tipo, nome, id, tamanho, placeholder }) => {
     } else {
       setFocus("");
     }
+  }
+  function atualizar(e) {
+    setDados(e.target.value);
   }
   return (
     <>
@@ -26,6 +38,7 @@ const Input = ({ htmlFor, texto, tipo, nome, id, tamanho, placeholder }) => {
             required
             onFocus={inputFocado}
             onBlur={inputDesfocado}
+            onChange={atualizar}
           />
           <LabelInput className={focus} htmlFor={htmlFor}>
             {texto}

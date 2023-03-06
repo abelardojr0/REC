@@ -31,22 +31,23 @@ export const HeaderNavUl = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
   margin-left: 40px;
   li {
-    font-size: 1.5rem;
+    font-size: 1rem;
     padding: 0.5rem 1.5rem;
     border-radius: 15px;
     cursor: pointer;
     &:hover {
-      background-color: rgba(255, 255, 255, 0.2);
+      /* background-color: rgba(255, 255, 255, 0.2); */
       color: #00aad9;
+      text-decoration: underline;
     }
   }
 `;
 
 export const HeaderLink = styled(Link)`
   text-decoration: none;
+  color: #f9f9f9;
   &:visited {
     color: #f9f9f9;
   }
@@ -123,5 +124,54 @@ export const HeaderPesquisarBotao = styled.button`
   cursor: pointer;
   &:hover {
     transform: scale(1.1);
+  }
+`;
+
+export const HeaderMenuUsuario = styled.div`
+  background-color: #0c1f24;
+  padding: 0.5rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+`;
+export const HeaderMenuAberto = styled.div`
+  z-index: 3;
+  background-color: #e2e2e2;
+  width: 142px;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  font-weight: bold;
+  padding: 1rem;
+  gap: 10px;
+  position: absolute;
+  top: 75px;
+  right: 20px;
+`;
+
+export const HeaderItensMenuAberto = styled(Link)`
+  cursor: pointer;
+  color: black;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  &:hover {
+    text-decoration: underline;
+  }
+  img {
+    max-width: 20px;
   }
 `;

@@ -5,6 +5,7 @@ import {
   HeaderLogin,
   HeaderLoginBotao,
   HeaderLogo,
+  HeaderMenuUsuario,
   HeaderNav,
   HeaderNavUl,
   HeaderPesquisarBotao,
@@ -19,9 +20,11 @@ import Login from "../../Pages/Login/Login";
 const Header = () => {
   const [loginStatus, setLoginStatus] = React.useState(false);
   const [ativa, setAtiva] = React.useState("");
-
   const [search, setSearch] = React.useState("");
+  const [menuAberto, setMenuAberto] = React.useState();
   const navigate = useNavigate();
+  const nome_usuario = localStorage.getItem("nome");
+  const id_usuario = localStorage.getItem("id");
 
   function pesquisar(e) {
     e.preventDefault();
@@ -47,6 +50,7 @@ const Header = () => {
       setAtiva("");
     }
   }
+  function abrirMenu() {}
 
   return (
     <HeaderComponent>
@@ -64,17 +68,34 @@ const Header = () => {
           <HeaderLink to="/series">
             <li>Séries</li>
           </HeaderLink>
-
-          <li>Meus Filmes</li>
-          <li>Minhas Séries</li>
-          <li>Lista de Desejos</li>
+          {nome_usuario && (
+            <>
+              <li>Meus Filmes</li>
+              <li>Minhas Séries</li>
+              <li>Lista de Desejos</li>
+            </>
+          )}
         </HeaderNavUl>
       </HeaderNav>
       <HeaderLogin>
-        <HeaderLoginBotao onClick={abrirModalLogin}>Entrar</HeaderLoginBotao>
-        <Link to="/cadastro">
-          <HeaderLoginBotao>Cadastrar</HeaderLoginBotao>
-        </Link>
+        {nome_usuario ? (
+          <>
+            <HeaderMenuUsuario onClick={abrirMenu}>
+              {nome_usuario[0].toLocaleUpperCase()}
+            </HeaderMenuUsuario>
+          </>
+        ) : (
+          <>
+            {" "}
+            <HeaderLoginBotao onClick={abrirModalLogin}>
+              Entrar
+            </HeaderLoginBotao>
+            <Link to="/cadastro">
+              <HeaderLoginBotao>Cadastrar</HeaderLoginBotao>
+            </Link>
+          </>
+        )}
+
         <HeaderPesquisarContainer onSubmit={pesquisar}>
           <HeaderPesquisarContainerBarra>
             <HeaderPesquisarInput
