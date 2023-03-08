@@ -55,19 +55,25 @@ const FilmeDetalhes = ({
               <FilmeDetalhesLi>
                 Generos:{" "}
                 {generos.map((genero) => (
-                  <FilmeDetalhesSpan>{genero.name} | </FilmeDetalhesSpan>
+                  <FilmeDetalhesSpan key={genero.name}>
+                    {genero.name} |{" "}
+                  </FilmeDetalhesSpan>
                 ))}
               </FilmeDetalhesLi>
               <FilmeDetalhesLi>
                 Produtoras:{" "}
                 {produtoras.map((produtora) => (
-                  <FilmeDetalhesSpan>{produtora.name} | </FilmeDetalhesSpan>
+                  <FilmeDetalhesSpan key={produtora.name}>
+                    {produtora.name} |{" "}
+                  </FilmeDetalhesSpan>
                 ))}{" "}
               </FilmeDetalhesLi>
               <FilmeDetalhesLi>
                 Criadores:{" "}
                 {criadores.map((criador) => (
-                  <FilmeDetalhesSpan>{criador.name} | </FilmeDetalhesSpan>
+                  <FilmeDetalhesSpan key={criador.name}>
+                    {criador.name} |{" "}
+                  </FilmeDetalhesSpan>
                 ))}{" "}
               </FilmeDetalhesLi>
 

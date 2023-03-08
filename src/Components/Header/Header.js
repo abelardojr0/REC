@@ -1,10 +1,13 @@
 import React from "react";
 import {
   HeaderComponent,
+  HeaderItensMenuAberto,
   HeaderLink,
   HeaderLogin,
   HeaderLoginBotao,
   HeaderLogo,
+  HeaderMenuAberto,
+  HeaderMenuAbertoCabeçalho,
   HeaderMenuUsuario,
   HeaderNav,
   HeaderNavUl,
@@ -50,7 +53,16 @@ const Header = () => {
       setAtiva("");
     }
   }
-  function abrirMenu() {}
+  function abrirMenu() {
+    if (menuAberto) {
+      setMenuAberto(false);
+    } else {
+      setMenuAberto(true);
+    }
+  }
+  function deslogar() {
+    localStorage.clear();
+  }
 
   return (
     <HeaderComponent>
@@ -78,24 +90,6 @@ const Header = () => {
         </HeaderNavUl>
       </HeaderNav>
       <HeaderLogin>
-        {nome_usuario ? (
-          <>
-            <HeaderMenuUsuario onClick={abrirMenu}>
-              {nome_usuario[0].toLocaleUpperCase()}
-            </HeaderMenuUsuario>
-          </>
-        ) : (
-          <>
-            {" "}
-            <HeaderLoginBotao onClick={abrirModalLogin}>
-              Entrar
-            </HeaderLoginBotao>
-            <Link to="/cadastro">
-              <HeaderLoginBotao>Cadastrar</HeaderLoginBotao>
-            </Link>
-          </>
-        )}
-
         <HeaderPesquisarContainer onSubmit={pesquisar}>
           <HeaderPesquisarContainerBarra>
             <HeaderPesquisarInput
@@ -113,6 +107,39 @@ const Header = () => {
             <HeaderPesquisarBotao onClick={mostrarPesquisa} type="submit" />
           </HeaderPesquisarContainerBarra>
         </HeaderPesquisarContainer>
+        {nome_usuario ? (
+          <>
+            <HeaderMenuUsuario onClick={abrirMenu}>
+              {nome_usuario[0].toLocaleUpperCase()}
+            </HeaderMenuUsuario>
+            {menuAberto && (
+              <HeaderMenuAberto>
+                <HeaderMenuAbertoCabeçalho>
+                  <HeaderMenuUsuario>
+                    {nome_usuario[0].toLocaleUpperCase()}
+                  </HeaderMenuUsuario>
+                  <HeaderItensMenuAberto>{nome_usuario}</HeaderItensMenuAberto>
+                </HeaderMenuAbertoCabeçalho>
+                <HeaderItensMenuAberto>Meus Filmes</HeaderItensMenuAberto>
+                <HeaderItensMenuAberto>Minhas Séries</HeaderItensMenuAberto>
+                <HeaderItensMenuAberto>Minha Lista</HeaderItensMenuAberto>
+                <HeaderItensMenuAberto onClick={deslogar}>
+                  Sair
+                </HeaderItensMenuAberto>
+              </HeaderMenuAberto>
+            )}
+          </>
+        ) : (
+          <>
+            {" "}
+            <HeaderLoginBotao onClick={abrirModalLogin}>
+              Entrar
+            </HeaderLoginBotao>
+            <Link to="/cadastro">
+              <HeaderLoginBotao>Cadastrar</HeaderLoginBotao>
+            </Link>
+          </>
+        )}
       </HeaderLogin>
 
       {loginStatus && (

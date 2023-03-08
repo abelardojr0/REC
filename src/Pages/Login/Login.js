@@ -21,6 +21,7 @@ import axios from "axios";
 const Login = ({ setLoginStatus }) => {
   const [email, setEmail] = React.useState();
   const [senha, setSenha] = React.useState();
+  const [errorLogin, setErrorLogin] = React.useState();
 
   function fecharModal(e) {
     if (
@@ -41,9 +42,11 @@ const Login = ({ setLoginStatus }) => {
             localStorage.setItem("nome", usuario[1]);
             setLoginStatus(false);
             console.log("deu bom");
+            setErrorLogin(false);
             return false;
           } else {
             console.log("login errado");
+            setErrorLogin(true);
             return true;
           }
         });
@@ -61,6 +64,7 @@ const Login = ({ setLoginStatus }) => {
 
         <LoginFormulario onSubmit={checarLogin}>
           <LoginTitulo>Entrar</LoginTitulo>
+          {errorLogin && <p>Login errado</p>}
           <Input
             htmlFor={"userEmail"}
             texto={"Usuário/E-mail *"}

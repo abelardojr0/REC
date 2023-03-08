@@ -7,7 +7,6 @@ import {
   CategoriasLista,
 } from "./StyleBarraCategorias";
 
-// const generos = LinksApi.genres;
 const key = LinksApi.key;
 const traduzido = LinksApi.traduzido;
 const BarraCategorias = ({ cat, tipo }) => {
@@ -40,7 +39,11 @@ const BarraCategorias = ({ cat, tipo }) => {
         <CategoriasLista>
           {categorias &&
             categorias.map((categoria) => (
-              <CategoriasItem id={categoria.id} onClick={navegarParaCat}>
+              <CategoriasItem
+                key={categoria.id}
+                id={categoria.id}
+                onClick={navegarParaCat}
+              >
                 {categoria.name}
               </CategoriasItem>
             ))}

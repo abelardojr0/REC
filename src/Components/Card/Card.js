@@ -23,15 +23,23 @@ const img = LinksApi.IMG;
 const Card = ({ titulo, imagem, nota, id, tipo }) => {
   const [habilitando, setHabilitando] = React.useState("");
   const [assistido, setAssistido] = React.useState(false);
-  React.useEffect(() => {
-    axios.get("http://localhost:5000/filmes").then((response) => {
-      response.data.forEach((filme) => {
-        if (filme[1] === titulo) {
-          setAssistido(true);
-        }
-      });
-    }, []);
-  });
+
+  // const listaBanco = React.useMemo(() => {
+  //   axios.get("http://localhost:5000/filmes").then((response) => {
+  //     console.log(response);
+  //     const lista = response.data
+  //   });
+  //   console.log(lista);
+  // }, []);
+  // React.useEffect(() => {
+  //   axios.get("http://localhost:5000/filmes").then((response) => {
+  //     response.data.forEach((filme) => {
+  //       if (filme[1] === titulo) {
+  //         setAssistido(true);
+  //       }
+  //     });
+  //   }, []);
+  // });
   function habilitandoInfos() {
     setHabilitando("ativo");
   }

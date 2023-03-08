@@ -22,10 +22,13 @@ const Formulario = () => {
   const [usuario, setUsuario] = React.useState();
   const [email, setEmail] = React.useState();
   const [senha, setSenha] = React.useState();
+
   function finalizar(e) {
     e.preventDefault();
+    // ("https://teste-api-projeto.vercel.app/cadastro"
+    // ("http://localhost:5000/inserirUsuario"
     axios
-      .post("http://localhost:5000/inserirUsuario", {
+      .post("https://teste-api-projeto.vercel.app/cadastro", {
         usuario,
         email,
         senha,

@@ -57,6 +57,7 @@ export const HeaderLogin = styled.div`
   align-items: center;
   justify-content: center;
   gap: 10px;
+  margin-right: 20px;
 `;
 export const HeaderLoginBotao = styled.button`
   background-color: transparent;
@@ -174,4 +175,14 @@ export const HeaderItensMenuAberto = styled(Link)`
   img {
     max-width: 20px;
   }
+`;
+
+export const HeaderMenuAbertoCabeçalho = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 2px solid black;
+  padding-bottom: 10px;
+  width: 100%;
 `;

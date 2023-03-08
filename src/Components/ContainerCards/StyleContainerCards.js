@@ -22,7 +22,7 @@ export const ContainerCardsTituloSection = styled.h1`
   justify-self: flex-start;
   align-items: flex-start;
   padding-top: 50px;
-  margin-left: 30px;
+  margin-left: 40px;
   margin-bottom: 20px;
 `;
 export const ContainerCardsContainerLista = styled.ul`

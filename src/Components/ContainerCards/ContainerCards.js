@@ -12,7 +12,7 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
           <Carousel cols={6} rows={1} gap={"20px"} loop>
             {lista &&
               lista.map((filme) => (
-                <Carousel.Item>
+                <Carousel.Item key={filme.title}>
                   <Card
                     titulo={filme.title}
                     imagem={filme.poster_path}
@@ -31,7 +31,7 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
           <Carousel cols={6} rows={1} gap={"20px"} loop>
             {lista &&
               lista.map((serie) => (
-                <Carousel.Item>
+                <Carousel.Item key={serie.name}>
                   <Card
                     titulo={serie.name}
                     imagem={serie.poster_path}

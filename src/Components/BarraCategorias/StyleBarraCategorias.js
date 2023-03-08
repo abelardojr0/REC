@@ -14,10 +14,10 @@ export const CategoriasLista = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 25px;
+  gap: 12px;
 `;
 export const CategoriasItem = styled.li`
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: white;
   cursor: pointer;
   &:hover {
