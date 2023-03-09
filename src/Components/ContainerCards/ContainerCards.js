@@ -1,11 +1,33 @@
+import axios from "axios";
 import Carousel from "better-react-carousel";
 import React from "react";
+import Login from "../../Pages/Login/Login";
 import Card from "../Card/Card";
 import { ContainerCardsTituloSection } from "./StyleContainerCards";
 
 const ContainerCards = ({ titulo, lista, tipo }) => {
+  const [loginStatus, setLoginStatus] = React.useState(false);
+  const [filmesBanco, setFilmesBanco] = React.useState([]);
+  const [seriesBanco, setSeriesBanco] = React.useState([]);
+  const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
+  const id_usuario = localStorage.getItem("id");
+
+  React.useEffect(() => {
+    if (id_usuario) {
+      axios
+        .get("http://localhost:5000/filmes/" + id_usuario)
+        .then((response) => {
+          setFilmesBanco(response.data);
+        });
+    }
+  }, [id_usuario]);
   return (
     <>
+      {loginStatus && (
+        <>
+          <Login setLoginStatus={setLoginStatus} />
+        </>
+      )}
       {tipo === "filme" && (
         <>
           <ContainerCardsTituloSection>{titulo}</ContainerCardsTituloSection>
@@ -19,6 +41,8 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
                     nota={filme.vote_average}
                     id={filme.id}
                     tipo={"movie"}
+                    setLoginStatus={setLoginStatus}
+                    listaBanco={filmesBanco}
                   />
                 </Carousel.Item>
               ))}
@@ -38,6 +62,8 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
                     nota={serie.vote_average}
                     id={serie.id}
                     tipo={"tv"}
+                    setLoginStatus={setLoginStatus}
+                    listaBanco={filmesBanco}
                   />
                 </Carousel.Item>
               ))}

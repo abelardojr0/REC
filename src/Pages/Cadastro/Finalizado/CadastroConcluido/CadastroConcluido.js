@@ -6,7 +6,7 @@ import {
   SucessoSubTitulo,
   SucessoTitulo,
 } from "./StyleConcluido";
-import ImagemSucesso from "../../Img/Finalizado.png";
+import ImagemSucesso from "../../../../Images/Finalizado.png";
 const CadastroConcluido = () => {
   return (
     <SectionSucesso>

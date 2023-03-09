@@ -33,7 +33,7 @@ export const HeaderNavUl = styled.ul`
   align-items: center;
   margin-left: 40px;
   li {
-    font-size: 1rem;
+    font-size: 1.2rem;
     padding: 0.5rem 1.5rem;
     border-radius: 15px;
     cursor: pointer;

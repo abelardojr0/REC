@@ -7,12 +7,14 @@ import { LinksApi } from "../../ConsultasParaApi";
 import BarraCategorias from "../../Components/BarraCategorias/BarraCategorias";
 
 import {
-  ResultadoContainer,
   ResultadoConteudo,
   ResultadoLista,
   ResultadoTitulo,
   ResultadoTituloQuery,
 } from "../Search/StyleSearch";
+import Login from "../Login/Login";
+import axios from "axios";
+import { ResultadoContainerCategoria } from "./StylesCategorias";
 
 const discoverFilmes = LinksApi.discoverMovie;
 const key = LinksApi.key;
@@ -23,6 +25,9 @@ const CategoriaFilmes = () => {
   const query = searchParams.get("q");
   const tituloCat = searchParams.get("t");
   const [categoriaFilmes, setCategoriaFilmes] = React.useState([]);
+  const [loginStatus, setLoginStatus] = React.useState(false);
+  const [listaBanco, setListaBanco] = React.useState([]);
+  const id_usuario = localStorage.getItem("id");
 
   async function buscarFilmes(url) {
     const response = await fetch(url);
@@ -36,12 +41,26 @@ const CategoriaFilmes = () => {
     buscarFilmes(listaFilmes);
   }, [query]);
 
+  React.useEffect(() => {
+    if (id_usuario) {
+      axios
+        .get("http://localhost:5000/filmes/" + id_usuario)
+        .then((response) => {
+          setListaBanco(response.data);
+        });
+    }
+  }, [id_usuario]);
   if (categoriaFilmes === []) return null;
   return (
     <>
       <Header />
+      {loginStatus && (
+        <>
+          <Login setLoginStatus={setLoginStatus} />
+        </>
+      )}
       <BarraCategorias tipo={"movie"} cat={"categoriaFilmes"} />
-      <ResultadoContainer>
+      <ResultadoContainerCategoria>
         <ResultadoConteudo>
           <ResultadoTitulo>
             Resultado para a categoria:{" "}
@@ -57,12 +76,14 @@ const CategoriaFilmes = () => {
                     nota={item.vote_average}
                     id={item.id}
                     tipo={item.media_type}
+                    setLoginStatus={setLoginStatus}
+                    listaBanco={listaBanco}
                   />
                 </li>
               ))}
           </ResultadoLista>
         </ResultadoConteudo>
-      </ResultadoContainer>
+      </ResultadoContainerCategoria>
       <Footer />
     </>
   );

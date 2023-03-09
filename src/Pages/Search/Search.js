@@ -13,6 +13,8 @@ import {
   ResultadoTituloQuery,
 } from "./StyleSearch";
 import Card from "../../Components/Card/Card";
+import axios from "axios";
+import Login from "../Login/Login";
 
 const key = LinksApi.key;
 const searchFilme = LinksApi.searchMovie;
@@ -23,6 +25,9 @@ const Search = () => {
   const query = searchParams.get("q");
   const [searchFilmes, setSearchFilmes] = React.useState([]);
   const [searchSeries, setSearchSeries] = React.useState([]);
+  const [loginStatus, setLoginStatus] = React.useState(false);
+  const [listaBanco, setListaBanco] = React.useState([]);
+  const id_usuario = localStorage.getItem("id");
 
   async function buscarFilme(url) {
     const response = await fetch(url);
@@ -45,10 +50,24 @@ const Search = () => {
     buscarSerie(listaSeries);
   }, [query]);
 
-  console.log(searchFilmes);
+  React.useEffect(() => {
+    if (id_usuario) {
+      axios
+        .get("http://localhost:5000/filmes/" + id_usuario)
+        .then((response) => {
+          setListaBanco(response.data);
+        });
+    }
+  }, [id_usuario]);
+
   return (
     <>
       <Header />
+      {loginStatus && (
+        <>
+          <Login setLoginStatus={setLoginStatus} />
+        </>
+      )}
       <ResultadoContainer>
         <ResultadoConteudo>
           <ResultadoTitulo>
@@ -65,6 +84,8 @@ const Search = () => {
                     nota={filme.vote_average}
                     id={filme.id}
                     tipo={"movie"}
+                    setLoginStatus={setLoginStatus}
+                    listaBanco={listaBanco}
                   />
                 </li>
               ))}
@@ -77,6 +98,8 @@ const Search = () => {
                     nota={serie.vote_average}
                     id={serie.id}
                     tipo={"tv"}
+                    setLoginStatus={setLoginStatus}
+                    listaBanco={listaBanco}
                   />
                 </li>
               ))}

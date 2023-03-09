@@ -1,6 +1,6 @@
 import React from "react";
-import Footer from "../Cadastro/Footer/Footer";
-import Header from "../Cadastro/Header/Header";
+import Footer from "../../../Components/Footer/Footer";
+import Header from "../../../Components/Header/Header";
 import CadastroConcluido from "./CadastroConcluido/CadastroConcluido";
 
 const Finalizado = () => {

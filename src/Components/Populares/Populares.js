@@ -35,7 +35,6 @@ const Populares = () => {
       listaFinal.pop();
       tamanhoLista--;
     }
-    console.log(listaFinal);
     setTopFilmes(listaFinal);
   }
 

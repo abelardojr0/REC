@@ -5,19 +5,19 @@ import FilmesPopulares from "./FilmesPopulares";
 import FilmesEmBreve from "./FilmesEmBreve";
 import FilmesEmCartaz from "./FilmesEmCartaz";
 import FilmesMaioresNotas from "./FilmesMaioresNotas";
-import { ContainerEstrutura } from "../Home/StyleHome";
 import BarraCategorias from "../../Components/BarraCategorias/BarraCategorias";
+import { ContainerPages } from "../../GlobalStyles";
 const Filmes = () => {
   return (
     <>
       <Header />
       <BarraCategorias tipo={"movie"} cat={"categoriaFilmes"} />
-      <ContainerEstrutura>
+      <ContainerPages>
         <FilmesPopulares />
         <FilmesEmCartaz />
         <FilmesEmBreve />
         <FilmesMaioresNotas />
-      </ContainerEstrutura>
+      </ContainerPages>
       <Footer />
     </>
   );

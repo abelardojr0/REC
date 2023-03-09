@@ -56,8 +56,6 @@ const Serie = () => {
 
   if (serie === null || similares === null || recomendacoes === null)
     return null;
-  console.log(serie);
-
   return (
     <>
       <Header />

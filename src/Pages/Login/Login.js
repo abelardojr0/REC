@@ -41,11 +41,9 @@ const Login = ({ setLoginStatus }) => {
             localStorage.setItem("id", usuario[0]);
             localStorage.setItem("nome", usuario[1]);
             setLoginStatus(false);
-            console.log("deu bom");
             setErrorLogin(false);
             return false;
           } else {
-            console.log("login errado");
             setErrorLogin(true);
             return true;
           }

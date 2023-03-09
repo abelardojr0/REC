@@ -13,33 +13,37 @@ import {
   CardTitulo,
 } from "./StyleCard";
 import star from "../../Images/estrela.png";
-import favorito from "../../Images/favorito.png";
+import listaDesejo from "../../Images/listaDesejo.png";
 import adicionar from "../../Images/adicionar.png";
 import detalhes from "../../Images/detalhes.png";
 import assistido_img from "../../Images/assistido.png";
 import axios from "axios";
 const img = LinksApi.IMG;
 
-const Card = ({ titulo, imagem, nota, id, tipo }) => {
+const Card = ({
+  titulo,
+  imagem,
+  nota,
+  id,
+  tipo,
+  setLoginStatus,
+  listaFilmes,
+}) => {
   const [habilitando, setHabilitando] = React.useState("");
   const [assistido, setAssistido] = React.useState(false);
+  const [adicionadoNaLista, setAdicionadoNaLista] = React.useState(false);
+  const id_usuario = localStorage.getItem("id");
 
-  // const listaBanco = React.useMemo(() => {
-  //   axios.get("http://localhost:5000/filmes").then((response) => {
-  //     console.log(response);
-  //     const lista = response.data
-  //   });
-  //   console.log(lista);
-  // }, []);
-  // React.useEffect(() => {
-  //   axios.get("http://localhost:5000/filmes").then((response) => {
-  //     response.data.forEach((filme) => {
-  //       if (filme[1] === titulo) {
-  //         setAssistido(true);
-  //       }
-  //     });
-  //   }, []);
-  // });
+  React.useEffect(() => {
+    listaFilmes.forEach((item) => {
+      if (item[1] === titulo) {
+        setAssistido(true);
+      }
+      if (item) {
+      }
+    });
+  }, [titulo, listaFilmes]);
+
   function habilitandoInfos() {
     setHabilitando("ativo");
   }
@@ -47,14 +51,57 @@ const Card = ({ titulo, imagem, nota, id, tipo }) => {
     setHabilitando("");
   }
   function marcarAssistido() {
-    setAssistido(true);
+    if (id_usuario) {
+      setLoginStatus(false);
+      setAssistido(true);
+      if (tipo === "movie") {
+        axios
+          .post("http://localhost:5000/inserirFilme", {
+            titulo,
+            imagem,
+            nota,
+            tipo,
+            id_api: id,
+            id_usuario,
+          })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        axios
+          .post("http://localhost:5000/inserirSerie", {
+            titulo,
+            imagem,
+            nota,
+            tipo,
+            id_api: id,
+            id_usuario,
+          })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    } else {
+      setLoginStatus(true);
+    }
+  }
+
+  function adicionarNaLista() {
+    setAdicionadoNaLista(true);
     axios
-      .post("http://localhost:5000/inserirFilme", {
+      .post("http://localhost:5000/inserirListaDesejo", {
         titulo,
         imagem,
         nota,
         tipo,
         id_api: id,
+        id_usuario,
       })
       .then((response) => {
         console.log(response);
@@ -76,7 +123,6 @@ const Card = ({ titulo, imagem, nota, id, tipo }) => {
               <img src={star} alt="star" />
               <p>{nota}</p>
             </CardContainerNota>
-            <CardFavorito src={favorito} alt="favorito" />
           </CardDivDasEstrelas>
           <CardTitulo to={`/${tipo}/${id}`}>{titulo}</CardTitulo>
           <CardContainerInfos>
@@ -91,6 +137,11 @@ const Card = ({ titulo, imagem, nota, id, tipo }) => {
                 </>
               )}
             </CardBotao>
+            {!adicionadoNaLista && (
+              <CardBotao onClick={adicionarNaLista}>
+                <img src={listaDesejo} alt="icon-lista_desejo" />
+              </CardBotao>
+            )}
             <CardBotao to={`/${tipo}/${id}`}>
               <img src={detalhes} alt="more" />
             </CardBotao>

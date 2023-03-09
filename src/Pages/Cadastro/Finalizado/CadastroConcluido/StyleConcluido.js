@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const SectionSucesso = styled.section`
   margin: 0 auto;
-  margin-top: 40px;
+  margin-top: 200px;
+  margin-bottom: 200px;
   padding-left: 20px;
   display: flex;
   justify-content: flex-start;
@@ -10,8 +11,9 @@ export const SectionSucesso = styled.section`
   flex-direction: column;
   border-radius: 15px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
+  background-color: white;
   max-width: 1000px;
-  height: 50vh;
+  height: 100vh;
 `;
 
 export const SucessoTitulo = styled.h1`

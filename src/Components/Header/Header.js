@@ -27,7 +27,7 @@ const Header = () => {
   const [menuAberto, setMenuAberto] = React.useState();
   const navigate = useNavigate();
   const nome_usuario = localStorage.getItem("nome");
-  const id_usuario = localStorage.getItem("id");
+  // const id_usuario = localStorage.getItem("id");
 
   function pesquisar(e) {
     e.preventDefault();
@@ -62,6 +62,8 @@ const Header = () => {
   }
   function deslogar() {
     localStorage.clear();
+    navigate("/");
+    window.location.reload(true);
   }
 
   return (
@@ -82,9 +84,15 @@ const Header = () => {
           </HeaderLink>
           {nome_usuario && (
             <>
-              <li>Meus Filmes</li>
-              <li>Minhas Séries</li>
-              <li>Lista de Desejos</li>
+              <HeaderLink to="/meusFilmes">
+                <li>Meus Filmes</li>
+              </HeaderLink>
+              <HeaderLink to="/minhasSeries">
+                <li>Minhas Séries</li>
+              </HeaderLink>
+              <HeaderLink to="/listaDesejo">
+                <li>Lista de Desejos</li>
+              </HeaderLink>
             </>
           )}
         </HeaderNavUl>

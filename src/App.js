@@ -10,6 +10,10 @@ import CategoriaFilmes from "./Pages/Categorias/CategoriaFilmes";
 import CategoriaSeries from "./Pages/Categorias/CategoriaSeries";
 import Filmes from "./Pages/Filmes/Filmes";
 import Series from "./Pages/Series/Series";
+import Finalizado from "./Pages/Cadastro/Finalizado/Finalizado";
+import MeusFilmes from "./Pages/MeusFilmes/MeusFilmes";
+import MinhasSeries from "./Pages/MinhasSeries/MinhasSeries";
+import ListaDesejo from "./Pages/ListaDesejo/ListaDesejo";
 function App() {
   return (
     <>
@@ -22,9 +26,13 @@ function App() {
           <Route path="/movie/:id" element={<Filme />} />
           <Route path="/tv/:id" element={<Serie />} />
           <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/finalizado" element={<Finalizado />} />
           <Route path="search" element={<Search />} />
           <Route path="categoriaFilmes" element={<CategoriaFilmes />} />
           <Route path="categoriaSeries" element={<CategoriaSeries />} />
+          <Route path="/meusFilmes" element={<MeusFilmes />} />
+          <Route path="/minhasSeries" element={<MinhasSeries />} />
+          <Route path="/listaDesejo" element={<ListaDesejo />} />
         </Routes>
       </BrowserRouter>
     </>

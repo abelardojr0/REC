@@ -19,7 +19,7 @@ import axios from "axios";
 
 const Formulario = () => {
   const navigate = useNavigate();
-  const [usuario, setUsuario] = React.useState();
+  const [nome, setNome] = React.useState();
   const [email, setEmail] = React.useState();
   const [senha, setSenha] = React.useState();
 
@@ -28,8 +28,8 @@ const Formulario = () => {
     // ("https://teste-api-projeto.vercel.app/cadastro"
     // ("http://localhost:5000/inserirUsuario"
     axios
-      .post("https://teste-api-projeto.vercel.app/cadastro", {
-        usuario,
+      .post("http://localhost:5000/inserirUsuario", {
+        nome,
         email,
         senha,
       })
@@ -54,7 +54,7 @@ const Formulario = () => {
           id={"usuario"}
           tamanho={"grande"}
           required={true}
-          setDados={setUsuario}
+          setDados={setNome}
         />
         <Input
           htmlFor={"email"}

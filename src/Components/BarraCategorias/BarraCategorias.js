@@ -31,7 +31,6 @@ const BarraCategorias = ({ cat, tipo }) => {
     const id = e.target.getAttribute("id");
     navigate(`/${cat}/?q=${id}&t=${titulo}`);
   }
-  console.log(categorias);
   if (categorias === []) return null;
   return (
     <>
