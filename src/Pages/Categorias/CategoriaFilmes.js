@@ -59,7 +59,6 @@ const CategoriaFilmes = () => {
         });
     }
   }, [id_usuario]);
-  console.log(categoriaFilmes);
   if (categoriaFilmes === []) return null;
   return (
     <>

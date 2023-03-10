@@ -42,6 +42,8 @@ const FilmeDetalhes = ({
         console.log(response);
         if (response.data.status === "sucess") {
           setAssistido(true);
+        } else {
+          setAssistido(false);
         }
       })
       .catch((error) => {

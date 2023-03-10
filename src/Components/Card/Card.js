@@ -50,7 +50,6 @@ const Card = ({
       if (listaDesejoBanco) {
         listaDesejoBanco.forEach((item) => {
           if (item[1] === titulo) {
-            console.log(item[1]);
             setAdicionadoNaLista(true);
           }
         });
@@ -76,7 +75,7 @@ const Card = ({
           id_usuario,
         })
         .then((response) => {
-          console.log(response.data);
+          console.log(response);
           if (window.location.href === "http://localhost:3000/listaDesejo") {
             setVisivel(false);
           }
@@ -124,6 +123,9 @@ const Card = ({
 
   function desmarcarAssistido() {
     setAssistido(false);
+    if (window.location.href === "http://localhost:3000/meusFilmes") {
+      setVisivel(false);
+    }
     if (tipo === "movie") {
       axios
         .post("http://localhost:5000/removerFilme", {
