@@ -1,22 +1,22 @@
 import React from "react";
 import { LinksApi } from "../../ConsultasParaApi";
 import {
-  CardAdicionarTexto,
   CardBotao,
   CardComponent,
   CardContainerInfos,
   CardContainerNota,
-  CardDivDasEstrelas,
   CardDivInfos,
   CardImagem,
   CardLink,
   CardTitulo,
 } from "./StyleCard";
 import star from "../../Images/estrela.png";
-import listaDesejo_img from "../../Images/listaDesejo.png";
-import adicionar from "../../Images/adicionar.png";
+import listaDesejo_img from "../../Images/adicionar.png";
+import adicionar from "../../Images/assistir.png";
 import detalhes from "../../Images/detalhes.png";
 import assistido_img from "../../Images/assistido.png";
+import adicionado from "../../Images/adicionado.png";
+
 import axios from "axios";
 const img = LinksApi.IMG;
 
@@ -44,13 +44,13 @@ const Card = ({
         listaBanco.forEach((item) => {
           if (item[1] === titulo) {
             setAssistido(true);
-            setAdicionadoNaLista(true);
           }
         });
       }
       if (listaDesejoBanco) {
         listaDesejoBanco.forEach((item) => {
           if (item[1] === titulo) {
+            console.log(item[1]);
             setAdicionadoNaLista(true);
           }
         });
@@ -71,27 +71,15 @@ const Card = ({
       }
       setAssistido(true);
       axios
-        .get("http://localhost:5000/listaDesejo/" + id_usuario)
+        .post("http://localhost:5000/removerListaDesejo", {
+          titulo,
+          id_usuario,
+        })
         .then((response) => {
-          response.data.forEach((item) => {
-            if (item[1] === titulo) {
-              axios
-                .post("http://localhost:5000/removerListaDesejo", {
-                  id: item[0],
-                })
-                .then((response) => {
-                  console.log(response);
-                  if (
-                    window.location.href === "http://localhost:3000/listaDesejo"
-                  ) {
-                    setVisivel(false);
-                  }
-                })
-                .catch((error) => {
-                  console.log(error);
-                });
-            }
-          });
+          console.log(response.data);
+          if (window.location.href === "http://localhost:3000/listaDesejo") {
+            setVisivel(false);
+          }
         })
         .catch((error) => {
           console.log(error);
@@ -134,6 +122,22 @@ const Card = ({
     }
   }
 
+  function desmarcarAssistido() {
+    setAssistido(false);
+    if (tipo === "movie") {
+      axios
+        .post("http://localhost:5000/removerFilme", {
+          titulo,
+          id_usuario,
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
   function adicionarNaLista() {
     setAdicionadoNaLista(true);
     axios
@@ -152,6 +156,23 @@ const Card = ({
         console.log(error);
       });
   }
+  function removerDaLista() {
+    setAdicionadoNaLista(false);
+    axios
+      .post("http://localhost:5000/removerListaDesejo", {
+        titulo,
+        id_usuario,
+      })
+      .then((response) => {
+        console.log(response.data);
+        if (window.location.href === "http://localhost:3000/listaDesejo") {
+          setVisivel(false);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   return (
     <>
       {visivel && (
@@ -161,29 +182,39 @@ const Card = ({
         >
           <CardImagem src={`${img}${imagem}`} alt="poster" />
           <CardDivInfos className={habilitando}>
-            <CardDivDasEstrelas>
-              <CardContainerNota>
-                <img src={star} alt="star" />
-                <p>{nota}</p>
-              </CardContainerNota>
-            </CardDivDasEstrelas>
+            <CardContainerNota>
+              <img src={star} alt="star" />
+              <p>{nota}</p>
+            </CardContainerNota>
             <CardTitulo to={`/${tipo}/${id}`}>{titulo}</CardTitulo>
             <CardContainerInfos>
-              <CardBotao>
-                {assistido ? (
-                  <img src={assistido_img} alt="icon-assistido" />
-                ) : (
-                  <>
-                    <CardAdicionarTexto onClick={marcarAssistido}>
-                      <img src={adicionar} alt="adicionar" />
-                    </CardAdicionarTexto>
-                  </>
-                )}
-              </CardBotao>
-              {!adicionadoNaLista && !listaDeDesejo && (
-                <CardBotao onClick={adicionarNaLista}>
-                  <img src={listaDesejo_img} alt="icon-lista_desejo" />
-                </CardBotao>
+              {assistido ? (
+                <CardBotao
+                  onClick={desmarcarAssistido}
+                  src={assistido_img}
+                  alt="icon-assistido"
+                />
+              ) : (
+                <>
+                  <CardBotao
+                    onClick={marcarAssistido}
+                    src={adicionar}
+                    alt="adicionar"
+                  />
+                </>
+              )}
+              {!adicionadoNaLista && !listaDeDesejo ? (
+                <CardBotao
+                  onClick={adicionarNaLista}
+                  src={listaDesejo_img}
+                  alt="icon-lista_desejo"
+                />
+              ) : (
+                <CardBotao
+                  onClick={removerDaLista}
+                  src={adicionado}
+                  alt="icon-lista_desejo"
+                />
               )}
               <CardLink to={`/${tipo}/${id}`}>
                 <img src={detalhes} alt="more" />

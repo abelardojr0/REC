@@ -35,20 +35,19 @@ const Login = ({ setLoginStatus }) => {
   function checarLogin(e) {
     e.preventDefault();
     axios
-      .get("http://localhost:5000/usuarios")
+      .post("http://localhost:5000/usuarios", {
+        email,
+        senha,
+      })
       .then((response) => {
-        response.data.every((usuario) => {
-          if (email === usuario[2] && senha === usuario[3]) {
-            localStorage.setItem("id", usuario[0]);
-            localStorage.setItem("nome", usuario[1]);
-            setLoginStatus(false);
-            setErrorLogin(false);
-            return false;
-          } else {
-            setErrorLogin(true);
-            return true;
-          }
-        });
+        if (response.data.status === "fail") {
+          setErrorLogin(true);
+        } else {
+          localStorage.setItem("id", response.data.id);
+          localStorage.setItem("nome", response.data.nome);
+          setLoginStatus(false);
+          setErrorLogin(false);
+        }
       })
       .catch((error) => {
         console.log(error);

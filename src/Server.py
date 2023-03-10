@@ -8,7 +8,7 @@ try:
       host="localhost",
       database="REC",
       user="postgres",
-      password="postgres",
+      password="123",
       port="5432"
     )
     app = Flask(__name__)
@@ -16,13 +16,24 @@ try:
     CORS(app)
     print("Conectado")
     
-    @app.route("/filmes/<int:id>", methods =['GET'])
+    @app.route("/filmes/<int:id>", methods =['GET' ,'POST'])
     def consultarFilmes(id):
       cursor = con.cursor()
-      cursor.execute(f"SELECT * FROM filmes WHERE id_usuario = '{id}'")
-      results = cursor.fetchall()
-      return results
-    
+      if(request.method == 'GET'):
+        cursor.execute("ROLLBACK")
+        cursor.execute(f"SELECT * FROM filmes WHERE id_usuario = '{id}'")
+        results = cursor.fetchall()
+        return results
+      elif(request.method == 'POST'):
+        titulo = request.json['titulo']
+        id_usuario = request.json['id_usuario']
+        cursor.execute(f"SELECT * FROM filmes WHERE titulo = '{titulo}' AND id_usuario = '{id_usuario}'")
+        resposta = cursor.fetchone()
+        if(resposta is None):
+          return jsonify({'status' : 'fail'})
+        else:
+          return jsonify({'status' : 'sucess'})
+          
     @app.route("/series/<int:id>", methods =['GET'])
     def consultarSeries(id):
       cursor = con.cursor()
@@ -37,13 +48,18 @@ try:
       results = cursor.fetchall()
       return results
     
-    @app.route("/usuarios", methods =['GET'])
-    def consultarUsuarios():
+    @app.route("/usuarios", methods =['POST'])
+    def checarUsuarios():
       cursor = con.cursor()
-      cursor.execute("SELECT * FROM usuarios")
-      results = cursor.fetchall()
-      return results
-    
+      email = request.json['email']
+      senha = request.json['senha']
+      cursor.execute(f"SELECT * FROM usuarios WHERE email = '{email}' AND senha = '{senha}' ")
+      resposta = cursor.fetchone()
+      if(resposta is None):
+        return jsonify({'status' : 'fail'})
+      else:
+        return jsonify({'status' : 'sucess', 'id': f'{resposta[0]}', 'nome' : f'{resposta[1]}' })
+          
     
     @app.route("/inserirFilme", methods =['POST'])
     def inserirFilme():
@@ -76,7 +92,6 @@ try:
     @app.route("/inserirListaDesejo", methods =['POST'])
     def inserirListaDesejo():
       cursor = con.cursor()
-      print(request.json)
       titulo = request.json['titulo']
       imagem = request.json['imagem']
       nota = request.json['nota']
@@ -94,18 +109,37 @@ try:
       nome = request.json['nome']
       email = request.json['email']
       senha = request.json['senha']
-      cursor.execute('INSERT INTO usuarios (nome, email, senha) VALUES (%s, %s, %s)', (nome, email, senha))
-      con.commit()
-      return jsonify({'status': 'sucess'})
+      cursor.execute(f"SELECT * FROM usuarios WHERE email = '{email}'")
+      resposta = cursor.fetchone()
+      if(resposta is None):
+        cursor.execute('INSERT INTO usuarios (nome, email, senha) VALUES (%s, %s, %s)', (nome, email, senha))
+        con.commit()
+        return jsonify({'status': 'sucess'})
+      else:  
+        return jsonify({'status': 'fail'})
     
     @app.route("/removerListaDesejo", methods =['POST'])
     def removerListaDesejo():
       cursor = con.cursor()
-      id = request.json['id']
-      cursor.execute("ROLLBACK")
-      cursor.execute(f"DELETE FROM listaDesejo WHERE id = '{id}'")
+      titulo = request.json['titulo']
+      id_usuario = request.json['id_usuario']
+      cursor.execute(f"SELECT * FROM listaDesejo WHERE titulo = '{titulo}' AND id_usuario = '{id_usuario}' ")
+      resposta = cursor.fetchone()
+      if(resposta is None):
+        return jsonify({'status' : 'fail'})
+      else:
+        cursor.execute(f"DELETE FROM listaDesejo WHERE titulo = '{titulo}'  AND id_usuario = '{id_usuario}'")
+        con.commit()
+        return jsonify({'status': 'sucess'})
+    
+    @app.route("/removerFilme", methods = ['POST'])
+    def removerFilme():
+      cursor = con.cursor()
+      titulo = request.json['titulo']
+      id_usuario = request.json['id_usuario']
+      cursor.execute(f"DELETE FROM filmes WHERE id_usuario = '{id_usuario}' AND titulo = '{titulo}'")
       con.commit()
-      return jsonify({'status': 'sucess'})
+      return jsonify({'status' : 'sucess'})
     if __name__ == '__main__':
       app.run(debug=True)
 except(Error) as error:

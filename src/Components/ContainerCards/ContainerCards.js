@@ -52,7 +52,7 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
       {tipo === "filme" && (
         <>
           <ContainerCardsTituloSection>{titulo}</ContainerCardsTituloSection>
-          <Carousel cols={6} rows={1} gap={"20px"} loop>
+          <Carousel cols={5} rows={1} gap={"20px"} loop>
             {lista &&
               lista.map((filme) => (
                 <Carousel.Item key={filme.title}>
@@ -64,6 +64,7 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
                     tipo={"movie"}
                     setLoginStatus={setLoginStatus}
                     listaBanco={filmesBanco}
+                    listaDeDesejo={false}
                     listaDesejoBanco={listaDesejoBanco}
                   />
                 </Carousel.Item>

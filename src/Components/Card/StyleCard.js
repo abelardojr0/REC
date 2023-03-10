@@ -19,12 +19,13 @@ export const CardImagem = styled.img`
 
 export const CardDivInfos = styled.div`
   display: flex;
-  justify-content: flex-start;
+  /* justify-content: flex-start; */
+  justify-content: center;
   align-items: center;
   flex-direction: column;
   border-radius: 15px;
   position: absolute;
-  height: 93.5%;
+  height: 92.5%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   display: none;
@@ -34,17 +35,21 @@ export const CardDivInfos = styled.div`
 `;
 
 export const CardDivDasEstrelas = styled.div`
-  width: 100%;
   height: 50px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 `;
 export const CardContainerNota = styled.div`
+  align-self: flex-start;
   width: 50px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  background-color: white;
+  border-radius: 15px;
+  padding: 0.3rem;
+  padding-right: 0.6rem;
   margin-left: 10px;
   margin-top: 10px;
   gap: 5px;
@@ -58,20 +63,6 @@ export const CardContainerNota = styled.div`
     color: #605c6c;
   }
 `;
-export const CardFavorito = styled.img`
-  max-width: 20px;
-  justify-self: flex-end;
-  align-items: flex-end;
-  cursor: pointer;
-  padding: 0.2rem;
-  margin-top: 5px;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    box-sizing: 2px 2px 5px rgba(0, 0, 0, 0.3);
-    border-radius: 50%;
-  }
-`;
 
 export const CardContainerInfos = styled.div`
   height: 100%;
@@ -80,7 +71,6 @@ export const CardContainerInfos = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   gap: 10px;
-  /* flex-direction: column; */
   margin-bottom: 5px;
 `;
 export const CardTitulo = styled(Link)`
@@ -113,55 +103,21 @@ export const CardLink = styled(Link)`
   height: 40px;
   cursor: pointer;
   img {
-    max-width: 30px;
+    max-width: 40px;
   }
   &:hover {
     transform: scale(1.05);
   }
 `;
 
-export const CardBotao = styled.button`
-  background-color: transparent;
-  border: none;
+export const CardBotao = styled.img`
   margin-bottom: 5px;
   margin-top: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 40px;
   height: 40px;
   cursor: pointer;
-  img {
-    max-width: 30px;
-  }
+
   &:hover {
     transform: scale(1.05);
   }
-`;
-export const CardAdicionar = styled.div`
-  /* background-color: #005da8; */
-  background-color: rgba(255, 255, 255, 0.4);
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 10px;
-  padding: 0.2rem 0.5rem;
-  margin-top: 10px;
-  color: black;
-  gap: 5px;
-  font-size: 1.2rem;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  &:hover {
-    color: white;
-  }
-  img {
-    max-width: 30px;
-    align-self: center;
-  }
-`;
-export const CardAdicionarTexto = styled.p`
-  font-size: 1.2rem;
 `;

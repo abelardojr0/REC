@@ -84,3 +84,19 @@ export const FilmeDetalhesBotao = styled.button`
     transform: scale(1.02);
   }
 `;
+
+export const FilmeDetalhesBotaoAdicionado = styled.button`
+  color: #fff;
+  background-color: #08ba68;
+  padding: 1rem 2rem;
+  text-align: center;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 20px;
+  width: 100%;
+  margin: 0 auto;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.02);
+  }
+`;

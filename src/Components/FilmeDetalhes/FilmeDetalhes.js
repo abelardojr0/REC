@@ -1,9 +1,11 @@
+import axios from "axios";
 import React from "react";
 import { LinksApi } from "../../ConsultasParaApi";
 import {
   FilmeContainer,
   FilmeConteudo,
   FilmeDetalhesBotao,
+  FilmeDetalhesBotaoAdicionado,
   FilmeDetalhesLi,
   FilmeDetalhesLiSinopse,
   FilmeDetalhesLista,
@@ -16,6 +18,7 @@ import {
 const img = LinksApi.IMG;
 
 const FilmeDetalhes = ({
+  id,
   titulo,
   imagem,
   nota,
@@ -27,6 +30,43 @@ const FilmeDetalhes = ({
   sinopse,
   duracao,
 }) => {
+  const id_usuario = localStorage.getItem("id");
+  const [assistido, setAssistido] = React.useState(false);
+  React.useEffect(() => {
+    axios
+      .post("http://localhost:5000/filmes/" + id_usuario, {
+        titulo,
+        id_usuario,
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.data.status === "sucess") {
+          setAssistido(true);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [id_usuario, titulo]);
+
+  function adicionarFilme() {
+    axios
+      .post("http://localhost:5000/inserirFilme", {
+        titulo,
+        imagem,
+        nota,
+        tipo: "movie",
+        id_api: id,
+        id_usuario,
+      })
+      .then((response) => {
+        console.log(response);
+        setAssistido(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   return (
     <>
       <>
@@ -82,7 +122,15 @@ const FilmeDetalhes = ({
                 Duração:{" "}
                 <FilmeDetalhesSpan>{duracao} minutos</FilmeDetalhesSpan>
               </FilmeDetalhesLi>
-              <FilmeDetalhesBotao>Adicionar</FilmeDetalhesBotao>
+              {assistido ? (
+                <FilmeDetalhesBotaoAdicionado>
+                  Adicionado
+                </FilmeDetalhesBotaoAdicionado>
+              ) : (
+                <FilmeDetalhesBotao onClick={adicionarFilme}>
+                  Adicionar
+                </FilmeDetalhesBotao>
+              )}
             </FilmeDetalhesLista>
           </FilmeConteudo>
         </FilmeContainer>

@@ -27,26 +27,16 @@ const Formulario = () => {
 
   function finalizar(e) {
     e.preventDefault();
-    // ("https://teste-api-projeto.vercel.app/cadastro"
-    // ("http://localhost:5000/inserirUsuario"
     axios
-      .get("http://localhost:5000/usuarios")
+      .post("http://localhost:5000/inserirUsuario", {
+        nome,
+        email,
+        senha,
+      })
       .then((response) => {
-        const result = response.data.filter((usuario) => email === usuario[2]);
-        if (result.length === 0) {
-          axios
-            .post("http://localhost:5000/inserirUsuario", {
-              nome,
-              email,
-              senha,
-            })
-            .then((response) => {
-              console.log(response);
-              navigate("/finalizado");
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+        console.log(response.data.status);
+        if (response.data.status === "sucess") {
+          navigate("/finalizado");
         } else {
           setMsgErro(true);
         }

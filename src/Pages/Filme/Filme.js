@@ -77,6 +77,7 @@ const Filme = () => {
       {filme && (
         <>
           <FilmeDetalhes
+            id={filme.id}
             titulo={filme.title}
             imagem={filme.poster_path}
             nota={filme.vote_average.toFixed(2)}
