@@ -3,15 +3,19 @@ import React from "react";
 import Card from "../../Components/Card/Card";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
+import { ContainerCarregando } from "../../GlobalStyles";
 import {
   ResultadoContainer,
   ResultadoConteudo,
   ResultadoLista,
   ResultadoTitulo,
 } from "../Search/StyleSearch";
+import { ClipLoader } from "react-spinners";
 
 const MinhasSeries = () => {
   const [minhasSeries, setMinhasSeries] = React.useState([]);
+  const [carregando, setCarregando] = React.useState(true);
+
   const id_usuario = localStorage.getItem("id");
 
   React.useEffect(() => {
@@ -20,6 +24,9 @@ const MinhasSeries = () => {
         .get("http://localhost:5000/series/" + id_usuario)
         .then((response) => {
           setMinhasSeries(response.data);
+          setTimeout(() => {
+            setCarregando(false);
+          }, 500);
         })
         .catch((error) => {
           console.log(error);
@@ -29,6 +36,13 @@ const MinhasSeries = () => {
   return (
     <>
       <Header />
+      {carregando && (
+        <>
+          <ContainerCarregando>
+            <ClipLoader size={100} />
+          </ContainerCarregando>
+        </>
+      )}
       <ResultadoContainer>
         <ResultadoConteudo>
           <ResultadoTitulo>Minhas Séries:</ResultadoTitulo>
@@ -43,6 +57,7 @@ const MinhasSeries = () => {
                     tipo={item[4]}
                     id={item[5]}
                     listaBanco={minhasSeries}
+                    listaDeDesejo={false}
                   />
                 </li>
               ))}

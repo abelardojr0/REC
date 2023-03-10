@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const ResultadoContainer = styled.article`
   background-color: #424150;
   width: 100%;
-  height: 100vh;
+  height: 100%;
+  min-height: 500px;
   padding-top: 100px;
 `;
 

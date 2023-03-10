@@ -25,14 +25,22 @@ const Filme = () => {
     const response = await fetch(url);
     const responseJson = await response.json();
     const resultadoFinal = await responseJson.results;
-    setSimilares(resultadoFinal);
+    if (resultadoFinal.length === 0) {
+      setSimilares(false);
+    } else {
+      setSimilares(resultadoFinal);
+    }
   }
 
   async function buscarRecomendacoes(url) {
     const response = await fetch(url);
     const responseJson = await response.json();
     const resultadoFinal = await responseJson.results;
-    setRecomendacoes(resultadoFinal);
+    if (resultadoFinal.length === 0) {
+      setRecomendacoes(false);
+    } else {
+      setRecomendacoes(resultadoFinal);
+    }
   }
 
   React.useEffect(() => {
@@ -62,7 +70,7 @@ const Filme = () => {
 
   if (filme === null || similares === null || recomendacoes === null)
     return null;
-
+  // console.log(similares);
   return (
     <>
       <Header />
@@ -80,19 +88,19 @@ const Filme = () => {
             sinopse={filme.overview}
             duracao={filme.runtime}
           />
-          {similares && recomendacoes && (
-            <>
-              <ContainerCards
-                titulo={"Similares"}
-                lista={similares}
-                tipo={"filme"}
-              />
-              <ContainerCards
-                titulo={"Recomendações"}
-                lista={recomendacoes}
-                tipo={"filme"}
-              />
-            </>
+          {similares && (
+            <ContainerCards
+              titulo={"Similares"}
+              lista={similares}
+              tipo={"filme"}
+            />
+          )}
+          {recomendacoes && (
+            <ContainerCards
+              titulo={"Recomendações"}
+              lista={recomendacoes}
+              tipo={"filme"}
+            />
           )}
         </>
       )}

@@ -27,6 +27,7 @@ const CategoriaFilmes = () => {
   const [categoriaFilmes, setCategoriaFilmes] = React.useState([]);
   const [loginStatus, setLoginStatus] = React.useState(false);
   const [listaBanco, setListaBanco] = React.useState([]);
+  const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
   const id_usuario = localStorage.getItem("id");
 
   async function buscarFilmes(url) {
@@ -48,8 +49,17 @@ const CategoriaFilmes = () => {
         .then((response) => {
           setListaBanco(response.data);
         });
+      axios
+        .get("http://localhost:5000/listaDesejo/" + id_usuario)
+        .then((response) => {
+          setListaDesejoBanco(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }, [id_usuario]);
+  console.log(categoriaFilmes);
   if (categoriaFilmes === []) return null;
   return (
     <>
@@ -75,9 +85,10 @@ const CategoriaFilmes = () => {
                     imagem={item.poster_path}
                     nota={item.vote_average}
                     id={item.id}
-                    tipo={item.media_type}
+                    tipo={"movie"}
                     setLoginStatus={setLoginStatus}
                     listaBanco={listaBanco}
+                    listaDesejoBanco={listaDesejoBanco}
                   />
                 </li>
               ))}

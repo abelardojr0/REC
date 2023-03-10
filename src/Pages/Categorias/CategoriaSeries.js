@@ -73,7 +73,7 @@ const CategoriaSeries = () => {
                     imagem={item.poster_path}
                     nota={item.vote_average}
                     id={item.id}
-                    tipo={item.media_type}
+                    tipo={"tv"}
                     setLoginStatus={setLoginStatus}
                     listaBanco={listaBanco}
                   />

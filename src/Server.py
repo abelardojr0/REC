@@ -76,6 +76,7 @@ try:
     @app.route("/inserirListaDesejo", methods =['POST'])
     def inserirListaDesejo():
       cursor = con.cursor()
+      print(request.json)
       titulo = request.json['titulo']
       imagem = request.json['imagem']
       nota = request.json['nota']
@@ -96,7 +97,15 @@ try:
       cursor.execute('INSERT INTO usuarios (nome, email, senha) VALUES (%s, %s, %s)', (nome, email, senha))
       con.commit()
       return jsonify({'status': 'sucess'})
-        
+    
+    @app.route("/removerListaDesejo", methods =['POST'])
+    def removerListaDesejo():
+      cursor = con.cursor()
+      id = request.json['id']
+      cursor.execute("ROLLBACK")
+      cursor.execute(f"DELETE FROM listaDesejo WHERE id = '{id}'")
+      con.commit()
+      return jsonify({'status': 'sucess'})
     if __name__ == '__main__':
       app.run(debug=True)
 except(Error) as error:

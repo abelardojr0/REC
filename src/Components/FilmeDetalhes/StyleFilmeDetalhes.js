@@ -4,6 +4,7 @@ export const FilmeContainer = styled.article`
   height: 100vh;
   background-color: #424150;
   width: 100%;
+  padding-top: 100px;
   margin-bottom: 60px;
 `;
 export const FilmeConteudo = styled.section`

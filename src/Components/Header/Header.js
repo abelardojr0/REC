@@ -24,10 +24,18 @@ const Header = () => {
   const [loginStatus, setLoginStatus] = React.useState(false);
   const [ativa, setAtiva] = React.useState("");
   const [search, setSearch] = React.useState("");
-  const [menuAberto, setMenuAberto] = React.useState();
+  const [menuAberto, setMenuAberto] = React.useState(false);
+  const [inputVisivel, setInputVisivel] = React.useState(false);
   const navigate = useNavigate();
   const nome_usuario = localStorage.getItem("nome");
+  const inputRef = React.useRef(null);
   // const id_usuario = localStorage.getItem("id");
+
+  React.useEffect(() => {
+    if (inputVisivel) {
+      inputRef.current.focus();
+    }
+  }, [inputVisivel]);
 
   function pesquisar(e) {
     e.preventDefault();
@@ -45,12 +53,14 @@ const Header = () => {
   }
   function mostrarPesquisa() {
     setAtiva("ativo");
+    setInputVisivel(true);
   }
   function esconderPesquisa(e) {
     if (e.target.value.length > 0) {
       return;
     } else {
       setAtiva("");
+      setInputVisivel(false);
     }
   }
   function abrirMenu() {
@@ -60,12 +70,27 @@ const Header = () => {
       setMenuAberto(true);
     }
   }
+
   function deslogar() {
     localStorage.clear();
     navigate("/");
     window.location.reload(true);
   }
 
+  function fecharMenu(e) {
+    // console.log(e.target);
+    if (e.target.getAttribute("id") !== "menu_aberto") {
+      setMenuAberto(false);
+    }
+
+    // if (
+    //   (ativa === "ativo" && e.target.getAttribute("id") !== "pesquisar") ||
+    //   e.target.getAttribute("id") !== "pesquisar_botao"
+    // ) {
+    //   // setAtiva("");
+    // }
+  }
+  window.addEventListener("click", fecharMenu);
   return (
     <HeaderComponent>
       <HeaderNav>
@@ -110,18 +135,23 @@ const Header = () => {
               placeholder={"Buscar por filmes e séries..."}
               autoComplete="off"
               onChange={(e) => setSearch(e.target.value)}
+              ref={inputRef}
               value={search}
             />
-            <HeaderPesquisarBotao onClick={mostrarPesquisa} type="submit" />
+            <HeaderPesquisarBotao
+              id="pesquisar_botao"
+              onClick={mostrarPesquisa}
+              type="submit"
+            />
           </HeaderPesquisarContainerBarra>
         </HeaderPesquisarContainer>
         {nome_usuario ? (
           <>
-            <HeaderMenuUsuario onClick={abrirMenu}>
+            <HeaderMenuUsuario id="menu_aberto" onClick={abrirMenu}>
               {nome_usuario[0].toLocaleUpperCase()}
             </HeaderMenuUsuario>
             {menuAberto && (
-              <HeaderMenuAberto>
+              <HeaderMenuAberto id="menu_aberto">
                 <HeaderMenuAbertoCabeçalho>
                   <HeaderMenuUsuario>
                     {nome_usuario[0].toLocaleUpperCase()}

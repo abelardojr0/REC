@@ -105,3 +105,13 @@ export const FormularioSociais = styled.div`
   gap: 20px;
   width: 100%;
 `;
+export const LoginMsgErro = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  width: 92%;
+  border-radius: 15px;
+  margin-bottom: 10px;
+  background-color: #9d001b;
+`;

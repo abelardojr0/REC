@@ -9,13 +9,6 @@ export const CardComponent = styled.div`
   position: relative;
 `;
 
-export const CardCarregando = styled.div`
-  background-color: #000600;
-  height: 300px;
-  width: 250px;
-  border-radius: 15px;
-`;
-
 export const CardImagem = styled.img`
   padding: 1rem;
   width: 100%;
@@ -103,7 +96,7 @@ export const CardTitulo = styled(Link)`
   }
 `;
 
-export const CardBotao = styled(Link)`
+export const CardLink = styled(Link)`
   text-decoration: none;
   text-align: center;
   border-radius: 10px;
@@ -116,6 +109,25 @@ export const CardBotao = styled(Link)`
   justify-content: center;
   align-items: center;
   gap: 15px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  img {
+    max-width: 30px;
+  }
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
+export const CardBotao = styled.button`
+  background-color: transparent;
+  border: none;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 40px;
   height: 40px;
   cursor: pointer;

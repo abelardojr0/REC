@@ -11,6 +11,7 @@ import {
   LoginLembrarLabel,
   LoginModal,
   LoginModalContainer,
+  LoginMsgErro,
   LoginTitulo,
 } from "./StyleLogin";
 import facebook from "../../Images/logo_facebook.png";
@@ -62,10 +63,10 @@ const Login = ({ setLoginStatus }) => {
 
         <LoginFormulario onSubmit={checarLogin}>
           <LoginTitulo>Entrar</LoginTitulo>
-          {errorLogin && <p>Login errado</p>}
+          {errorLogin && <LoginMsgErro>Email/Senha incorreto</LoginMsgErro>}
           <Input
             htmlFor={"userEmail"}
-            texto={"Usuário/E-mail *"}
+            texto={"E-mail *"}
             tipo={"text"}
             nome={"userEmail"}
             id={"userEmail"}

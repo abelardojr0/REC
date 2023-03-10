@@ -9,9 +9,13 @@ import {
   ResultadoLista,
   ResultadoTitulo,
 } from "../Search/StyleSearch";
+import { ClipLoader } from "react-spinners";
+import { ContainerCarregando } from "../../GlobalStyles";
 
 const ListaDesejo = () => {
   const [listaDesejo, setListaDesejo] = React.useState([]);
+  const [carregando, setCarregando] = React.useState(true);
+
   const id_usuario = localStorage.getItem("id");
 
   React.useEffect(() => {
@@ -20,6 +24,9 @@ const ListaDesejo = () => {
         .get("http://localhost:5000/listaDesejo/" + id_usuario)
         .then((response) => {
           setListaDesejo(response.data);
+          setTimeout(() => {
+            setCarregando(false);
+          }, 500);
         })
         .catch((error) => {
           console.log(error);
@@ -29,6 +36,13 @@ const ListaDesejo = () => {
   return (
     <>
       <Header />
+      {carregando && (
+        <>
+          <ContainerCarregando>
+            <ClipLoader size={100} />
+          </ContainerCarregando>
+        </>
+      )}
       <ResultadoContainer>
         <ResultadoConteudo>
           <ResultadoTitulo>Minha Lista de Desejos:</ResultadoTitulo>
@@ -43,6 +57,7 @@ const ListaDesejo = () => {
                     tipo={item[4]}
                     id={item[5]}
                     listaBanco={listaDesejo}
+                    listaDeDesejo={true}
                   />
                 </li>
               ))}

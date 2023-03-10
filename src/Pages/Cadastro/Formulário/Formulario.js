@@ -3,6 +3,7 @@ import LoginComSociais from "../../Login/LoginComSociais/LoginComSociais";
 import Input from "./Components/Input";
 import {
   Botao,
+  CadastroMsgDeErro,
   ContainerFormulario,
   FormularioJaTenhoConta,
   FormularioJaTenhoContaTitulo,
@@ -22,20 +23,33 @@ const Formulario = () => {
   const [nome, setNome] = React.useState();
   const [email, setEmail] = React.useState();
   const [senha, setSenha] = React.useState();
+  const [msgErro, setMsgErro] = React.useState(false);
 
   function finalizar(e) {
     e.preventDefault();
     // ("https://teste-api-projeto.vercel.app/cadastro"
     // ("http://localhost:5000/inserirUsuario"
     axios
-      .post("http://localhost:5000/inserirUsuario", {
-        nome,
-        email,
-        senha,
-      })
+      .get("http://localhost:5000/usuarios")
       .then((response) => {
-        console.log(response);
-        navigate("/finalizado");
+        const result = response.data.filter((usuario) => email === usuario[2]);
+        if (result.length === 0) {
+          axios
+            .post("http://localhost:5000/inserirUsuario", {
+              nome,
+              email,
+              senha,
+            })
+            .then((response) => {
+              console.log(response);
+              navigate("/finalizado");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          setMsgErro(true);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -56,6 +70,7 @@ const Formulario = () => {
           required={true}
           setDados={setNome}
         />
+        {msgErro && <CadastroMsgDeErro>Email já existe!</CadastroMsgDeErro>}
         <Input
           htmlFor={"email"}
           texto={"Email *"}

@@ -17,3 +17,10 @@ export const ContainerPages = styled.div`
   flex-direction: column;
   margin: 0 auto;
 `;
+export const ContainerCarregando = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+`;

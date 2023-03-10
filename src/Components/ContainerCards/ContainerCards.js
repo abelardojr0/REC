@@ -18,6 +18,27 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
         .get("http://localhost:5000/filmes/" + id_usuario)
         .then((response) => {
           setFilmesBanco(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      axios
+        .get("http://localhost:5000/series/" + id_usuario)
+        .then((response) => {
+          setSeriesBanco(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      axios
+        .get("http://localhost:5000/listaDesejo/" + id_usuario)
+        .then((response) => {
+          setListaDesejoBanco(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
         });
     }
   }, [id_usuario]);
@@ -43,6 +64,7 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
                     tipo={"movie"}
                     setLoginStatus={setLoginStatus}
                     listaBanco={filmesBanco}
+                    listaDesejoBanco={listaDesejoBanco}
                   />
                 </Carousel.Item>
               ))}
@@ -63,7 +85,9 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
                     id={serie.id}
                     tipo={"tv"}
                     setLoginStatus={setLoginStatus}
-                    listaBanco={filmesBanco}
+                    listaBanco={seriesBanco}
+                    listaDeDesejo={false}
+                    listaDesejoBanco={listaDesejoBanco}
                   />
                 </Carousel.Item>
               ))}
