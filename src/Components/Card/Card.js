@@ -123,12 +123,27 @@ const Card = ({
 
   function desmarcarAssistido() {
     setAssistido(false);
-    if (window.location.href === "http://localhost:3000/meusFilmes") {
-      setVisivel(false);
-    }
     if (tipo === "movie") {
+      if (window.location.href === "http://localhost:3000/meusFilmes") {
+        setVisivel(false);
+      }
       axios
         .post("http://localhost:5000/removerFilme", {
+          titulo,
+          id_usuario,
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      if (window.location.href === "http://localhost:3000/minhasSeries") {
+        setVisivel(false);
+      }
+      axios
+        .post("http://localhost:5000/removerSerie", {
           titulo,
           id_usuario,
         })

@@ -8,7 +8,7 @@ try:
       host="localhost",
       database="REC",
       user="postgres",
-      password="postgres",
+      password="123",
       port="5432"
     )
     app = Flask(__name__)
@@ -159,7 +159,15 @@ try:
       id_usuario = request.json['id_usuario']
       cursor.execute(f"DELETE FROM filmes WHERE id_usuario = '{id_usuario}' AND titulo = '{titulo}'")
       con.commit()
-      
+      return jsonify({'status' : 'sucess'})
+    
+    @app.route("/removerSerie", methods = ['POST'])
+    def removerSerie():
+      cursor = con.cursor()
+      titulo = request.json['titulo']
+      id_usuario = request.json['id_usuario']
+      cursor.execute(f"DELETE FROM series WHERE id_usuario = '{id_usuario}' AND titulo = '{titulo}'")
+      con.commit()
       return jsonify({'status' : 'sucess'})
     
     @app.route("/deletarUsuario", methods = ['POST'])

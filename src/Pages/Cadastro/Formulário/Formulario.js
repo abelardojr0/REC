@@ -23,7 +23,8 @@ const Formulario = () => {
   const [nome, setNome] = React.useState();
   const [email, setEmail] = React.useState();
   const [senha, setSenha] = React.useState();
-  const [msgErro, setMsgErro] = React.useState(false);
+  const [msgErroEmail, setMsgErroEmail] = React.useState(false);
+  const [msgErroSenha, setMsgErroSenha] = React.useState(false);
 
   function finalizar(e) {
     e.preventDefault();
@@ -37,8 +38,10 @@ const Formulario = () => {
         console.log(response.data.status);
         if (response.data.status === "sucess") {
           navigate("/finalizado");
-        } else {
-          setMsgErro(true);
+        } else if (response.data.status === "fail") {
+          setMsgErroEmail(true);
+        } else if (response.data.status === "senhaFraca") {
+          setMsgErroSenha(true);
         }
       })
       .catch((error) => {
@@ -60,7 +63,9 @@ const Formulario = () => {
           required={true}
           setDados={setNome}
         />
-        {msgErro && <CadastroMsgDeErro>Email já existe!</CadastroMsgDeErro>}
+        {msgErroEmail && (
+          <CadastroMsgDeErro>Email já existe!</CadastroMsgDeErro>
+        )}
         <Input
           htmlFor={"email"}
           texto={"Email *"}
@@ -71,6 +76,12 @@ const Formulario = () => {
           required
           setDados={setEmail}
         />
+        {msgErroSenha && (
+          <CadastroMsgDeErro>
+            Senha fraca, digite uma senha com no minimo um caracter maiúsculo,
+            minúsculo, especial e um número
+          </CadastroMsgDeErro>
+        )}
         <Input
           htmlFor={"senha"}
           texto={"Senha *"}
