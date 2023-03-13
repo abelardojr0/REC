@@ -3,6 +3,7 @@ import React from "react";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
 import Input from "../Cadastro/Formulário/Components/Input";
+import { CadastroMsgDeErro } from "../Cadastro/Formulário/StylesFormulario";
 import {
   MinhaContaAtualizar,
   MinhaContaBotao,
@@ -14,12 +15,13 @@ const AtualizarUsuario = () => {
   const [nome, setNome] = React.useState();
   const [email, setEmail] = React.useState();
   const [senha, setSenha] = React.useState();
+  const [senhaFraca, setSenhaFraca] = React.useState(false);
   const [sucesso, setSucesso] = React.useState();
   const id_usuario = localStorage.getItem("id");
 
   function atualizarBanco(e) {
-    localStorage.setItem("user", nome);
     e.preventDefault();
+    localStorage.setItem("nome", nome);
     axios
       .post("http://localhost:5000/atualizarUsuario", {
         nome,
@@ -29,7 +31,12 @@ const AtualizarUsuario = () => {
       })
       .then((response) => {
         console.log(response);
-        setSucesso(true);
+        if (response.data.status === "sucess") {
+          setSucesso(true);
+          setSenhaFraca(false);
+        } else if (response.data.status === "senhaFraca") {
+          setSenhaFraca(true);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -60,6 +67,12 @@ const AtualizarUsuario = () => {
           required={true}
           setDados={setEmail}
         />
+        {senhaFraca && (
+          <CadastroMsgDeErro>
+            Senha fraca, digite uma senha com no minimo um caracter maiúsculo,
+            minúsculo, especial e um número
+          </CadastroMsgDeErro>
+        )}
         <Input
           htmlFor={"novaSenha"}
           texto={"Nova Senha"}

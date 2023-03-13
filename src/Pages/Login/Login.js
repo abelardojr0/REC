@@ -1,8 +1,8 @@
 import React from "react";
 import Input from "../Cadastro/Formulário/Components/Input";
 import {
-  EntrarCom,
-  FormularioSociais,
+  // EntrarCom,
+  // FormularioSociais,
   LoginBotaoEntrar,
   LoginBotaoFechar,
   LoginFormulario,
@@ -14,9 +14,9 @@ import {
   LoginMsgErro,
   LoginTitulo,
 } from "./StyleLogin";
-import facebook from "../../Images/logo_facebook.png";
-import google from "../../Images/logo_google.png";
-import LoginComSociais from "./LoginComSociais/LoginComSociais";
+// import facebook from "../../Images/logo_facebook.png";
+// import google from "../../Images/logo_google.png";
+// import LoginComSociais from "./LoginComSociais/LoginComSociais";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -41,15 +41,17 @@ const Login = ({ setLoginStatus }) => {
         senha,
       })
       .then((response) => {
+        console.log(response);
         if (response.data.status === "fail") {
           setErrorLogin(true);
         } else {
           localStorage.setItem("id", response.data.id);
           localStorage.setItem("nome", response.data.nome);
+          localStorage.setItem("token", response.data.access_token);
           setLoginStatus(false);
           setErrorLogin(false);
           navigate("/");
-          window.location.reload(true);
+          // window.location.reload(true);
         }
       })
       .catch((error) => {
@@ -97,11 +99,11 @@ const Login = ({ setLoginStatus }) => {
 
           <LoginBotaoEntrar>Entrar</LoginBotaoEntrar>
 
-          <EntrarCom>Entrar com: </EntrarCom>
-          <FormularioSociais>
+          {/* <EntrarCom>Entrar com: </EntrarCom> */}
+          {/* <FormularioSociais>
             <LoginComSociais social={facebook} />
             <LoginComSociais social={google} />
-          </FormularioSociais>
+          </FormularioSociais> */}
         </LoginFormulario>
       </LoginModal>
     </LoginModalContainer>

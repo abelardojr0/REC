@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import React from "react";
 import Card from "../../Components/Card/Card";
 import Footer from "../../Components/Footer/Footer";
@@ -12,6 +12,7 @@ import {
   ResultadoTitulo,
 } from "../Search/StyleSearch";
 import { ContainerCarregando } from "../../GlobalStyles";
+import api from "../../api";
 
 const MeusFilmes = () => {
   const [meusFilmes, setMeusFilmes] = React.useState([]);
@@ -21,8 +22,8 @@ const MeusFilmes = () => {
 
   React.useEffect(() => {
     if (id_usuario) {
-      axios
-        .get("http://localhost:5000/filmes/" + id_usuario)
+      api
+        .get("/filmes/" + id_usuario)
         .then((response) => {
           setMeusFilmes(response.data);
           setTimeout(() => {
@@ -32,6 +33,17 @@ const MeusFilmes = () => {
         .catch((error) => {
           console.log(error);
         });
+      // axios
+      //   .get("http://localhost:5000/filmes/" + id_usuario)
+      //   .then((response) => {
+      //     setMeusFilmes(response.data);
+      //     setTimeout(() => {
+      //       setCarregando(false);
+      //     }, 500);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
     }
   }, [id_usuario]);
   return (
