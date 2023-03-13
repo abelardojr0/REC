@@ -1,19 +1,5 @@
 import styled from "styled-components";
 
-export const ContainerCardsContainer = styled.article`
-  background-color: #424150;
-  width: 100%;
-  height: 600px;
-`;
-export const ContainerCardsContainerConteudo = styled.section`
-  width: 1200px;
-  height: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 0 auto;
-`;
 export const ContainerCardsTituloSection = styled.h1`
   font-size: 3rem;
   color: white;
@@ -24,11 +10,4 @@ export const ContainerCardsTituloSection = styled.h1`
   padding-top: 50px;
   margin-left: 40px;
   margin-bottom: 20px;
-`;
-export const ContainerCardsContainerLista = styled.ul`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 500px;
-  gap: 20px;
 `;

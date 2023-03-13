@@ -8,7 +8,7 @@ try:
       host="localhost",
       database="REC",
       user="postgres",
-      password="123",
+      password="postgres",
       port="5432"
     )
     app = Flask(__name__)
@@ -34,12 +34,22 @@ try:
         else:
           return jsonify({'status' : 'sucess'})
           
-    @app.route("/series/<int:id>", methods =['GET'])
+    @app.route("/series/<int:id>", methods =['GET', 'POST'])
     def consultarSeries(id):
       cursor = con.cursor()
-      cursor.execute(f"SELECT * FROM series WHERE id_usuario = '{id}'")
-      results = cursor.fetchall()
-      return results
+      if(request.method == 'GET'):
+        cursor.execute(f"SELECT * FROM series WHERE id_usuario = '{id}'")
+        results = cursor.fetchall()
+        return results
+      elif(request.method == 'POST'):
+        titulo = request.json['titulo']
+        id_usuario = request.json['id_usuario']
+        cursor.execute(f"SELECT * FROM series WHERE titulo = '{titulo}' AND id_usuario = '{id_usuario}'")
+        resposta = cursor.fetchone()
+        if(resposta is None):
+          return jsonify({'status' : 'fail'})
+        else:
+          return jsonify({'status' : 'sucess'})
     
     @app.route("/listaDesejo/<int:id>", methods =['GET'])
     def consultarListaDesejo(id):
@@ -59,7 +69,17 @@ try:
         return jsonify({'status' : 'fail'})
       else:
         return jsonify({'status' : 'sucess', 'id': f'{resposta[0]}', 'nome' : f'{resposta[1]}' })
-          
+      
+    @app.route('/atualizarUsuario', methods=['POST'])
+    def atualizar_user():
+        cur = con.cursor()
+        nome = request.json['nome']
+        email = request.json['email']
+        senha = request.json['senha']
+        id_usuario = request.json['id_usuario']
+        cur.execute("UPDATE usuarios SET nome=%s, email =%s, senha=%s WHERE id = %s", (nome, email, senha, id_usuario))
+        con.commit()
+        return jsonify({'status': 'success'})      
     
     @app.route("/inserirFilme", methods =['POST'])
     def inserirFilme():
@@ -139,7 +159,21 @@ try:
       id_usuario = request.json['id_usuario']
       cursor.execute(f"DELETE FROM filmes WHERE id_usuario = '{id_usuario}' AND titulo = '{titulo}'")
       con.commit()
+      
       return jsonify({'status' : 'sucess'})
+    
+    @app.route("/deletarUsuario", methods = ['POST'])
+    def deletarUsuario():
+      cursor = con.cursor()
+      id_usuario = request.json['id_usuario']
+      cursor.execute(f"DELETE FROM filmes WHERE id_usuario = '{id_usuario}'")
+      cursor.execute(f"DELETE FROM series WHERE id_usuario = '{id_usuario}'")
+      cursor.execute(f"DELETE FROM listaDesejo WHERE id_usuario = '{id_usuario}'")
+      cursor.execute(f"DELETE FROM usuarios WHERE id = '{id_usuario}'")
+      con.commit()
+      return jsonify({'status' : 'sucess'})
+
+      
     if __name__ == '__main__':
       app.run(debug=True)
 except(Error) as error:

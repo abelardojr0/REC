@@ -18,12 +18,13 @@ import facebook from "../../Images/logo_facebook.png";
 import google from "../../Images/logo_google.png";
 import LoginComSociais from "./LoginComSociais/LoginComSociais";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ setLoginStatus }) => {
   const [email, setEmail] = React.useState();
   const [senha, setSenha] = React.useState();
   const [errorLogin, setErrorLogin] = React.useState();
-
+  const navigate = useNavigate();
   function fecharModal(e) {
     if (
       e.target.getAttribute("id") === "modal" ||
@@ -47,6 +48,8 @@ const Login = ({ setLoginStatus }) => {
           localStorage.setItem("nome", response.data.nome);
           setLoginStatus(false);
           setErrorLogin(false);
+          navigate("/");
+          window.location.reload(true);
         }
       })
       .catch((error) => {

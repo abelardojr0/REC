@@ -38,8 +38,7 @@ export const HeaderNavUl = styled.ul`
     border-radius: 15px;
     cursor: pointer;
     &:hover {
-      /* background-color: rgba(255, 255, 255, 0.2); */
-      color: #00aad9;
+      color: #ff3131;
       text-decoration: underline;
     }
   }
@@ -70,7 +69,7 @@ export const HeaderLoginBotao = styled.button`
   color: #f9f9f9;
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
-    color: #00aad9;
+    color: #ff3131;
   }
 `;
 
@@ -129,7 +128,8 @@ export const HeaderPesquisarBotao = styled.button`
 `;
 
 export const HeaderMenuUsuario = styled.div`
-  background-color: #0c1f24;
+  /* background-color: #0c1f24; */
+  background-color: #bd0b0b;
   padding: 0.5rem;
   color: white;
   font-size: 1rem;
@@ -147,7 +147,6 @@ export const HeaderMenuUsuario = styled.div`
 export const HeaderMenuAberto = styled.div`
   z-index: 3;
   background-color: #e2e2e2;
-  width: 142px;
   border-radius: 15px;
   display: flex;
   justify-content: center;
@@ -157,7 +156,7 @@ export const HeaderMenuAberto = styled.div`
   padding: 1rem;
   gap: 10px;
   position: absolute;
-  top: 75px;
+  top: 80px;
   right: 20px;
 `;
 
@@ -169,6 +168,7 @@ export const HeaderItensMenuAberto = styled(Link)`
   justify-content: center;
   align-items: center;
   gap: 10px;
+  text-transform: capitalize;
   &:hover {
     text-decoration: underline;
   }

@@ -62,6 +62,7 @@ const Serie = () => {
       {serie && (
         <>
           <SerieDetalhes
+            id={serie.id}
             nome={serie.name}
             imagem={serie.poster_path}
             nota={serie.vote_average.toFixed(2)}

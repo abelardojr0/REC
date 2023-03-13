@@ -78,17 +78,9 @@ const Header = () => {
   }
 
   function fecharMenu(e) {
-    // console.log(e.target);
     if (e.target.getAttribute("id") !== "menu_aberto") {
       setMenuAberto(false);
     }
-
-    // if (
-    //   (ativa === "ativo" && e.target.getAttribute("id") !== "pesquisar") ||
-    //   e.target.getAttribute("id") !== "pesquisar_botao"
-    // ) {
-    //   // setAtiva("");
-    // }
   }
   window.addEventListener("click", fecharMenu);
   return (
@@ -156,11 +148,22 @@ const Header = () => {
                   <HeaderMenuUsuario>
                     {nome_usuario[0].toLocaleUpperCase()}
                   </HeaderMenuUsuario>
-                  <HeaderItensMenuAberto>{nome_usuario}</HeaderItensMenuAberto>
+                  <HeaderItensMenuAberto to="/minhaConta">
+                    {nome_usuario}
+                  </HeaderItensMenuAberto>
                 </HeaderMenuAbertoCabeçalho>
-                <HeaderItensMenuAberto>Meus Filmes</HeaderItensMenuAberto>
-                <HeaderItensMenuAberto>Minhas Séries</HeaderItensMenuAberto>
-                <HeaderItensMenuAberto>Minha Lista</HeaderItensMenuAberto>
+                <HeaderItensMenuAberto to="/meusFilmes">
+                  Meus Filmes
+                </HeaderItensMenuAberto>
+                <HeaderItensMenuAberto to="/minhasSeries">
+                  Minhas Séries
+                </HeaderItensMenuAberto>
+                <HeaderItensMenuAberto to="/listaDesejo">
+                  Minha Lista
+                </HeaderItensMenuAberto>
+                <HeaderItensMenuAberto to="/minhaConta">
+                  Minha Conta
+                </HeaderItensMenuAberto>
                 <HeaderItensMenuAberto onClick={deslogar}>
                   Sair
                 </HeaderItensMenuAberto>

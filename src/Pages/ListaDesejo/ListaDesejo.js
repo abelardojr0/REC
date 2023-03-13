@@ -36,34 +36,36 @@ const ListaDesejo = () => {
   return (
     <>
       <Header />
-      {carregando && (
+      {carregando ? (
         <>
           <ContainerCarregando>
             <ClipLoader size={100} />
           </ContainerCarregando>
         </>
+      ) : (
+        <ResultadoContainer>
+          <ResultadoConteudo>
+            <ResultadoTitulo>Minha Lista de Desejos:</ResultadoTitulo>
+            <ResultadoLista>
+              {listaDesejo &&
+                listaDesejo.map((item) => (
+                  <li key={item.id}>
+                    <Card
+                      titulo={item[1]}
+                      imagem={item[2]}
+                      nota={item[3]}
+                      tipo={item[4]}
+                      id={item[5]}
+                      listaBanco={listaDesejo}
+                      listaDeDesejo={true}
+                    />
+                  </li>
+                ))}
+            </ResultadoLista>
+          </ResultadoConteudo>
+        </ResultadoContainer>
       )}
-      <ResultadoContainer>
-        <ResultadoConteudo>
-          <ResultadoTitulo>Minha Lista de Desejos:</ResultadoTitulo>
-          <ResultadoLista>
-            {listaDesejo &&
-              listaDesejo.map((item) => (
-                <li key={item.id}>
-                  <Card
-                    titulo={item[1]}
-                    imagem={item[2]}
-                    nota={item[3]}
-                    tipo={item[4]}
-                    id={item[5]}
-                    listaBanco={listaDesejo}
-                    listaDeDesejo={true}
-                  />
-                </li>
-              ))}
-          </ResultadoLista>
-        </ResultadoConteudo>
-      </ResultadoContainer>
+
       <Footer />
     </>
   );

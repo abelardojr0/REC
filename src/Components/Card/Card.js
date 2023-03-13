@@ -141,22 +141,26 @@ const Card = ({
     }
   }
   function adicionarNaLista() {
-    setAdicionadoNaLista(true);
-    axios
-      .post("http://localhost:5000/inserirListaDesejo", {
-        titulo,
-        imagem,
-        nota,
-        tipo,
-        id_api: id,
-        id_usuario,
-      })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (id_usuario) {
+      setAdicionadoNaLista(true);
+      axios
+        .post("http://localhost:5000/inserirListaDesejo", {
+          titulo,
+          imagem,
+          nota,
+          tipo,
+          id_api: id,
+          id_usuario,
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setLoginStatus(true);
+    }
   }
   function removerDaLista() {
     setAdicionadoNaLista(false);
@@ -203,21 +207,22 @@ const Card = ({
                     src={adicionar}
                     alt="adicionar"
                   />
+                  {!adicionadoNaLista && !listaDeDesejo ? (
+                    <CardBotao
+                      onClick={adicionarNaLista}
+                      src={listaDesejo_img}
+                      alt="icon-lista_desejo"
+                    />
+                  ) : (
+                    <CardBotao
+                      onClick={removerDaLista}
+                      src={adicionado}
+                      alt="icon-lista_desejo"
+                    />
+                  )}
                 </>
               )}
-              {!adicionadoNaLista && !listaDeDesejo ? (
-                <CardBotao
-                  onClick={adicionarNaLista}
-                  src={listaDesejo_img}
-                  alt="icon-lista_desejo"
-                />
-              ) : (
-                <CardBotao
-                  onClick={removerDaLista}
-                  src={adicionado}
-                  alt="icon-lista_desejo"
-                />
-              )}
+
               <CardLink to={`/${tipo}/${id}`}>
                 <img src={detalhes} alt="more" />
               </CardLink>

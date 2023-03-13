@@ -59,7 +59,7 @@ export const LoginTitulo = styled.h1`
 `;
 
 export const LoginBotaoEntrar = styled.button`
-  background-color: #068ecc;
+  background-color: #ff3131;
   outline: none;
   padding: 0.8rem 1.6rem;
   font-size: 1.5rem;

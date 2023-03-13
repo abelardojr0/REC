@@ -14,6 +14,8 @@ import Finalizado from "./Pages/Cadastro/Finalizado/Finalizado";
 import MeusFilmes from "./Pages/MeusFilmes/MeusFilmes";
 import MinhasSeries from "./Pages/MinhasSeries/MinhasSeries";
 import ListaDesejo from "./Pages/ListaDesejo/ListaDesejo";
+import MinhaConta from "./Pages/MinhaConta/MinhaConta";
+import AtualizarUsuario from "./Pages/MinhaConta/AtualizarUsuario";
 function App() {
   return (
     <>
@@ -33,6 +35,8 @@ function App() {
           <Route path="/meusFilmes" element={<MeusFilmes />} />
           <Route path="/minhasSeries" element={<MinhasSeries />} />
           <Route path="/listaDesejo" element={<ListaDesejo />} />
+          <Route path="/minhaConta" element={<MinhaConta />} />
+          <Route path="/atualizarConta" element={<AtualizarUsuario />} />
         </Routes>
       </BrowserRouter>
     </>

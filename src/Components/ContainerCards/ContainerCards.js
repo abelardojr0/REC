@@ -75,7 +75,7 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
       {tipo === "serie" && (
         <>
           <ContainerCardsTituloSection>{titulo}</ContainerCardsTituloSection>
-          <Carousel cols={6} rows={1} gap={"20px"} loop>
+          <Carousel cols={5} rows={1} gap={"20px"} loop>
             {lista &&
               lista.map((serie) => (
                 <Carousel.Item key={serie.name}>

@@ -10,7 +10,6 @@ export const CardComponent = styled.div`
 `;
 
 export const CardImagem = styled.img`
-  padding: 1rem;
   width: 100%;
   border-radius: 30px;
   cursor: pointer;
@@ -19,13 +18,12 @@ export const CardImagem = styled.img`
 
 export const CardDivInfos = styled.div`
   display: flex;
-  /* justify-content: flex-start; */
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  border-radius: 15px;
+  border-radius: 29px;
   position: absolute;
-  height: 92.5%;
+  height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   display: none;

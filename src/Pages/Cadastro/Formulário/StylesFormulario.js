@@ -20,7 +20,7 @@ export const ContainerFormulario = styled.form`
 
 export const TituloFormulario = styled.h2`
   margin-top: 20px;
-  color: #00aad9;
+  color: #ff3131;
   font-size: 2rem;
   font-weight: bold;
 `;
@@ -35,7 +35,7 @@ export const SubtituloFormulario = styled.h3`
 
 export const Botao = styled.button`
   color: #fff;
-  background-color: #00aad9;
+  background-color: #ff3131;
   padding: 1rem 2rem;
   text-align: center;
   font-size: 1.5rem;

@@ -22,7 +22,7 @@ export const LabelInput = styled.label`
 
   &.ativo {
     transform: translate(0, 5px) scale(0.75);
-    color: #00aad9;
+    color: #ff3131;
   }
 `;
 
