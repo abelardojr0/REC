@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import responsivo, { breakpoints } from "../../Responsivo";
+// import responsivo, { breakpoints } from "../../Responsivo";
 
 export const CategoriasContainer = styled.nav`
   margin-top: 100px;

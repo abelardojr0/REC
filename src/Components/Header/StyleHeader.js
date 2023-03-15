@@ -98,6 +98,12 @@ export const HeaderLoginBotao = styled.button`
   font-style: italic;
   border: none;
   color: #f9f9f9;
+  ${responsivo(breakpoints.desktop)} {
+    font-size: 1rem;
+  }
+  ${responsivo(breakpoints.mobile)} {
+    font-size: 1.3rem;
+  }
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
     color: #ff3131;
