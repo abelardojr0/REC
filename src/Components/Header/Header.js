@@ -17,8 +17,16 @@ import {
   HeaderPesquisarInput,
 } from "./StyleHeader";
 import logo from "../../Images/logo.png";
+import home from "../../Images/home-icon.png";
+import filmes from "../../Images/filmes-icon.png";
+import series from "../../Images/series-icon.png";
+import my_series from "../../Images/my-series-icon.png";
+import my_filmes from "../../Images/my-filmes-icon.png";
+import desejo from "../../Images/desejo-icon.png";
 import { Link, useNavigate } from "react-router-dom";
 import Login from "../../Pages/Login/Login";
+import { bubble as Menu } from "react-burger-menu";
+import "./styles.css";
 
 const Header = () => {
   const [loginStatus, setLoginStatus] = React.useState(false);
@@ -26,10 +34,10 @@ const Header = () => {
   const [search, setSearch] = React.useState("");
   const [menuAberto, setMenuAberto] = React.useState(false);
   const [inputVisivel, setInputVisivel] = React.useState(false);
+  const [menuMobile, setMenuMobile] = React.useState(false);
   const navigate = useNavigate();
   const nome_usuario = localStorage.getItem("nome");
   const inputRef = React.useRef(null);
-  // const id_usuario = localStorage.getItem("id");
 
   React.useEffect(() => {
     if (inputVisivel) {
@@ -83,37 +91,92 @@ const Header = () => {
     }
   }
   window.addEventListener("click", fecharMenu);
+  React.useEffect(() => {
+    if (window.innerWidth <= 768) {
+      setMenuMobile(true);
+    }
+  }, []);
   return (
     <HeaderComponent>
-      <HeaderNav>
-        <Link to="/">
-          <HeaderLogo src={logo} alt="logo" />
-        </Link>
-        <HeaderNavUl>
-          <HeaderLink to="/">
-            <li>Início</li>
-          </HeaderLink>
-          <HeaderLink to="/filmes">
-            <li>Filmes</li>
-          </HeaderLink>
-          <HeaderLink to="/series">
-            <li>Séries</li>
-          </HeaderLink>
-          {nome_usuario && (
-            <>
-              <HeaderLink to="/meusFilmes">
-                <li>Meus Filmes</li>
-              </HeaderLink>
-              <HeaderLink to="/minhasSeries">
-                <li>Minhas Séries</li>
-              </HeaderLink>
-              <HeaderLink to="/listaDesejo">
-                <li>Lista de Desejos</li>
-              </HeaderLink>
-            </>
-          )}
-        </HeaderNavUl>
-      </HeaderNav>
+      {!menuMobile ? (
+        <HeaderNav>
+          <Link to="/">
+            <HeaderLogo src={logo} alt="logo" />
+          </Link>
+          <HeaderNavUl>
+            <HeaderLink to="/">
+              <li>Início</li>
+            </HeaderLink>
+            <HeaderLink to="/filmes">
+              <li>Filmes</li>
+            </HeaderLink>
+            <HeaderLink to="/series">
+              <li>Séries</li>
+            </HeaderLink>
+            {nome_usuario && (
+              <>
+                <HeaderLink to="/meusFilmes">
+                  <li>Meus Filmes</li>
+                </HeaderLink>
+                <HeaderLink to="/minhasSeries">
+                  <li>Minhas Séries</li>
+                </HeaderLink>
+                <HeaderLink to="/listaDesejo">
+                  <li>Lista de Desejos</li>
+                </HeaderLink>
+              </>
+            )}
+          </HeaderNavUl>
+        </HeaderNav>
+      ) : (
+        <>
+          <Menu>
+            <HeaderLogo
+              style={{ alignSelf: "center", marginBottom: "20px" }}
+              src={logo}
+              alt="logo"
+            />
+
+            <HeaderLink to="/">
+              {" "}
+              <img src={home} alt="home-icon" />
+              Início
+            </HeaderLink>
+            <HeaderLink to="/filmes">
+              {" "}
+              <img src={filmes} alt="home-icon" /> Filmes
+            </HeaderLink>
+            <HeaderLink to="/series">
+              {" "}
+              <img src={series} alt="home-icon" />
+              Séries
+            </HeaderLink>
+            {nome_usuario && (
+              <>
+                <HeaderLink to="/meusFilmes">
+                  {" "}
+                  <img src={my_filmes} alt="home-icon" />
+                  Meus Filmes
+                </HeaderLink>
+                <HeaderLink to="/minhasSeries">
+                  {" "}
+                  <img src={my_series} alt="home-icon" />
+                  Minhas Séries
+                </HeaderLink>
+                <HeaderLink to="/listaDesejo">
+                  {" "}
+                  <img src={desejo} alt="home-icon" />
+                  Lista de Desejos
+                </HeaderLink>
+              </>
+            )}
+          </Menu>
+          <Link to="/">
+            <HeaderLogo src={logo} alt="logo" />
+          </Link>
+        </>
+      )}
+
       <HeaderLogin>
         <HeaderPesquisarContainer onSubmit={pesquisar}>
           <HeaderPesquisarContainerBarra>

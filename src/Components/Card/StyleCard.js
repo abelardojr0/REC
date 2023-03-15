@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import responsivo, { breakpoints } from "../../Responsivo";
 
 export const CardComponent = styled.div`
   display: flex;
@@ -14,6 +15,9 @@ export const CardImagem = styled.img`
   border-radius: 30px;
   cursor: pointer;
   position: relative;
+  ${responsivo(breakpoints.tablet)} {
+    width: 90%;
+  }
 `;
 
 export const CardDivInfos = styled.div`
@@ -86,22 +90,14 @@ export const CardTitulo = styled(Link)`
 
 export const CardLink = styled(Link)`
   text-decoration: none;
-  text-align: center;
-  border-radius: 10px;
   border: none;
-  margin-bottom: 5px;
-  margin-top: 5px;
-  font-size: 1.2rem;
-  color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 15px;
   width: 40px;
   height: 40px;
   cursor: pointer;
   img {
-    max-width: 40px;
+    width: 30px;
+    height: 30px;
   }
   &:hover {
     transform: scale(1.05);
@@ -111,8 +107,8 @@ export const CardLink = styled(Link)`
 export const CardBotao = styled.img`
   margin-bottom: 5px;
   margin-top: 5px;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
 
   &:hover {

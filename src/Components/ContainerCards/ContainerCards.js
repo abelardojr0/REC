@@ -1,6 +1,7 @@
-import axios from "axios";
+// import axios from "axios";
 import Carousel from "better-react-carousel";
 import React from "react";
+import api from "../../api";
 import Login from "../../Pages/Login/Login";
 import Card from "../Card/Card";
 import { ContainerCardsTituloSection } from "./StyleContainerCards";
@@ -10,11 +11,12 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
   const [filmesBanco, setFilmesBanco] = React.useState([]);
   const [seriesBanco, setSeriesBanco] = React.useState([]);
   const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
+  const [colunas, setColunas] = React.useState(5);
   const id_usuario = localStorage.getItem("id");
 
   React.useEffect(() => {
     if (id_usuario) {
-      axios
+      api
         .get("http://localhost:5000/filmes/" + id_usuario)
         .then((response) => {
           setFilmesBanco(response.data);
@@ -23,7 +25,7 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
           console.log(error);
         });
 
-      axios
+      api
         .get("http://localhost:5000/series/" + id_usuario)
         .then((response) => {
           setSeriesBanco(response.data);
@@ -32,7 +34,7 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
           console.log(error);
         });
 
-      axios
+      api
         .get("http://localhost:5000/listaDesejo/" + id_usuario)
         .then((response) => {
           setListaDesejoBanco(response.data);
@@ -42,6 +44,12 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
         });
     }
   }, [id_usuario]);
+  React.useEffect(() => {
+    console.log(window.innerWidth);
+    if (window.innerWidth < 1000) {
+      setColunas(3);
+    }
+  }, []);
   return (
     <>
       {loginStatus && (
@@ -52,7 +60,7 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
       {tipo === "filme" && (
         <>
           <ContainerCardsTituloSection>{titulo}</ContainerCardsTituloSection>
-          <Carousel cols={5} rows={1} gap={"20px"} loop>
+          <Carousel cols={colunas} rows={1} gap={"20px"} loop>
             {lista &&
               lista.map((filme) => (
                 <Carousel.Item key={filme.title}>
@@ -75,7 +83,7 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
       {tipo === "serie" && (
         <>
           <ContainerCardsTituloSection>{titulo}</ContainerCardsTituloSection>
-          <Carousel cols={5} rows={1} gap={"20px"} loop>
+          <Carousel cols={colunas} rows={1} gap={"20px"} loop>
             {lista &&
               lista.map((serie) => (
                 <Carousel.Item key={serie.name}>

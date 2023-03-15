@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import lupa from "../../Images/lupa2.png";
+import responsivo, { breakpoints } from "../../Responsivo";
 
 export const HeaderComponent = styled.header`
   width: 100%;
@@ -20,11 +21,21 @@ export const HeaderNav = styled.nav`
   align-items: center;
   gap: 40px;
   margin-left: 60px;
+  ${responsivo(breakpoints.desktop)} {
+    gap: 20px;
+    margin-left: 20px;
+  }
 `;
 
 export const HeaderLogo = styled.img`
   max-width: 90px;
   cursor: pointer;
+  ${responsivo(breakpoints.desktop)} {
+    max-width: 60px;
+  }
+  ${responsivo(breakpoints.tablet)} {
+    max-width: 100px;
+  }
 `;
 
 export const HeaderNavUl = styled.ul`
@@ -32,11 +43,18 @@ export const HeaderNavUl = styled.ul`
   justify-content: center;
   align-items: center;
   margin-left: 40px;
+  ${responsivo(breakpoints.desktop)} {
+    margin-left: 0px;
+  }
   li {
     font-size: 1.2rem;
     padding: 0.5rem 1.5rem;
     border-radius: 15px;
     cursor: pointer;
+    ${responsivo(breakpoints.desktop)} {
+      font-size: 0.8rem;
+      padding: 0.3rem 0.8rem;
+    }
     &:hover {
       color: #ff3131;
       text-decoration: underline;
@@ -46,9 +64,22 @@ export const HeaderNavUl = styled.ul`
 
 export const HeaderLink = styled(Link)`
   text-decoration: none;
-  color: #f9f9f9;
+  color: #f9f9f9 !important;
+  display: flex !important;
+  align-items: center;
+  gap: 20px;
+  font-size: 1.5rem;
+  ${responsivo(breakpoints.desktop)} {
+    max-width: 120px;
+  }
+  ${responsivo(breakpoints.tablet)} {
+    max-width: 200px;
+  }
   &:visited {
     color: #f9f9f9;
+  }
+  img {
+    max-width: 30px;
   }
 `;
 export const HeaderLogin = styled.div`
@@ -75,6 +106,9 @@ export const HeaderLoginBotao = styled.button`
 
 export const HeaderPesquisarContainer = styled.form`
   margin-left: 50px;
+  ${responsivo(breakpoints.desktop)} {
+    margin-left: 0px;
+  }
 `;
 export const HeaderPesquisarContainerBarra = styled.div`
   display: flex;
@@ -92,6 +126,10 @@ export const HeaderPesquisarInput = styled.input`
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
   display: none;
   width: 300px;
+  ${responsivo(breakpoints.desktop)} {
+    width: 200px;
+    font-size: 0.7rem;
+  }
   &.ativo {
     display: block;
     animation: show-rigth 0.5s forwards ease-in-out;
@@ -122,13 +160,16 @@ export const HeaderPesquisarBotao = styled.button`
   position: absolute;
   right: 20px;
   cursor: pointer;
+  ${responsivo(breakpoints.desktop)} {
+    width: 20px;
+    height: 20px;
+  }
   &:hover {
     transform: scale(1.1);
   }
 `;
 
 export const HeaderMenuUsuario = styled.div`
-  /* background-color: #0c1f24; */
   background-color: #bd0b0b;
   padding: 0.5rem;
   color: white;
@@ -142,6 +183,11 @@ export const HeaderMenuUsuario = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
+  ${responsivo(breakpoints.desktop)} {
+    width: 25px;
+    height: 25px;
+    font-size: 0.8rem;
+  }
   cursor: pointer;
 `;
 export const HeaderMenuAberto = styled.div`

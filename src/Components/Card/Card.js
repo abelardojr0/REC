@@ -239,7 +239,7 @@ const Card = ({
               )}
 
               <CardLink to={`/${tipo}/${id}`}>
-                <img src={detalhes} alt="more" />
+                <CardBotao src={detalhes} alt="more" />
               </CardLink>
             </CardContainerInfos>
           </CardDivInfos>

@@ -51,7 +51,7 @@ const Login = ({ setLoginStatus }) => {
           setLoginStatus(false);
           setErrorLogin(false);
           navigate("/");
-          // window.location.reload(true);
+          window.location.reload(true);
         }
       })
       .catch((error) => {
