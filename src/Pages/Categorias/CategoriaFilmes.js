@@ -13,8 +13,8 @@ import {
   ResultadoTituloQuery,
 } from "../Search/StyleSearch";
 import Login from "../Login/Login";
-import axios from "axios";
 import { ResultadoContainerCategoria } from "./StylesCategorias";
+import api from "../../api";
 
 const discoverFilmes = LinksApi.discoverMovie;
 const key = LinksApi.key;
@@ -28,7 +28,7 @@ const CategoriaFilmes = () => {
   const [loginStatus, setLoginStatus] = React.useState(false);
   const [listaBanco, setListaBanco] = React.useState([]);
   const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
-  const id_usuario = localStorage.getItem("id");
+  const id_usuario = localStorage.getItem("token");
 
   async function buscarFilmes(url) {
     const response = await fetch(url);
@@ -44,13 +44,16 @@ const CategoriaFilmes = () => {
 
   React.useEffect(() => {
     if (id_usuario) {
-      axios
-        .get("http://localhost:5000/filmes/" + id_usuario)
+      api
+        .get("http://localhost:5000/filmes")
         .then((response) => {
           setListaBanco(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      axios
-        .get("http://localhost:5000/listaDesejo/" + id_usuario)
+      api
+        .get("http://localhost:5000/listaDesejo")
         .then((response) => {
           setListaDesejoBanco(response.data);
         })

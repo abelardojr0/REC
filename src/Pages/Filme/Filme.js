@@ -70,7 +70,7 @@ const Filme = () => {
 
   if (filme === null || similares === null || recomendacoes === null)
     return null;
-  // console.log(similares);
+
   return (
     <>
       <Header />

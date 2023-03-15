@@ -12,12 +12,12 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
   const [seriesBanco, setSeriesBanco] = React.useState([]);
   const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
   const [colunas, setColunas] = React.useState(5);
-  const id_usuario = localStorage.getItem("id");
+  const id_usuario = localStorage.getItem("token");
 
   React.useEffect(() => {
     if (id_usuario) {
       api
-        .get("http://localhost:5000/filmes/" + id_usuario)
+        .get("http://localhost:5000/filmes")
         .then((response) => {
           setFilmesBanco(response.data);
         })
@@ -26,7 +26,7 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
         });
 
       api
-        .get("http://localhost:5000/series/" + id_usuario)
+        .get("http://localhost:5000/series")
         .then((response) => {
           setSeriesBanco(response.data);
         })
@@ -35,7 +35,7 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
         });
 
       api
-        .get("http://localhost:5000/listaDesejo/" + id_usuario)
+        .get("http://localhost:5000/listaDesejo")
         .then((response) => {
           setListaDesejoBanco(response.data);
         })
@@ -45,7 +45,6 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
     }
   }, [id_usuario]);
   React.useEffect(() => {
-    console.log(window.innerWidth);
     if (window.innerWidth < 1000) {
       setColunas(3);
     }

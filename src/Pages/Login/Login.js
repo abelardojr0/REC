@@ -45,7 +45,6 @@ const Login = ({ setLoginStatus }) => {
         if (response.data.status === "fail") {
           setErrorLogin(true);
         } else {
-          localStorage.setItem("id", response.data.id);
           localStorage.setItem("nome", response.data.nome);
           localStorage.setItem("token", response.data.access_token);
           setLoginStatus(false);

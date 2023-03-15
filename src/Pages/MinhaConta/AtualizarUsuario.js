@@ -17,30 +17,31 @@ const AtualizarUsuario = () => {
   const [senha, setSenha] = React.useState();
   const [senhaFraca, setSenhaFraca] = React.useState(false);
   const [sucesso, setSucesso] = React.useState();
-  const id_usuario = localStorage.getItem("id");
+  const id_usuario = localStorage.getItem("token");
 
   function atualizarBanco(e) {
     e.preventDefault();
     localStorage.setItem("nome", nome);
-    axios
-      .post("http://localhost:5000/atualizarUsuario", {
-        nome,
-        email,
-        senha,
-        id_usuario,
-      })
-      .then((response) => {
-        console.log(response);
-        if (response.data.status === "sucess") {
-          setSucesso(true);
-          setSenhaFraca(false);
-        } else if (response.data.status === "senhaFraca") {
-          setSenhaFraca(true);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (id_usuario) {
+      axios
+        .post("http://localhost:5000/atualizarUsuario", {
+          nome,
+          email,
+          senha,
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.data.status === "sucess") {
+            setSucesso(true);
+            setSenhaFraca(false);
+          } else if (response.data.status === "senhaFraca") {
+            setSenhaFraca(true);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
   return (
     <>

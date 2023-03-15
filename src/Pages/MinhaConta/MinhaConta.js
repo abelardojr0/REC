@@ -5,21 +5,21 @@ import Header from "../../Components/Header/Header";
 import { MinhaContaBotao, MinhaContaContainer } from "./StylesMinhaConta";
 
 const MinhaConta = () => {
-  const id_usuario = localStorage.getItem("id");
+  const id_usuario = localStorage.getItem("token");
 
   function deletarUsuario() {
-    axios
-      .post("http://localhost:5000/deletarUsuario", {
-        id_usuario,
-      })
-      .then((response) => {
-        console.log(response);
-        localStorage.clear();
-        window.location.reload();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (id_usuario) {
+      axios
+        .post("http://localhost:5000/deletarUsuario")
+        .then((response) => {
+          console.log(response);
+          localStorage.clear();
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
   return (
     <>

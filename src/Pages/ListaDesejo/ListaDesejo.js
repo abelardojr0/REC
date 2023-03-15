@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import Card from "../../Components/Card/Card";
 import Footer from "../../Components/Footer/Footer";
@@ -11,17 +10,18 @@ import {
 } from "../Search/StyleSearch";
 import { ClipLoader } from "react-spinners";
 import { ContainerCarregando } from "../../GlobalStyles";
+import api from "../../api";
 
 const ListaDesejo = () => {
   const [listaDesejo, setListaDesejo] = React.useState([]);
   const [carregando, setCarregando] = React.useState(true);
 
-  const id_usuario = localStorage.getItem("id");
+  const id_usuario = localStorage.getItem("token");
 
   React.useEffect(() => {
     if (id_usuario) {
-      axios
-        .get("http://localhost:5000/listaDesejo/" + id_usuario)
+      api
+        .get("http://localhost:5000/listaDesejo")
         .then((response) => {
           setListaDesejo(response.data);
           setTimeout(() => {

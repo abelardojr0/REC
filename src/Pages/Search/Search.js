@@ -31,7 +31,7 @@ const Search = () => {
   const [listaBanco, setListaBanco] = React.useState([]);
   const [carregandoFilmes, setCarregandoFilmes] = React.useState(true);
   const [carregandoSeries, setCarregandoSeries] = React.useState(true);
-  const id_usuario = localStorage.getItem("id");
+  const id_usuario = localStorage.getItem("token");
 
   async function buscarFilme(url) {
     const response = await fetch(url);
@@ -58,11 +58,9 @@ const Search = () => {
 
   React.useEffect(() => {
     if (id_usuario) {
-      axios
-        .get("http://localhost:5000/filmes/" + id_usuario)
-        .then((response) => {
-          setListaBanco(response.data);
-        });
+      axios.get("http://localhost:5000/filmes").then((response) => {
+        setListaBanco(response.data);
+      });
     }
   }, [id_usuario]);
 

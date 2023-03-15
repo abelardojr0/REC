@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import Card from "../../Components/Card/Card";
 import Footer from "../../Components/Footer/Footer";
@@ -11,17 +10,18 @@ import {
   ResultadoTitulo,
 } from "../Search/StyleSearch";
 import { ClipLoader } from "react-spinners";
+import api from "../../api";
 
 const MinhasSeries = () => {
   const [minhasSeries, setMinhasSeries] = React.useState([]);
   const [carregando, setCarregando] = React.useState(true);
 
-  const id_usuario = localStorage.getItem("id");
+  const id_usuario = localStorage.getItem("token");
 
   React.useEffect(() => {
     if (id_usuario) {
-      axios
-        .get("http://localhost:5000/series/" + id_usuario)
+      api
+        .get("http://localhost:5000/series")
         .then((response) => {
           setMinhasSeries(response.data);
           setTimeout(() => {

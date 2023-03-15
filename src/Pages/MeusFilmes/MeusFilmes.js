@@ -18,12 +18,12 @@ const MeusFilmes = () => {
   const [meusFilmes, setMeusFilmes] = React.useState([]);
   const [carregando, setCarregando] = React.useState(true);
 
-  const id_usuario = localStorage.getItem("id");
+  const id_usuario = localStorage.getItem("token");
 
   React.useEffect(() => {
     if (id_usuario) {
       api
-        .get("/filmes/" + id_usuario)
+        .get("/filmes")
         .then((response) => {
           setMeusFilmes(response.data);
           setTimeout(() => {
@@ -33,17 +33,6 @@ const MeusFilmes = () => {
         .catch((error) => {
           console.log(error);
         });
-      // axios
-      //   .get("http://localhost:5000/filmes/" + id_usuario)
-      //   .then((response) => {
-      //     setMeusFilmes(response.data);
-      //     setTimeout(() => {
-      //       setCarregando(false);
-      //     }, 500);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
     }
   }, [id_usuario]);
   return (

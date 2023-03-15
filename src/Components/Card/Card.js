@@ -36,7 +36,7 @@ const Card = ({
   const [adicionadoNaLista, setAdicionadoNaLista] = React.useState(false);
   const [visivel, setVisivel] = React.useState(true);
 
-  const id_usuario = localStorage.getItem("id");
+  const id_usuario = localStorage.getItem("token");
 
   React.useEffect(() => {
     if (!listaDeDesejo) {
@@ -72,7 +72,6 @@ const Card = ({
       axios
         .post("http://localhost:5000/removerListaDesejo", {
           titulo,
-          id_usuario,
         })
         .then((response) => {
           console.log(response);
@@ -91,7 +90,6 @@ const Card = ({
             nota,
             tipo,
             id_api: id,
-            id_usuario,
           })
           .then((response) => {
             console.log(response);
@@ -107,7 +105,6 @@ const Card = ({
             nota,
             tipo,
             id_api: id,
-            id_usuario,
           })
           .then((response) => {
             console.log(response);
@@ -130,7 +127,6 @@ const Card = ({
       axios
         .post("http://localhost:5000/removerFilme", {
           titulo,
-          id_usuario,
         })
         .then((response) => {
           console.log(response);
@@ -145,7 +141,6 @@ const Card = ({
       axios
         .post("http://localhost:5000/removerSerie", {
           titulo,
-          id_usuario,
         })
         .then((response) => {
           console.log(response);
@@ -165,7 +160,6 @@ const Card = ({
           nota,
           tipo,
           id_api: id,
-          id_usuario,
         })
         .then((response) => {
           console.log(response);
@@ -182,7 +176,6 @@ const Card = ({
     axios
       .post("http://localhost:5000/removerListaDesejo", {
         titulo,
-        id_usuario,
       })
       .then((response) => {
         console.log(response.data);

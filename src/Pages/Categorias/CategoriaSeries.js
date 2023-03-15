@@ -11,9 +11,9 @@ import {
   ResultadoTitulo,
   ResultadoTituloQuery,
 } from "../Search/StyleSearch";
-import axios from "axios";
 import Login from "../Login/Login";
 import { ResultadoContainerCategoria } from "./StylesCategorias";
+import api from "../../api";
 
 const discoverSeries = LinksApi.discoverTv;
 const key = LinksApi.key;
@@ -26,9 +26,10 @@ const CategoriaSeries = () => {
   const [categoriaSeries, setCategoriaSeries] = React.useState([]);
   const [loginStatus, setLoginStatus] = React.useState(false);
   const [listaBanco, setListaBanco] = React.useState([]);
-  const id_usuario = localStorage.getItem("id");
+  const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
+  const id_usuario = localStorage.getItem("token");
 
-  async function buscarFilmes(url) {
+  async function buscarSeries(url) {
     const response = await fetch(url);
     const responseJson = await response.json();
     const responseFinal = await responseJson.results;
@@ -37,14 +38,25 @@ const CategoriaSeries = () => {
 
   React.useEffect(() => {
     const listaFilmes = `${discoverSeries}${key}&with_genres=${query}${traduzido}`;
-    buscarFilmes(listaFilmes);
+    buscarSeries(listaFilmes);
   }, [query]);
   React.useEffect(() => {
     if (id_usuario) {
-      axios
-        .get("http://localhost:5000/filmes/" + id_usuario)
+      api
+        .get("http://localhost:5000/series")
         .then((response) => {
           setListaBanco(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      api
+        .get("http://localhost:5000/listaDesejo")
+        .then((response) => {
+          setListaDesejoBanco(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
         });
     }
   }, [id_usuario]);
@@ -76,6 +88,7 @@ const CategoriaSeries = () => {
                     tipo={"tv"}
                     setLoginStatus={setLoginStatus}
                     listaBanco={listaBanco}
+                    listaDesejoBanco={listaDesejoBanco}
                   />
                 </li>
               ))}
