@@ -16,7 +16,7 @@ import {
 } from "./StyleLogin";
 // import facebook from "../../Images/logo_facebook.png";
 // import google from "../../Images/logo_google.png";
-// import LoginComSociais from "./LoginComSociais/LoginComSociais";
+// import LoginComS ociais from "./LoginComSociais/LoginComSociais";
 
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
@@ -27,7 +27,7 @@ const Login = ({ setLoginStatus }) => {
   const [senha, setSenha] = React.useState();
   const [errorLogin, setErrorLogin] = React.useState();
   const [lembrar, setLembrar] = React.useState(false);
-  const [token, setToken] = useJwtToken(1);
+  const [token, setToken] = useJwtToken(5);
   const navigate = useNavigate();
   console.log(token);
   function fecharModal(e) {

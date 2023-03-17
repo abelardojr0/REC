@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 
-function useJwtToken(expiryInMinutes) {
+function useJwtToken(tempoEmDias) {
   const [token, setToken] = useState(null);
 
   function setTokenWithExpiry(token) {
     const now = new Date();
-    const expiry = new Date(now.getTime() + expiryInMinutes * 60 * 1000);
+    const expiry = new Date(now.getTime() + tempoEmDias * 24 * 60 * 60 * 1000);
     localStorage.setItem("token", token);
     localStorage.setItem("expiry", expiry.toISOString());
     setToken(token);
