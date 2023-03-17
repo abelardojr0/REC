@@ -20,6 +20,8 @@ import logo from "../../Images/logo.png";
 import home from "../../Images/home-icon.png";
 import filmes from "../../Images/filmes-icon.png";
 import series from "../../Images/series-icon.png";
+import login from "../../Images/login-icon.png";
+import cadastrar from "../../Images/cadastrar-icon.png";
 import my_series from "../../Images/my-series-icon.png";
 import my_filmes from "../../Images/my-filmes-icon.png";
 import desejo from "../../Images/desejo-icon.png";
@@ -174,6 +176,15 @@ const Header = () => {
               <img src={series} alt="home-icon" />
               Séries
             </HeaderLink>
+
+            <HeaderLink>
+              <img src={login} alt="login-icon" /> Entrar
+            </HeaderLink>
+            <HeaderLink>
+              {" "}
+              <img src={cadastrar} alt="cadastrar-icon" />
+              Cadastrar
+            </HeaderLink>
             {nome_usuario && (
               <>
                 <HeaderLink to="/meusFilmes">
@@ -236,13 +247,17 @@ const Header = () => {
           </>
         ) : (
           <>
-            {" "}
-            <HeaderLoginBotao onClick={abrirModalLogin}>
-              Entrar
-            </HeaderLoginBotao>
-            <Link to="/cadastro">
-              <HeaderLoginBotao>Cadastrar</HeaderLoginBotao>
-            </Link>
+            {!menuMobile && (
+              <>
+                {" "}
+                <HeaderLoginBotao onClick={abrirModalLogin}>
+                  Entrar
+                </HeaderLoginBotao>
+                <Link to="/cadastro">
+                  <HeaderLoginBotao>Cadastrar</HeaderLoginBotao>
+                </Link>
+              </>
+            )}
           </>
         )}
       </HeaderLogin>

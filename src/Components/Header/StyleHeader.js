@@ -137,7 +137,7 @@ export const HeaderPesquisarInput = styled.input`
     font-size: 0.7rem;
   }
   ${responsivo(breakpoints.mobile)} {
-    width: 320px;
+    width: 250px;
     font-size: 1rem;
     padding-left: 30px;
   }
