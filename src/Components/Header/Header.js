@@ -177,10 +177,10 @@ const Header = () => {
               Séries
             </HeaderLink>
 
-            <HeaderLink>
+            <HeaderLink onClick={abrirModalLogin}>
               <img src={login} alt="login-icon" /> Entrar
             </HeaderLink>
-            <HeaderLink>
+            <HeaderLink to="/cadastro">
               {" "}
               <img src={cadastrar} alt="cadastrar-icon" />
               Cadastrar

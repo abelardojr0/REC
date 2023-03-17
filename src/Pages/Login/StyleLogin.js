@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import responsivo, { breakpoints } from "../../Responsivo";
 
 export const LoginModalContainer = styled.div`
   height: 100%;
@@ -24,6 +25,9 @@ export const LoginModal = styled.div`
   flex-direction: column;
   border-radius: 15px;
   margin: 20px auto;
+  ${responsivo(breakpoints.mobile)} {
+    width: 250px;
+  }
 `;
 
 export const LoginBotaoFechar = styled.button`

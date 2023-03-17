@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import responsivo, { breakpoints } from "../../Responsivo";
 
 export const FilmeContainer = styled.article`
   height: 100vh;
@@ -6,6 +7,7 @@ export const FilmeContainer = styled.article`
   width: 100%;
   padding-top: 100px;
   margin-bottom: 60px;
+  overflow-x: hidden;
 `;
 export const FilmeConteudo = styled.section`
   width: 60vw;
@@ -15,6 +17,12 @@ export const FilmeConteudo = styled.section`
   gap: 40px;
   margin: 0 auto;
   padding-top: 40px;
+  overflow-x: hidden;
+
+  ${responsivo(breakpoints.mobile)} {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const FilmeTituloEImagem = styled.div`
@@ -34,6 +42,9 @@ export const FilmeTitulo = styled.h1`
 export const FilmeImagem = styled.img`
   max-width: 400px;
   border-radius: 15px;
+  ${responsivo(breakpoints.mobile)} {
+    max-width: 200px;
+  }
 `;
 export const FilmeDetalhesLista = styled.ul`
   display: flex;

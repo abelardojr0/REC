@@ -89,20 +89,22 @@ const Filme = () => {
             sinopse={filme.overview}
             duracao={filme.runtime}
           />
-          {similares && (
-            <ContainerCards
-              titulo={"Similares"}
-              lista={similares}
-              tipo={"filme"}
-            />
-          )}
-          {recomendacoes && (
-            <ContainerCards
-              titulo={"Recomendações"}
-              lista={recomendacoes}
-              tipo={"filme"}
-            />
-          )}
+          <div style={{ width: "85%" }}>
+            {similares && (
+              <ContainerCards
+                titulo={"Similares"}
+                lista={similares}
+                tipo={"filme"}
+              />
+            )}
+            {recomendacoes && (
+              <ContainerCards
+                titulo={"Recomendações"}
+                lista={recomendacoes}
+                tipo={"filme"}
+              />
+            )}
+          </div>
         </>
       )}
       <Footer />
