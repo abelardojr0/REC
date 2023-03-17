@@ -17,8 +17,9 @@ import {
 // import facebook from "../../Images/logo_facebook.png";
 // import google from "../../Images/logo_google.png";
 // import LoginComSociais from "./LoginComSociais/LoginComSociais";
-import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
+import api from "../../api";
 
 const Login = ({ setLoginStatus }) => {
   const [email, setEmail] = React.useState();
@@ -35,8 +36,8 @@ const Login = ({ setLoginStatus }) => {
   }
   function checarLogin(e) {
     e.preventDefault();
-    axios
-      .post("http://localhost:5000/usuarios", {
+    api
+      .post("/usuarios", {
         email,
         senha,
       })

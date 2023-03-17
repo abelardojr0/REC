@@ -1,4 +1,3 @@
-// import axios from "axios";
 import React from "react";
 import Card from "../../Components/Card/Card";
 import Footer from "../../Components/Footer/Footer";
@@ -17,6 +16,7 @@ import api from "../../api";
 const MeusFilmes = () => {
   const [meusFilmes, setMeusFilmes] = React.useState([]);
   const [carregando, setCarregando] = React.useState(true);
+  const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
 
   const id_usuario = localStorage.getItem("token");
 
@@ -26,9 +26,16 @@ const MeusFilmes = () => {
         .get("/filmes")
         .then((response) => {
           setMeusFilmes(response.data);
-          setTimeout(() => {
-            setCarregando(false);
-          }, 500);
+          setCarregando(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      api
+        .get("/listaDesejo")
+        .then((response) => {
+          setListaDesejoBanco(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -51,7 +58,7 @@ const MeusFilmes = () => {
             <ResultadoLista>
               {meusFilmes &&
                 meusFilmes.map((item) => (
-                  <li key={item.id}>
+                  <li key={item[0]}>
                     <Card
                       titulo={item[1]}
                       imagem={item[2]}
@@ -59,7 +66,7 @@ const MeusFilmes = () => {
                       tipo={item[4]}
                       id={item[5]}
                       listaBanco={meusFilmes}
-                      listaDeDesejo={false}
+                      listaDesejoBanco={listaDesejoBanco}
                     />
                   </li>
                 ))}

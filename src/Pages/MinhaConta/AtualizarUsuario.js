@@ -1,5 +1,5 @@
-import axios from "axios";
 import React from "react";
+import api from "../../api";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
 import Input from "../Cadastro/Formulário/Components/Input";
@@ -23,8 +23,8 @@ const AtualizarUsuario = () => {
     e.preventDefault();
     localStorage.setItem("nome", nome);
     if (id_usuario) {
-      axios
-        .post("http://localhost:5000/atualizarUsuario", {
+      api
+        .post("/atualizarUsuario", {
           nome,
           email,
           senha,

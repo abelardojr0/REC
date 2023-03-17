@@ -15,18 +15,26 @@ import api from "../../api";
 const MinhasSeries = () => {
   const [minhasSeries, setMinhasSeries] = React.useState([]);
   const [carregando, setCarregando] = React.useState(true);
+  const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
 
   const id_usuario = localStorage.getItem("token");
 
   React.useEffect(() => {
     if (id_usuario) {
       api
-        .get("http://localhost:5000/series")
+        .get("/series")
         .then((response) => {
           setMinhasSeries(response.data);
-          setTimeout(() => {
-            setCarregando(false);
-          }, 500);
+          setCarregando(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      api
+        .get("/listaDesejo")
+        .then((response) => {
+          setListaDesejoBanco(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -48,8 +56,8 @@ const MinhasSeries = () => {
             <ResultadoTitulo>Minhas Séries:</ResultadoTitulo>
             <ResultadoLista>
               {minhasSeries &&
-                minhasSeries.map((item) => (
-                  <li key={item.id}>
+                minhasSeries.map((item, index) => (
+                  <li key={item[0]}>
                     <Card
                       titulo={item[1]}
                       imagem={item[2]}
@@ -57,7 +65,7 @@ const MinhasSeries = () => {
                       tipo={item[4]}
                       id={item[5]}
                       listaBanco={minhasSeries}
-                      listaDeDesejo={false}
+                      listaDesejoBanco={listaDesejoBanco}
                     />
                   </li>
                 ))}

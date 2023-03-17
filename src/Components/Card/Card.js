@@ -17,7 +17,10 @@ import detalhes from "../../Images/detalhes.png";
 import assistido_img from "../../Images/assistido.png";
 import adicionado from "../../Images/adicionado.png";
 
-import axios from "axios";
+import api from "../../api";
+import { useMemo } from "react";
+import { useCallback } from "react";
+import { useEffect } from "react";
 const img = LinksApi.IMG;
 
 const Card = ({
@@ -28,18 +31,21 @@ const Card = ({
   tipo,
   setLoginStatus,
   listaBanco,
-  listaDeDesejo,
   listaDesejoBanco,
 }) => {
   const [habilitando, setHabilitando] = React.useState("");
   const [assistido, setAssistido] = React.useState(false);
   const [adicionadoNaLista, setAdicionadoNaLista] = React.useState(false);
   const [visivel, setVisivel] = React.useState(true);
-
+  const pageAtual = useMemo(() => window.location.href, []);
+  const pageListaDesejo = useMemo(
+    () => "http://localhost:3000/listaDesejo",
+    []
+  );
   const id_usuario = localStorage.getItem("token");
 
-  React.useEffect(() => {
-    if (!listaDeDesejo) {
+  const verificarListaBanco = useCallback(() => {
+    if (pageAtual !== pageListaDesejo) {
       if (listaBanco) {
         listaBanco.forEach((item) => {
           if (item[1] === titulo) {
@@ -55,36 +61,42 @@ const Card = ({
         });
       }
     }
-  }, [titulo, listaBanco, listaDeDesejo, listaDesejoBanco]);
+  }, [titulo, listaBanco, listaDesejoBanco, pageAtual, pageListaDesejo]);
 
-  function habilitandoInfos() {
+  useEffect(() => {
+    verificarListaBanco();
+  }, [verificarListaBanco]);
+
+  const habilitandoInfos = useCallback(() => {
     setHabilitando("ativo");
-  }
-  function desabilitandoInfos() {
+  }, []);
+
+  const desabilitandoInfos = useCallback(() => {
     setHabilitando("");
-  }
-  function marcarAssistido() {
+  }, []);
+
+  const marcarAssistido = useCallback(() => {
     if (id_usuario) {
       if (setLoginStatus) {
         setLoginStatus(false);
       }
-      setAssistido(true);
-      axios
-        .post("http://localhost:5000/removerListaDesejo", {
+      api
+        .post("/removerListaDesejo", {
           titulo,
         })
         .then((response) => {
           console.log(response);
-          if (window.location.href === "http://localhost:3000/listaDesejo") {
+          if (pageAtual === pageListaDesejo) {
             setVisivel(false);
+            setAssistido(true);
           }
         })
         .catch((error) => {
           console.log(error);
         });
       if (tipo === "movie") {
-        axios
-          .post("http://localhost:5000/inserirFilme", {
+        api
+          .post("/inserirFilme", {
             titulo,
             imagem,
             nota,
@@ -98,8 +110,8 @@ const Card = ({
             console.log(error);
           });
       } else {
-        axios
-          .post("http://localhost:5000/inserirSerie", {
+        api
+          .post("/inserirSerie", {
             titulo,
             imagem,
             nota,
@@ -116,16 +128,26 @@ const Card = ({
     } else {
       setLoginStatus(true);
     }
-  }
+  }, [
+    id,
+    id_usuario,
+    imagem,
+    nota,
+    pageAtual,
+    pageListaDesejo,
+    setLoginStatus,
+    tipo,
+    titulo,
+  ]);
 
-  function desmarcarAssistido() {
+  const desmarcarAssistido = useCallback(() => {
     setAssistido(false);
     if (tipo === "movie") {
       if (window.location.href === "http://localhost:3000/meusFilmes") {
         setVisivel(false);
       }
-      axios
-        .post("http://localhost:5000/removerFilme", {
+      api
+        .post("/removerFilme", {
           titulo,
         })
         .then((response) => {
@@ -138,8 +160,8 @@ const Card = ({
       if (window.location.href === "http://localhost:3000/minhasSeries") {
         setVisivel(false);
       }
-      axios
-        .post("http://localhost:5000/removerSerie", {
+      api
+        .post("/removerSerie", {
           titulo,
         })
         .then((response) => {
@@ -149,12 +171,13 @@ const Card = ({
           console.log(error);
         });
     }
-  }
-  function adicionarNaLista() {
+  }, [setAssistido, tipo, titulo, setVisivel]);
+
+  const adicionarNaLista = useCallback(() => {
     if (id_usuario) {
       setAdicionadoNaLista(true);
-      axios
-        .post("http://localhost:5000/inserirListaDesejo", {
+      api
+        .post("/inserirListaDesejo", {
           titulo,
           imagem,
           nota,
@@ -170,11 +193,21 @@ const Card = ({
     } else {
       setLoginStatus(true);
     }
-  }
-  function removerDaLista() {
+  }, [
+    id_usuario,
+    setAdicionadoNaLista,
+    titulo,
+    imagem,
+    nota,
+    tipo,
+    id,
+    setLoginStatus,
+  ]);
+
+  const removerDaLista = useCallback(() => {
     setAdicionadoNaLista(false);
-    axios
-      .post("http://localhost:5000/removerListaDesejo", {
+    api
+      .post("/removerListaDesejo", {
         titulo,
       })
       .then((response) => {
@@ -186,7 +219,8 @@ const Card = ({
       .catch((error) => {
         console.log(error);
       });
-  }
+  }, [titulo, setAdicionadoNaLista, setVisivel]);
+
   return (
     <>
       {visivel && (
@@ -215,7 +249,7 @@ const Card = ({
                     src={adicionar}
                     alt="adicionar"
                   />
-                  {!adicionadoNaLista && !listaDeDesejo ? (
+                  {!adicionadoNaLista && pageAtual !== pageListaDesejo ? (
                     <CardBotao
                       onClick={adicionarNaLista}
                       src={listaDesejo_img}

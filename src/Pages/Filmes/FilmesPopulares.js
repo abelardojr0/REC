@@ -19,7 +19,7 @@ const Populares = () => {
     setPopularesFilmes(resultadoFinal);
     setTimeout(() => {
       setCarregando(false);
-    }, 500);
+    }, 1000);
   }
 
   React.useEffect(() => {

@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { LinksApi } from "../../ConsultasParaApi";
 import { ContainerCarregando } from "../../GlobalStyles";
@@ -42,7 +41,7 @@ const SerieDetalhes = ({
   React.useEffect(() => {
     if (id_usuario) {
       api
-        .post("http://localhost:5000/series", {
+        .post("/series", {
           titulo: nome,
         })
         .then((response) => {
@@ -64,8 +63,8 @@ const SerieDetalhes = ({
 
   function adicionarSerie() {
     if (id_usuario) {
-      axios
-        .post("http://localhost:5000/inserirFilme", {
+      api
+        .post("/inserirFilme", {
           titulo: nome,
           imagem,
           nota,

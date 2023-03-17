@@ -11,12 +11,15 @@ export const CardComponent = styled.div`
 `;
 
 export const CardImagem = styled.img`
-  width: 100%;
+  max-width: 100%;
   border-radius: 30px;
   cursor: pointer;
   position: relative;
   ${responsivo(breakpoints.tablet)} {
-    width: 90%;
+    max-width: 60%;
+  }
+  ${responsivo(breakpoints.mobile)} {
+    max-width: 50%;
   }
 `;
 
@@ -33,6 +36,12 @@ export const CardDivInfos = styled.div`
   display: none;
   &.ativo {
     display: flex;
+  }
+  ${responsivo(breakpoints.mobile)} {
+    width: 60%;
+  }
+  ${responsivo(breakpoints.mobile)} {
+    width: 50%;
   }
 `;
 

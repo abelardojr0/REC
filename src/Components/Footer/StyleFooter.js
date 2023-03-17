@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import responsivo, { breakpoints } from "../../Responsivo";
 
 export const FooterComponent = styled.footer`
   background-color: #000600;
@@ -8,12 +9,17 @@ export const FooterComponent = styled.footer`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 `;
 
 export const FooterLogo = styled.img`
   margin-top: 20px;
   max-width: 100px;
   margin-left: 60px;
+  ${responsivo(breakpoints.mobile)} {
+    max-width: 80px;
+    margin-left: 20px;
+  }
 `;
 
 export const FooterTexto = styled.p`
@@ -23,6 +29,9 @@ export const FooterTexto = styled.p`
   sup {
     font-weight: 500;
   }
+  ${responsivo(breakpoints.mobile)} {
+    font-size: 1rem;
+  }
 `;
 
 export const FooterSociais = styled.div`
@@ -31,6 +40,9 @@ export const FooterSociais = styled.div`
   align-items: center;
   gap: 10px;
   margin-right: 60px;
+  ${responsivo(breakpoints.mobile)} {
+    flex-direction: column;
+  }
 `;
 
 export const SociaisImg = styled.img`
@@ -38,5 +50,8 @@ export const SociaisImg = styled.img`
   cursor: pointer;
   &:hover {
     opacity: 0.8;
+  }
+  ${responsivo(breakpoints.mobile)} {
+    max-width: 20px;
   }
 `;

@@ -9,38 +9,27 @@ class Conexao:
         self.port = port
         self.database = database
     
+    
     def queryExecute(self, sql, values):
 
         try:
-            con = connect(host=self.host, user=self.user, password=self.password, port=self.port, database=self.database)
+            with connect(host=self.host, user=self.user, password=self.password, port=self.port, database=self.database) as con:
+                with con.cursor() as cursor:
+                    cursor.execute(sql, values)
+                    con.commit()
 
-            cursor = con.cursor()
-
-            cursor.execute(sql, values)
-
-            con.commit()
-
-            cursor.close()
-
-            con.close()
-
-            return "Foi"
-        
+            return "Sucess"
+    
         except Error as error:
             return f"Ocorreu um erro {error}"
     
     def querySelect(self, sql):
         try:
-            con = connect(host=self.host, user=self.user, password=self.password, port=self.port, database=self.database)
-            
-            cursor = con.cursor()
-            
-            cursor.execute(sql)
+            with connect(host=self.host, user=self.user, password=self.password, port=self.port, database=self.database) as con:
+                with con.cursor() as cursor:
+                    cursor.execute(sql)
+                    resultado = cursor.fetchall()
 
-            resultado = cursor.fetchall()
-
-            cursor.close()
-            con.close()
             return resultado
         except Error as error:
             return f"Ocorreu um erro {error}"

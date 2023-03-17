@@ -1,5 +1,5 @@
 .bm-menu {
-  background-color: #000600;
+  background-color: black;
   padding: 2.5em 1.5em 0;
   padding-top: 50px;
   font-size: 1.15em;
@@ -29,11 +29,10 @@
 }
 
 .bm-burger-button {
-  position: absolute;
-  width: 36px;
-  height: 30px;
+  position: relative;
   left: 20px;
-  top: 30px;
+  width: 46px;
+  height: 40px;
 }
 
 .bm-burger-bars {

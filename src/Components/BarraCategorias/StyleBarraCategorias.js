@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import responsivo, { breakpoints } from "../../Responsivo";
 // import responsivo, { breakpoints } from "../../Responsivo";
 
 export const CategoriasContainer = styled.nav`
@@ -26,5 +27,8 @@ export const CategoriasItem = styled.li`
   cursor: pointer;
   &:hover {
     text-decoration: underline;
+  }
+  ${responsivo(breakpoints.mobile)} {
+    font-size: 0.8rem;
   }
 `;

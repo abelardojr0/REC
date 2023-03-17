@@ -43,7 +43,7 @@ const CategoriaSeries = () => {
   React.useEffect(() => {
     if (id_usuario) {
       api
-        .get("http://localhost:5000/series")
+        .get("/series")
         .then((response) => {
           setListaBanco(response.data);
         })
@@ -51,7 +51,7 @@ const CategoriaSeries = () => {
           console.log(error);
         });
       api
-        .get("http://localhost:5000/listaDesejo")
+        .get("/listaDesejo")
         .then((response) => {
           setListaDesejoBanco(response.data);
         })

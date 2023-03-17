@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const ContainerEstrutura = styled.div`
-  max-width: 95%;
+  max-width: 90%;
+  overflow-x: hidden;
   height: 100%;
   display: flex;
   justify-content: flex-start;

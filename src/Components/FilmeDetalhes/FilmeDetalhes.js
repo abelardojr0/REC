@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { LinksApi } from "../../ConsultasParaApi";
 import { ContainerCarregando } from "../../GlobalStyles";
@@ -41,7 +40,7 @@ const FilmeDetalhes = ({
   React.useEffect(() => {
     if (id_usuario) {
       api
-        .post("http://localhost:5000/filmes", {
+        .post("/filmes", {
           titulo,
         })
         .then((response) => {
@@ -63,8 +62,8 @@ const FilmeDetalhes = ({
 
   function adicionarFilme() {
     if (id_usuario) {
-      axios
-        .post("http://localhost:5000/inserirFilme", {
+      api
+        .post("/inserirFilme", {
           titulo,
           imagem,
           nota,

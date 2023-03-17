@@ -21,12 +21,10 @@ const ListaDesejo = () => {
   React.useEffect(() => {
     if (id_usuario) {
       api
-        .get("http://localhost:5000/listaDesejo")
+        .get("/listaDesejo")
         .then((response) => {
           setListaDesejo(response.data);
-          setTimeout(() => {
-            setCarregando(false);
-          }, 500);
+          setCarregando(false);
         })
         .catch((error) => {
           console.log(error);
@@ -49,7 +47,7 @@ const ListaDesejo = () => {
             <ResultadoLista>
               {listaDesejo &&
                 listaDesejo.map((item) => (
-                  <li key={item.id}>
+                  <li key={item[0]}>
                     <Card
                       titulo={item[1]}
                       imagem={item[2]}
@@ -57,7 +55,7 @@ const ListaDesejo = () => {
                       tipo={item[4]}
                       id={item[5]}
                       listaBanco={listaDesejo}
-                      listaDeDesejo={true}
+                      listaDesejoBanco={listaDesejo}
                     />
                   </li>
                 ))}

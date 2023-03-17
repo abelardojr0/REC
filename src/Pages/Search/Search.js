@@ -13,10 +13,10 @@ import {
   ResultadoTituloQuery,
 } from "./StyleSearch";
 import Card from "../../Components/Card/Card";
-import axios from "axios";
 import Login from "../Login/Login";
 import { ContainerCarregando } from "../../GlobalStyles";
 import { ClipLoader } from "react-spinners";
+import api from "../../api";
 
 const key = LinksApi.key;
 const searchFilme = LinksApi.searchMovie;
@@ -28,7 +28,9 @@ const Search = () => {
   const [searchFilmes, setSearchFilmes] = React.useState([]);
   const [searchSeries, setSearchSeries] = React.useState([]);
   const [loginStatus, setLoginStatus] = React.useState(false);
-  const [listaBanco, setListaBanco] = React.useState([]);
+  const [listaBancoFilmes, setListaBancoFilmes] = React.useState([]);
+  const [listaBancoSeries, setListaBancoSeries] = React.useState([]);
+  const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
   const [carregandoFilmes, setCarregandoFilmes] = React.useState(true);
   const [carregandoSeries, setCarregandoSeries] = React.useState(true);
   const id_usuario = localStorage.getItem("token");
@@ -58,9 +60,32 @@ const Search = () => {
 
   React.useEffect(() => {
     if (id_usuario) {
-      axios.get("http://localhost:5000/filmes").then((response) => {
-        setListaBanco(response.data);
-      });
+      api
+        .get("/filmes")
+        .then((response) => {
+          setListaBancoFilmes(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      api
+        .get("/series")
+        .then((response) => {
+          setListaBancoSeries(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      api
+        .get("/listaDesejo")
+        .then((response) => {
+          setListaDesejoBanco(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }, [id_usuario]);
 
@@ -96,7 +121,8 @@ const Search = () => {
                       id={filme.id}
                       tipo={"movie"}
                       setLoginStatus={setLoginStatus}
-                      listaBanco={listaBanco}
+                      listaBanco={listaBancoFilmes}
+                      listaDesejoBanco={listaDesejoBanco}
                     />
                   </li>
                 ))}
@@ -110,7 +136,8 @@ const Search = () => {
                       id={serie.id}
                       tipo={"tv"}
                       setLoginStatus={setLoginStatus}
-                      listaBanco={listaBanco}
+                      listaBanco={listaBancoSeries}
+                      listaDesejoBanco={listaDesejoBanco}
                     />
                   </li>
                 ))}

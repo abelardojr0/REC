@@ -136,6 +136,11 @@ export const HeaderPesquisarInput = styled.input`
     width: 200px;
     font-size: 0.7rem;
   }
+  ${responsivo(breakpoints.mobile)} {
+    width: 320px;
+    font-size: 1rem;
+    padding-left: 30px;
+  }
   &.ativo {
     display: block;
     animation: show-rigth 0.5s forwards ease-in-out;
@@ -170,6 +175,10 @@ export const HeaderPesquisarBotao = styled.button`
     width: 20px;
     height: 20px;
   }
+  ${responsivo(breakpoints.mobile)} {
+    /* right: 0; */
+    left: 10px;
+  }
   &:hover {
     transform: scale(1.1);
   }
@@ -193,6 +202,11 @@ export const HeaderMenuUsuario = styled.div`
     width: 25px;
     height: 25px;
     font-size: 0.8rem;
+  }
+  ${responsivo(breakpoints.mobile)} {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
   }
   cursor: pointer;
 `;

@@ -45,7 +45,7 @@ const CategoriaFilmes = () => {
   React.useEffect(() => {
     if (id_usuario) {
       api
-        .get("http://localhost:5000/filmes")
+        .get("/filmes")
         .then((response) => {
           setListaBanco(response.data);
         })
@@ -53,7 +53,7 @@ const CategoriaFilmes = () => {
           console.log(error);
         });
       api
-        .get("http://localhost:5000/listaDesejo")
+        .get("/listaDesejo")
         .then((response) => {
           setListaDesejoBanco(response.data);
         })

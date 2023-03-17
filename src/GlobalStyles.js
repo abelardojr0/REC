@@ -7,9 +7,14 @@ export const GlobalStyles = createGlobalStyle`
     background-color: #1b1c1f;
     overflow-x: hidden;
   }
+  #root{
+    width: 100vw;
+  }
 `;
 export const ContainerPages = styled.div`
   max-width: 90%;
+  overflow-x: hidden;
+
   height: 100%;
   display: flex;
   justify-content: flex-start;

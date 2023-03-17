@@ -1,5 +1,5 @@
-import axios from "axios";
 import React from "react";
+import api from "../../api";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
 import { MinhaContaBotao, MinhaContaContainer } from "./StylesMinhaConta";
@@ -9,8 +9,8 @@ const MinhaConta = () => {
 
   function deletarUsuario() {
     if (id_usuario) {
-      axios
-        .post("http://localhost:5000/deletarUsuario")
+      api
+        .post("/deletarUsuario")
         .then((response) => {
           console.log(response);
           localStorage.clear();

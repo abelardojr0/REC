@@ -1,4 +1,3 @@
-// import axios from "axios";
 import Carousel from "better-react-carousel";
 import React from "react";
 import api from "../../api";
@@ -16,26 +15,28 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
 
   React.useEffect(() => {
     if (id_usuario) {
-      api
-        .get("http://localhost:5000/filmes")
-        .then((response) => {
-          setFilmesBanco(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (tipo === "filme") {
+        api
+          .get("/filmes")
+          .then((response) => {
+            setFilmesBanco(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else if (tipo === "serie") {
+        api
+          .get("/series")
+          .then((response) => {
+            setSeriesBanco(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
 
       api
-        .get("http://localhost:5000/series")
-        .then((response) => {
-          setSeriesBanco(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-
-      api
-        .get("http://localhost:5000/listaDesejo")
+        .get("/listaDesejo")
         .then((response) => {
           setListaDesejoBanco(response.data);
         })
@@ -43,7 +44,7 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
           console.log(error);
         });
     }
-  }, [id_usuario]);
+  }, [id_usuario, tipo]);
   React.useEffect(() => {
     if (window.innerWidth < 1000) {
       setColunas(3);
@@ -71,7 +72,6 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
                     tipo={"movie"}
                     setLoginStatus={setLoginStatus}
                     listaBanco={filmesBanco}
-                    listaDeDesejo={false}
                     listaDesejoBanco={listaDesejoBanco}
                   />
                 </Carousel.Item>
@@ -94,7 +94,6 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
                     tipo={"tv"}
                     setLoginStatus={setLoginStatus}
                     listaBanco={seriesBanco}
-                    listaDeDesejo={false}
                     listaDesejoBanco={listaDesejoBanco}
                   />
                 </Carousel.Item>

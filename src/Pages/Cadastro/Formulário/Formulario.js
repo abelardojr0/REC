@@ -16,7 +16,7 @@ import {
 // import google from "../../../Images/logo_google.png";
 // import { EntrarCom, FormularioSociais } from "../../Login/StyleLogin";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../../api";
 
 const Formulario = () => {
   const navigate = useNavigate();
@@ -31,8 +31,8 @@ const Formulario = () => {
   function finalizar(e) {
     e.preventDefault();
     if (senha === confirmarSenha) {
-      axios
-        .post("http://localhost:5000/inserirUsuario", {
+      api
+        .post("/inserirUsuario", {
           nome,
           email,
           senha,
