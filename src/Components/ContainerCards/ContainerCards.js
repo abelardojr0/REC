@@ -72,7 +72,7 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
   React.useEffect(() => {
     const largura = window.innerWidth;
     if (largura < 1000) {
-      setColunas(1);
+      setColunas(3);
     }
   }, []);
   return (

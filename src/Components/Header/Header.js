@@ -103,35 +103,59 @@ const Header = () => {
   return (
     <HeaderComponent>
       {!menuMobile ? (
-        <HeaderNav>
-          <Link to="/">
-            <HeaderLogo src={logo} alt="logo" />
-          </Link>
-          <HeaderNavUl>
-            <HeaderLink to="/">
-              <li>Início</li>
-            </HeaderLink>
-            <HeaderLink to="/filmes">
-              <li>Filmes</li>
-            </HeaderLink>
-            <HeaderLink to="/series">
-              <li>Séries</li>
-            </HeaderLink>
-            {nome_usuario && (
-              <>
-                <HeaderLink to="/meusFilmes">
-                  <li>Meus Filmes</li>
-                </HeaderLink>
-                <HeaderLink to="/minhasSeries">
-                  <li>Minhas Séries</li>
-                </HeaderLink>
-                <HeaderLink to="/listaDesejo">
-                  <li>Lista de Desejos</li>
-                </HeaderLink>
-              </>
-            )}
-          </HeaderNavUl>
-        </HeaderNav>
+        <>
+          <HeaderNav>
+            <Link to="/">
+              <HeaderLogo src={logo} alt="logo" />
+            </Link>
+            <HeaderNavUl>
+              <HeaderLink to="/">
+                <li>Início</li>
+              </HeaderLink>
+              <HeaderLink to="/filmes">
+                <li>Filmes</li>
+              </HeaderLink>
+              <HeaderLink to="/series">
+                <li>Séries</li>
+              </HeaderLink>
+              {nome_usuario && (
+                <>
+                  <HeaderLink to="/meusFilmes">
+                    <li>Meus Filmes</li>
+                  </HeaderLink>
+                  <HeaderLink to="/minhasSeries">
+                    <li>Minhas Séries</li>
+                  </HeaderLink>
+                  <HeaderLink to="/listaDesejo">
+                    <li>Lista de Desejos</li>
+                  </HeaderLink>
+                </>
+              )}
+            </HeaderNavUl>
+          </HeaderNav>
+          <HeaderPesquisarContainer onSubmit={pesquisar}>
+            <HeaderPesquisarContainerBarra>
+              <HeaderPesquisarInput
+                autoFocus
+                className={ativa}
+                onBlur={esconderPesquisa}
+                type={"text"}
+                name={"pesquisar"}
+                id={"pesquisar"}
+                placeholder={"Buscar por filmes e séries..."}
+                autoComplete="off"
+                onChange={(e) => setSearch(e.target.value)}
+                ref={inputRef}
+                value={search}
+              />
+              <HeaderPesquisarBotao
+                id="pesquisar_botao"
+                onClick={mostrarPesquisa}
+                type="submit"
+              />
+            </HeaderPesquisarContainerBarra>
+          </HeaderPesquisarContainer>
+        </>
       ) : (
         <>
           <Menu>
@@ -177,15 +201,7 @@ const Header = () => {
               Séries
             </HeaderLink>
 
-            <HeaderLink onClick={abrirModalLogin}>
-              <img src={login} alt="login-icon" /> Entrar
-            </HeaderLink>
-            <HeaderLink to="/cadastro">
-              {" "}
-              <img src={cadastrar} alt="cadastrar-icon" />
-              Cadastrar
-            </HeaderLink>
-            {nome_usuario && (
+            {nome_usuario ? (
               <>
                 <HeaderLink to="/meusFilmes">
                   {" "}
@@ -201,6 +217,17 @@ const Header = () => {
                   {" "}
                   <img src={desejo} alt="home-icon" />
                   Lista de Desejos
+                </HeaderLink>
+              </>
+            ) : (
+              <>
+                <HeaderLink onClick={abrirModalLogin}>
+                  <img src={login} alt="login-icon" /> Entrar
+                </HeaderLink>
+                <HeaderLink to="/cadastro">
+                  {" "}
+                  <img src={cadastrar} alt="cadastrar-icon" />
+                  Cadastrar
                 </HeaderLink>
               </>
             )}
