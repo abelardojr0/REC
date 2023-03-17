@@ -11,16 +11,17 @@ import {
 } from "../Search/StyleSearch";
 import { ClipLoader } from "react-spinners";
 import api from "../../api";
+import { useJwtToken } from "../../useJwtToken";
 
 const MinhasSeries = () => {
   const [minhasSeries, setMinhasSeries] = React.useState([]);
   const [carregando, setCarregando] = React.useState(true);
   const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
 
-  const id_usuario = localStorage.getItem("token");
+  const [token] = useJwtToken();
 
   React.useEffect(() => {
-    if (id_usuario) {
+    if (token) {
       api
         .get("/series")
         .then((response) => {
@@ -40,7 +41,7 @@ const MinhasSeries = () => {
           console.log(error);
         });
     }
-  }, [id_usuario]);
+  }, [token]);
   return (
     <>
       <Header />

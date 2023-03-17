@@ -17,6 +17,7 @@ import Login from "../Login/Login";
 import { ContainerCarregando } from "../../GlobalStyles";
 import { ClipLoader } from "react-spinners";
 import api from "../../api";
+import { useJwtToken } from "../../useJwtToken";
 
 const key = LinksApi.key;
 const searchFilme = LinksApi.searchMovie;
@@ -33,7 +34,7 @@ const Search = () => {
   const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
   const [carregandoFilmes, setCarregandoFilmes] = React.useState(true);
   const [carregandoSeries, setCarregandoSeries] = React.useState(true);
-  const id_usuario = localStorage.getItem("token");
+  const [token] = useJwtToken();
 
   async function buscarFilme(url) {
     const response = await fetch(url);
@@ -59,7 +60,7 @@ const Search = () => {
   }, [query]);
 
   React.useEffect(() => {
-    if (id_usuario) {
+    if (token) {
       api
         .get("/filmes")
         .then((response) => {
@@ -87,7 +88,7 @@ const Search = () => {
           console.log(error);
         });
     }
-  }, [id_usuario]);
+  }, [token]);
 
   return (
     <>

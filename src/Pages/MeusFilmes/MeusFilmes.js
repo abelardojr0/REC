@@ -12,16 +12,17 @@ import {
 } from "../Search/StyleSearch";
 import { ContainerCarregando } from "../../GlobalStyles";
 import api from "../../api";
+import { useJwtToken } from "../../useJwtToken";
 
 const MeusFilmes = () => {
   const [meusFilmes, setMeusFilmes] = React.useState([]);
   const [carregando, setCarregando] = React.useState(true);
   const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
 
-  const id_usuario = localStorage.getItem("token");
+  const [token] = useJwtToken();
 
   React.useEffect(() => {
-    if (id_usuario) {
+    if (token) {
       api
         .get("/filmes")
         .then((response) => {
@@ -41,7 +42,7 @@ const MeusFilmes = () => {
           console.log(error);
         });
     }
-  }, [id_usuario]);
+  }, [token]);
   return (
     <>
       <Header />

@@ -17,6 +17,7 @@ import {
 import { ClipLoader } from "react-spinners";
 import Login from "../../Pages/Login/Login";
 import api from "../../api";
+import { useJwtToken } from "../../useJwtToken";
 
 const img = LinksApi.IMG;
 
@@ -33,12 +34,13 @@ const FilmeDetalhes = ({
   sinopse,
   duracao,
 }) => {
-  const id_usuario = localStorage.getItem("token");
   const [loginStatus, setLoginStatus] = React.useState(false);
   const [carregando, setCarregando] = React.useState(true);
   const [assistido, setAssistido] = React.useState(false);
+  const [token] = useJwtToken();
+
   React.useEffect(() => {
-    if (id_usuario) {
+    if (token) {
       api
         .post("/filmes", {
           titulo,
@@ -58,10 +60,10 @@ const FilmeDetalhes = ({
     } else {
       setCarregando(false);
     }
-  }, [id_usuario, titulo]);
+  }, [token, titulo]);
 
   function adicionarFilme() {
-    if (id_usuario) {
+    if (token) {
       api
         .post("/inserirFilme", {
           titulo,

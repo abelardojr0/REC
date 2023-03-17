@@ -19,7 +19,7 @@ const SeriesPopulares = () => {
     setPopularesSeries(resultadoFinal);
     setTimeout(() => {
       setCarregando(false);
-    }, 500);
+    }, 2000);
   }
 
   React.useEffect(() => {

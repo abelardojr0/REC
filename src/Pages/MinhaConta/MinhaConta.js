@@ -2,13 +2,14 @@ import React from "react";
 import api from "../../api";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
+import { useJwtToken } from "../../useJwtToken";
 import { MinhaContaBotao, MinhaContaContainer } from "./StylesMinhaConta";
 
 const MinhaConta = () => {
-  const id_usuario = localStorage.getItem("token");
+  const [token] = useJwtToken();
 
   function deletarUsuario() {
-    if (id_usuario) {
+    if (token) {
       api
         .post("/deletarUsuario")
         .then((response) => {

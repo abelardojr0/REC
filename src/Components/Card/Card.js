@@ -21,6 +21,7 @@ import api from "../../api";
 import { useMemo } from "react";
 import { useCallback } from "react";
 import { useEffect } from "react";
+import { useJwtToken } from "../../useJwtToken";
 const img = LinksApi.IMG;
 
 const Card = ({
@@ -42,7 +43,7 @@ const Card = ({
     () => "http://localhost:3000/listaDesejo",
     []
   );
-  const id_usuario = localStorage.getItem("token");
+  const [token] = useJwtToken();
 
   const verificarListaBanco = useCallback(() => {
     if (pageAtual !== pageListaDesejo) {
@@ -76,10 +77,11 @@ const Card = ({
   }, []);
 
   const marcarAssistido = useCallback(() => {
-    if (id_usuario) {
+    if (token) {
       if (setLoginStatus) {
         setLoginStatus(false);
       }
+      setAssistido(true);
       api
         .post("/removerListaDesejo", {
           titulo,
@@ -88,7 +90,6 @@ const Card = ({
           console.log(response);
           if (pageAtual === pageListaDesejo) {
             setVisivel(false);
-            setAssistido(true);
           }
         })
         .catch((error) => {
@@ -130,7 +131,7 @@ const Card = ({
     }
   }, [
     id,
-    id_usuario,
+    token,
     imagem,
     nota,
     pageAtual,
@@ -174,7 +175,7 @@ const Card = ({
   }, [setAssistido, tipo, titulo, setVisivel]);
 
   const adicionarNaLista = useCallback(() => {
-    if (id_usuario) {
+    if (token) {
       setAdicionadoNaLista(true);
       api
         .post("/inserirListaDesejo", {
@@ -194,7 +195,7 @@ const Card = ({
       setLoginStatus(true);
     }
   }, [
-    id_usuario,
+    token,
     setAdicionadoNaLista,
     titulo,
     imagem,

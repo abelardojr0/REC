@@ -14,6 +14,7 @@ import {
 import Login from "../Login/Login";
 import { ResultadoContainerCategoria } from "./StylesCategorias";
 import api from "../../api";
+import { useJwtToken } from "../../useJwtToken";
 
 const discoverSeries = LinksApi.discoverTv;
 const key = LinksApi.key;
@@ -27,7 +28,7 @@ const CategoriaSeries = () => {
   const [loginStatus, setLoginStatus] = React.useState(false);
   const [listaBanco, setListaBanco] = React.useState([]);
   const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
-  const id_usuario = localStorage.getItem("token");
+  const [token] = useJwtToken();
 
   async function buscarSeries(url) {
     const response = await fetch(url);
@@ -41,7 +42,7 @@ const CategoriaSeries = () => {
     buscarSeries(listaFilmes);
   }, [query]);
   React.useEffect(() => {
-    if (id_usuario) {
+    if (token) {
       api
         .get("/series")
         .then((response) => {
@@ -59,7 +60,7 @@ const CategoriaSeries = () => {
           console.log(error);
         });
     }
-  }, [id_usuario]);
+  }, [token]);
   if (categoriaSeries === []) return null;
   return (
     <>

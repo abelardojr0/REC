@@ -2,6 +2,7 @@ import React from "react";
 import api from "../../api";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
+import { useJwtToken } from "../../useJwtToken";
 import Input from "../Cadastro/Formulário/Components/Input";
 import { CadastroMsgDeErro } from "../Cadastro/Formulário/StylesFormulario";
 import {
@@ -17,12 +18,12 @@ const AtualizarUsuario = () => {
   const [senha, setSenha] = React.useState();
   const [senhaFraca, setSenhaFraca] = React.useState(false);
   const [sucesso, setSucesso] = React.useState();
-  const id_usuario = localStorage.getItem("token");
+  const [token] = useJwtToken();
 
   function atualizarBanco(e) {
     e.preventDefault();
     localStorage.setItem("nome", nome);
-    if (id_usuario) {
+    if (token) {
       api
         .post("/atualizarUsuario", {
           nome,

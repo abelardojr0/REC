@@ -15,6 +15,7 @@ import {
 import Login from "../Login/Login";
 import { ResultadoContainerCategoria } from "./StylesCategorias";
 import api from "../../api";
+import { useJwtToken } from "../../useJwtToken";
 
 const discoverFilmes = LinksApi.discoverMovie;
 const key = LinksApi.key;
@@ -28,7 +29,7 @@ const CategoriaFilmes = () => {
   const [loginStatus, setLoginStatus] = React.useState(false);
   const [listaBanco, setListaBanco] = React.useState([]);
   const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
-  const id_usuario = localStorage.getItem("token");
+  const [token] = useJwtToken();
 
   async function buscarFilmes(url) {
     const response = await fetch(url);
@@ -43,7 +44,7 @@ const CategoriaFilmes = () => {
   }, [query]);
 
   React.useEffect(() => {
-    if (id_usuario) {
+    if (token) {
       api
         .get("/filmes")
         .then((response) => {
@@ -61,7 +62,7 @@ const CategoriaFilmes = () => {
           console.log(error);
         });
     }
-  }, [id_usuario]);
+  }, [token]);
   if (categoriaFilmes === []) return null;
   return (
     <>

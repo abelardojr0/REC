@@ -1,7 +1,9 @@
+import axios from "axios";
 import Carousel from "better-react-carousel";
 import React from "react";
 import api from "../../api";
 import Login from "../../Pages/Login/Login";
+import { useJwtToken } from "../../useJwtToken";
 import Card from "../Card/Card";
 import { ContainerCardsTituloSection } from "./StyleContainerCards";
 
@@ -11,43 +13,66 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
   const [seriesBanco, setSeriesBanco] = React.useState([]);
   const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
   const [colunas, setColunas] = React.useState(5);
-  const id_usuario = localStorage.getItem("token");
+  const [token] = useJwtToken();
+  const cancelTokenSourceRef = React.useRef(null);
 
   React.useEffect(() => {
-    if (id_usuario) {
+    cancelTokenSourceRef.current = axios.CancelToken.source();
+    if (token) {
       if (tipo === "filme") {
         api
-          .get("/filmes")
+          .get("/filmes", { cancelToken: cancelTokenSourceRef.current.token })
           .then((response) => {
             setFilmesBanco(response.data);
           })
           .catch((error) => {
-            console.log(error);
+            if (axios.isCancel(error)) {
+              console.log("A requisição foi cancelada pelo usuário.");
+            } else {
+              console.log("Ocorreu um erro durante a requisição.");
+            }
           });
       } else if (tipo === "serie") {
         api
-          .get("/series")
+          .get("/series", { cancelToken: cancelTokenSourceRef.current.token })
           .then((response) => {
             setSeriesBanco(response.data);
           })
           .catch((error) => {
-            console.log(error);
+            if (axios.isCancel(error)) {
+              console.log("A requisição foi cancelada pelo usuário.");
+            } else {
+              console.log("Ocorreu um erro durante a requisição.");
+            }
           });
       }
 
       api
-        .get("/listaDesejo")
+        .get("/listaDesejo", {
+          cancelToken: cancelTokenSourceRef.current.token,
+        })
         .then((response) => {
           setListaDesejoBanco(response.data);
         })
         .catch((error) => {
-          console.log(error);
+          if (axios.isCancel(error)) {
+            console.log("A requisição foi cancelada pelo usuário.");
+          } else {
+            console.log("Ocorreu um erro durante a requisição.");
+          }
         });
     }
-  }, [id_usuario, tipo]);
+
+    return () => {
+      cancelTokenSourceRef.current.cancel(
+        "A requisição foi cancelada pelo usuário."
+      );
+    };
+  }, [token, tipo]);
   React.useEffect(() => {
-    if (window.innerWidth < 1000) {
-      setColunas(3);
+    const largura = window.innerWidth;
+    if (largura < 1000) {
+      setColunas(1);
     }
   }, []);
   return (
