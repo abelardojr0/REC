@@ -29,6 +29,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Login from "../../Pages/Login/Login";
 import { bubble as Menu } from "react-burger-menu";
 import "./styles.css";
+import { useJwtToken } from "../../useJwtToken";
 
 const Header = () => {
   const [loginStatus, setLoginStatus] = React.useState(false);
@@ -40,6 +41,9 @@ const Header = () => {
   const navigate = useNavigate();
   const nome_usuario = localStorage.getItem("nome");
   const inputRef = React.useRef(null);
+  const [token] = useJwtToken();
+
+  console.log(token);
 
   React.useEffect(() => {
     if (inputVisivel) {

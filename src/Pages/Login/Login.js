@@ -20,12 +20,16 @@ import {
 
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
+import { useJwtToken } from "../../useJwtToken";
 
 const Login = ({ setLoginStatus }) => {
   const [email, setEmail] = React.useState();
   const [senha, setSenha] = React.useState();
   const [errorLogin, setErrorLogin] = React.useState();
+  const [lembrar, setLembrar] = React.useState(false);
+  const [token, setToken] = useJwtToken(1);
   const navigate = useNavigate();
+  console.log(token);
   function fecharModal(e) {
     if (
       e.target.getAttribute("id") === "modal" ||
@@ -33,6 +37,9 @@ const Login = ({ setLoginStatus }) => {
     ) {
       setLoginStatus(false);
     }
+  }
+  function checarLembrar(e) {
+    setLembrar(e.target.checked);
   }
   function checarLogin(e) {
     e.preventDefault();
@@ -46,12 +53,18 @@ const Login = ({ setLoginStatus }) => {
         if (response.data.status === "fail") {
           setErrorLogin(true);
         } else {
-          localStorage.setItem("nome", response.data.nome);
-          localStorage.setItem("token", response.data.access_token);
-          setLoginStatus(false);
-          setErrorLogin(false);
-          navigate("/");
-          window.location.reload(true);
+          if (lembrar) {
+            setToken(response.data.access_token);
+            localStorage.setItem("nome", response.data.nome);
+            // localStorage.setItem("token", response.data.access_token);
+            setLoginStatus(false);
+            setErrorLogin(false);
+            navigate("/");
+            window.location.reload(true);
+          } else {
+            sessionStorage.setItem("nome", response.data.nome);
+            sessionStorage.setItem("token", response.data.access_token);
+          }
         }
       })
       .catch((error) => {
@@ -90,6 +103,8 @@ const Login = ({ setLoginStatus }) => {
           />
           <LoginLembrarDivisao>
             <LoginLembrarInput
+              checked={lembrar}
+              onChange={checarLembrar}
               type={"checkbox"}
               name={"lembrar"}
               id={"lembrar"}

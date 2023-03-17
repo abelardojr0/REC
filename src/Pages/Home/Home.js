@@ -11,7 +11,6 @@ import Faroeste from "./Faroeste";
 import Comedia from "./Comedia";
 import Crime from "./Crime";
 import Acao from "./Acao";
-
 const Home = () => {
   return (
     <>
