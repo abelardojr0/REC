@@ -39,15 +39,11 @@ const Card = ({
   const [adicionadoNaLista, setAdicionadoNaLista] = React.useState(false);
   const [visivel, setVisivel] = React.useState(true);
   const pageAtual = useMemo(() => window.location.href, []);
-  const pageListaDesejo = useMemo(
-    () => "http://localhost:3000/listaDesejo",
-    []
-  );
   const [token] = useJwtToken();
   const tokenTemporario = sessionStorage.getItem("token");
 
   const verificarListaBanco = useCallback(() => {
-    if (pageAtual !== pageListaDesejo) {
+    if (pageAtual.includes("listaDesejo")) {
       if (listaBanco) {
         listaBanco.forEach((item) => {
           if (item[1] === titulo) {
@@ -63,7 +59,7 @@ const Card = ({
         });
       }
     }
-  }, [titulo, listaBanco, listaDesejoBanco, pageAtual, pageListaDesejo]);
+  }, [titulo, listaBanco, listaDesejoBanco, pageAtual]);
 
   useEffect(() => {
     verificarListaBanco();
@@ -83,7 +79,7 @@ const Card = ({
         setLoginStatus(false);
       }
       setAssistido(true);
-      if (pageAtual === pageListaDesejo) {
+      if (pageAtual.includes("listaDesejo")) {
         setVisivel(false);
       }
       api
@@ -136,7 +132,6 @@ const Card = ({
     imagem,
     nota,
     pageAtual,
-    pageListaDesejo,
     setLoginStatus,
     tipo,
     titulo,
@@ -146,7 +141,7 @@ const Card = ({
   const desmarcarAssistido = useCallback(() => {
     setAssistido(false);
     if (tipo === "movie") {
-      if (window.location.href === "http://localhost:3000/meusFilmes") {
+      if (pageAtual.includes("meusFilmes")) {
         setVisivel(false);
       }
       api
@@ -160,7 +155,7 @@ const Card = ({
           console.log(error);
         });
     } else {
-      if (window.location.href === "http://localhost:3000/minhasSeries") {
+      if (pageAtual.includes("minhasSeries")) {
         setVisivel(false);
       }
       api
@@ -174,7 +169,7 @@ const Card = ({
           console.log(error);
         });
     }
-  }, [setAssistido, tipo, titulo, setVisivel]);
+  }, [setAssistido, tipo, titulo, setVisivel, pageAtual]);
 
   const adicionarNaLista = useCallback(() => {
     if (token || tokenTemporario) {
@@ -210,7 +205,7 @@ const Card = ({
 
   const removerDaLista = useCallback(() => {
     setAdicionadoNaLista(false);
-    if (window.location.href === "http://localhost:3000/listaDesejo") {
+    if (pageAtual.includes("listaDesejo")) {
       setVisivel(false);
     }
     api
@@ -223,8 +218,7 @@ const Card = ({
       .catch((error) => {
         console.log(error);
       });
-  }, [titulo, setAdicionadoNaLista, setVisivel]);
-
+  }, [titulo, setAdicionadoNaLista, setVisivel, pageAtual]);
   return (
     <>
       {visivel && (
@@ -253,7 +247,7 @@ const Card = ({
                     src={adicionar}
                     alt="adicionar"
                   />
-                  {!adicionadoNaLista && pageAtual !== pageListaDesejo ? (
+                  {!adicionadoNaLista && !pageAtual.includes("listaDesejo") ? (
                     <CardBotao
                       onClick={adicionarNaLista}
                       src={listaDesejo_img}
