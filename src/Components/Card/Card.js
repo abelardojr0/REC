@@ -43,7 +43,7 @@ const Card = ({
   const tokenTemporario = sessionStorage.getItem("token");
 
   const verificarListaBanco = useCallback(() => {
-    if (pageAtual.includes("listaDesejo")) {
+    if (!pageAtual.includes("listaDesejo")) {
       if (listaBanco) {
         listaBanco.forEach((item) => {
           if (item[1] === titulo) {
