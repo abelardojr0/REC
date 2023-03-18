@@ -19,9 +19,10 @@ const MinhasSeries = () => {
   const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
 
   const [token] = useJwtToken();
+  const tokenTemporario = sessionStorage.getItem("token");
 
   React.useEffect(() => {
-    if (token) {
+    if (token || tokenTemporario) {
       api
         .get("/series")
         .then((response) => {
@@ -41,7 +42,7 @@ const MinhasSeries = () => {
           console.log(error);
         });
     }
-  }, [token]);
+  }, [token, tokenTemporario]);
   return (
     <>
       <Header />

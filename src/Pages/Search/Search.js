@@ -35,6 +35,7 @@ const Search = () => {
   const [carregandoFilmes, setCarregandoFilmes] = React.useState(true);
   const [carregandoSeries, setCarregandoSeries] = React.useState(true);
   const [token] = useJwtToken();
+  const tokenTemporario = sessionStorage.getItem("token");
 
   async function buscarFilme(url) {
     const response = await fetch(url);
@@ -60,7 +61,7 @@ const Search = () => {
   }, [query]);
 
   React.useEffect(() => {
-    if (token) {
+    if (token || tokenTemporario) {
       api
         .get("/filmes")
         .then((response) => {
@@ -88,7 +89,7 @@ const Search = () => {
           console.log(error);
         });
     }
-  }, [token]);
+  }, [token, tokenTemporario]);
 
   return (
     <>

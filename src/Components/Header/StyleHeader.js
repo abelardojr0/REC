@@ -111,7 +111,12 @@ export const HeaderLoginBotao = styled.button`
 `;
 
 export const HeaderPesquisarContainer = styled.form`
-  margin-left: 50px;
+  margin-left: 450px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   ${responsivo(breakpoints.desktop)} {
     margin-left: 0px;
   }

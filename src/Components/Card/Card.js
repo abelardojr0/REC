@@ -44,6 +44,7 @@ const Card = ({
     []
   );
   const [token] = useJwtToken();
+  const tokenTemporario = sessionStorage.getItem("token");
 
   const verificarListaBanco = useCallback(() => {
     if (pageAtual !== pageListaDesejo) {
@@ -77,20 +78,20 @@ const Card = ({
   }, []);
 
   const marcarAssistido = useCallback(() => {
-    if (token) {
+    if (token || tokenTemporario) {
       if (setLoginStatus) {
         setLoginStatus(false);
       }
       setAssistido(true);
+      if (pageAtual === pageListaDesejo) {
+        setVisivel(false);
+      }
       api
         .post("/removerListaDesejo", {
           titulo,
         })
         .then((response) => {
           console.log(response);
-          if (pageAtual === pageListaDesejo) {
-            setVisivel(false);
-          }
         })
         .catch((error) => {
           console.log(error);
@@ -139,6 +140,7 @@ const Card = ({
     setLoginStatus,
     tipo,
     titulo,
+    tokenTemporario,
   ]);
 
   const desmarcarAssistido = useCallback(() => {
@@ -175,7 +177,7 @@ const Card = ({
   }, [setAssistido, tipo, titulo, setVisivel]);
 
   const adicionarNaLista = useCallback(() => {
-    if (token) {
+    if (token || tokenTemporario) {
       setAdicionadoNaLista(true);
       api
         .post("/inserirListaDesejo", {
@@ -203,19 +205,20 @@ const Card = ({
     tipo,
     id,
     setLoginStatus,
+    tokenTemporario,
   ]);
 
   const removerDaLista = useCallback(() => {
     setAdicionadoNaLista(false);
+    if (window.location.href === "http://localhost:3000/listaDesejo") {
+      setVisivel(false);
+    }
     api
       .post("/removerListaDesejo", {
         titulo,
       })
       .then((response) => {
         console.log(response.data);
-        if (window.location.href === "http://localhost:3000/listaDesejo") {
-          setVisivel(false);
-        }
       })
       .catch((error) => {
         console.log(error);

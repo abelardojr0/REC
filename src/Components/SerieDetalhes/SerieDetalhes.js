@@ -35,12 +35,13 @@ const SerieDetalhes = ({
   sinopse,
 }) => {
   const [token] = useJwtToken();
+  const tokenTemporario = sessionStorage.getItem("token");
   const [loginStatus, setLoginStatus] = React.useState(false);
   const [carregando, setCarregando] = React.useState(true);
   const [assistido, setAssistido] = React.useState(false);
 
   React.useEffect(() => {
-    if (token) {
+    if (token || tokenTemporario) {
       api
         .post("/series", {
           titulo: nome,
@@ -60,10 +61,10 @@ const SerieDetalhes = ({
     } else {
       setCarregando(false);
     }
-  }, [token, nome]);
+  }, [token, nome, tokenTemporario]);
 
   function adicionarSerie() {
-    if (token) {
+    if (token || tokenTemporario) {
       api
         .post("/inserirFilme", {
           titulo: nome,

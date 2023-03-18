@@ -29,6 +29,7 @@ const CategoriaSeries = () => {
   const [listaBanco, setListaBanco] = React.useState([]);
   const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
   const [token] = useJwtToken();
+  const tokenTemporario = sessionStorage.getItem("token");
 
   async function buscarSeries(url) {
     const response = await fetch(url);
@@ -42,7 +43,7 @@ const CategoriaSeries = () => {
     buscarSeries(listaFilmes);
   }, [query]);
   React.useEffect(() => {
-    if (token) {
+    if (token || tokenTemporario) {
       api
         .get("/series")
         .then((response) => {
@@ -60,7 +61,7 @@ const CategoriaSeries = () => {
           console.log(error);
         });
     }
-  }, [token]);
+  }, [token, tokenTemporario]);
   if (categoriaSeries === []) return null;
   return (
     <>

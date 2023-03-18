@@ -14,11 +14,12 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
   const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
   const [colunas, setColunas] = React.useState(5);
   const [token] = useJwtToken();
+  const tokenTemporario = sessionStorage.getItem("token");
   const cancelTokenSourceRef = React.useRef(null);
 
   React.useEffect(() => {
     cancelTokenSourceRef.current = axios.CancelToken.source();
-    if (token) {
+    if (token || tokenTemporario) {
       if (tipo === "filme") {
         api
           .get("/filmes", { cancelToken: cancelTokenSourceRef.current.token })
@@ -68,7 +69,7 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
         "A requisição foi cancelada pelo usuário."
       );
     };
-  }, [token, tipo]);
+  }, [token, tipo, tokenTemporario]);
   React.useEffect(() => {
     const largura = window.innerWidth;
     if (largura < 1000) {

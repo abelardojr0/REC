@@ -28,8 +28,9 @@ const Login = ({ setLoginStatus }) => {
   const [errorLogin, setErrorLogin] = React.useState();
   const [lembrar, setLembrar] = React.useState(false);
   const [token, setToken] = useJwtToken(5);
-  const navigate = useNavigate();
   console.log(token);
+  const navigate = useNavigate();
+
   function fecharModal(e) {
     if (
       e.target.getAttribute("id") === "modal" ||
@@ -56,15 +57,14 @@ const Login = ({ setLoginStatus }) => {
           if (lembrar) {
             setToken(response.data.access_token);
             localStorage.setItem("nome", response.data.nome);
-            // localStorage.setItem("token", response.data.access_token);
-            setLoginStatus(false);
-            setErrorLogin(false);
-            navigate("/");
-            window.location.reload(true);
           } else {
             sessionStorage.setItem("nome", response.data.nome);
             sessionStorage.setItem("token", response.data.access_token);
           }
+          setLoginStatus(false);
+          setErrorLogin(false);
+          navigate("/");
+          window.location.reload(true);
         }
       })
       .catch((error) => {

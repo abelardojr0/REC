@@ -38,7 +38,8 @@ const Header = () => {
   const [inputVisivel, setInputVisivel] = React.useState(false);
   const [menuMobile, setMenuMobile] = React.useState(false);
   const navigate = useNavigate();
-  const nome_usuario = localStorage.getItem("nome");
+  const nome_usuario =
+    localStorage.getItem("nome") || sessionStorage.getItem("nome");
   const inputRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -83,6 +84,7 @@ const Header = () => {
 
   function deslogar() {
     localStorage.clear();
+    sessionStorage.clear();
     navigate("/");
     window.location.reload(true);
   }

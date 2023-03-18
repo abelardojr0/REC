@@ -30,6 +30,7 @@ const CategoriaFilmes = () => {
   const [listaBanco, setListaBanco] = React.useState([]);
   const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
   const [token] = useJwtToken();
+  const tokenTemporario = sessionStorage.getItem("token");
 
   async function buscarFilmes(url) {
     const response = await fetch(url);
@@ -44,7 +45,7 @@ const CategoriaFilmes = () => {
   }, [query]);
 
   React.useEffect(() => {
-    if (token) {
+    if (token || tokenTemporario) {
       api
         .get("/filmes")
         .then((response) => {
@@ -62,7 +63,7 @@ const CategoriaFilmes = () => {
           console.log(error);
         });
     }
-  }, [token]);
+  }, [token, tokenTemporario]);
   if (categoriaFilmes === []) return null;
   return (
     <>

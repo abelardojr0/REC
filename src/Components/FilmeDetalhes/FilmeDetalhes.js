@@ -38,9 +38,10 @@ const FilmeDetalhes = ({
   const [carregando, setCarregando] = React.useState(true);
   const [assistido, setAssistido] = React.useState(false);
   const [token] = useJwtToken();
+  const tokenTemporario = sessionStorage.getItem("token");
 
   React.useEffect(() => {
-    if (token) {
+    if (token || tokenTemporario) {
       api
         .post("/filmes", {
           titulo,
@@ -60,10 +61,10 @@ const FilmeDetalhes = ({
     } else {
       setCarregando(false);
     }
-  }, [token, titulo]);
+  }, [token, titulo, tokenTemporario]);
 
   function adicionarFilme() {
-    if (token) {
+    if (token || tokenTemporario) {
       api
         .post("/inserirFilme", {
           titulo,

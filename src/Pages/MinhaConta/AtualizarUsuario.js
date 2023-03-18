@@ -19,11 +19,12 @@ const AtualizarUsuario = () => {
   const [senhaFraca, setSenhaFraca] = React.useState(false);
   const [sucesso, setSucesso] = React.useState();
   const [token] = useJwtToken();
+  const tokenTemporario = sessionStorage.getItem("token");
 
   function atualizarBanco(e) {
     e.preventDefault();
     localStorage.setItem("nome", nome);
-    if (token) {
+    if (token || tokenTemporario) {
       api
         .post("/atualizarUsuario", {
           nome,

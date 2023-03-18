@@ -18,9 +18,10 @@ const ListaDesejo = () => {
   const [carregando, setCarregando] = React.useState(true);
 
   const [token] = useJwtToken();
+  const tokenTemporario = sessionStorage.getItem("token");
 
   React.useEffect(() => {
-    if (token) {
+    if (token || tokenTemporario) {
       api
         .get("/listaDesejo")
         .then((response) => {
@@ -31,7 +32,7 @@ const ListaDesejo = () => {
           console.log(error);
         });
     }
-  }, [token]);
+  }, [token, tokenTemporario]);
   return (
     <>
       <Header />

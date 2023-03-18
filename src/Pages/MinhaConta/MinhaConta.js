@@ -7,9 +7,10 @@ import { MinhaContaBotao, MinhaContaContainer } from "./StylesMinhaConta";
 
 const MinhaConta = () => {
   const [token] = useJwtToken();
+  const tokenTemporario = sessionStorage.getItem("token");
 
   function deletarUsuario() {
-    if (token) {
+    if (token || tokenTemporario) {
       api
         .post("/deletarUsuario")
         .then((response) => {
