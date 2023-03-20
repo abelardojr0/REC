@@ -40,7 +40,7 @@ const Formulario = () => {
         .then((response) => {
           console.log(response.data.status);
           if (response.data.status === "sucess") {
-            navigate("/finalizado");
+            navigate(`/checarEmail?q=${email}`);
           } else if (response.data.status === "fail") {
             setMsgErroEmail(true);
           } else if (response.data.status === "senhaFraca") {

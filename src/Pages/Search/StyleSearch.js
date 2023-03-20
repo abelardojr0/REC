@@ -34,6 +34,9 @@ export const ResultadoLista = styled.ul`
   }
   ${responsivo(breakpoints.mobile)} {
     grid-template-columns: 1fr;
+    img {
+      max-width: 200px;
+    }
   }
   li {
     max-height: 350px;

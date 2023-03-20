@@ -5,6 +5,7 @@ export const SectionSucesso = styled.section`
   margin-top: 200px;
   margin-bottom: 200px;
   padding-left: 20px;
+  padding-bottom: 100px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -13,7 +14,7 @@ export const SectionSucesso = styled.section`
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
   background-color: white;
   max-width: 1000px;
-  height: 100vh;
+  /* height: 100vh; */
 `;
 
 export const SucessoTitulo = styled.h1`
@@ -37,4 +38,11 @@ export const SucessoImagem = styled.img`
   margin-top: 50px;
   align-self: center;
   max-width: 400px;
+`;
+export const SucessoBotaoEmail = styled.a`
+  color: blue;
+`;
+export const SucessoChecar = styled.p`
+  color: #ff3131;
+  margin-top: 10px;
 `;

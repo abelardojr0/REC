@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import responsivo, { breakpoints } from "../../Responsivo";
 
@@ -118,4 +119,13 @@ export const LoginMsgErro = styled.div`
   border-radius: 15px;
   margin-bottom: 10px;
   background-color: #9d001b;
+`;
+export const LoginEsqueceuSenha = styled(Link)`
+  color: blue;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 `;

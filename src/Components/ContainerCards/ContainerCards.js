@@ -12,7 +12,6 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
   const [filmesBanco, setFilmesBanco] = React.useState([]);
   const [seriesBanco, setSeriesBanco] = React.useState([]);
   const [listaDesejoBanco, setListaDesejoBanco] = React.useState([]);
-  const [colunas, setColunas] = React.useState(5);
   const [token] = useJwtToken();
   const tokenTemporario = sessionStorage.getItem("token");
   const cancelTokenSourceRef = React.useRef(null);
@@ -70,12 +69,6 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
       );
     };
   }, [token, tipo, tokenTemporario]);
-  React.useEffect(() => {
-    const largura = window.innerWidth;
-    if (largura < 1000) {
-      setColunas(3);
-    }
-  }, []);
   return (
     <>
       {loginStatus && (

@@ -5,6 +5,7 @@ import {
   // FormularioSociais,
   LoginBotaoEntrar,
   LoginBotaoFechar,
+  LoginEsqueceuSenha,
   LoginFormulario,
   LoginLembrarDivisao,
   LoginLembrarInput,
@@ -101,6 +102,9 @@ const Login = ({ setLoginStatus }) => {
             required
             setDados={setSenha}
           />
+          <LoginEsqueceuSenha to="/esqueceuSenha">
+            Esqueceu a senha?
+          </LoginEsqueceuSenha>
           <LoginLembrarDivisao>
             <LoginLembrarInput
               checked={lembrar}
