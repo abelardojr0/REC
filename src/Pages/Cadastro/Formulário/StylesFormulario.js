@@ -7,6 +7,7 @@ export const ContainerFormulario = styled.form`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+  gap: 20px;
   margin: 0 auto;
   height: 100vh;
   margin-top: 100px;
@@ -20,8 +21,8 @@ export const ContainerFormulario = styled.form`
 
 export const TituloFormulario = styled.h2`
   margin-top: 20px;
-  color: #ff3131;
-  font-size: 2rem;
+  color: #e2e2e2;
+  font-size: 2.5rem;
   font-weight: bold;
 `;
 
@@ -35,11 +36,25 @@ export const SubtituloFormulario = styled.h3`
 
 export const Botao = styled.button`
   color: #fff;
-  background-color: #ff3131;
+  background-color: #00b0ff;
   padding: 1rem 2rem;
   text-align: center;
   font-size: 1.5rem;
   border: none;
+  border-radius: 20px;
+  width: 100%;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
+export const BotaoFalso = styled.div`
+  color: #fff;
+  background-color: #00b0ff;
+  padding: 1rem 2rem;
+  text-align: center;
+  font-size: 1.5rem;
   border-radius: 20px;
   width: 100%;
   cursor: pointer;

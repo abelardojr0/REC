@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const EsqueceuSenhaContainer = styled.form`
@@ -9,21 +8,21 @@ export const EsqueceuSenhaContainer = styled.form`
   height: 100vh;
   max-width: 400px;
   margin: 0 auto;
+  gap: 20px;
 `;
 export const EsqueceuSenhaTitulo = styled.h1`
   font-size: 2rem;
-  color: #ff3131;
+  color: #e2e2e2;
   margin-bottom: 20px;
   text-transform: uppercase;
   font-weight: bold;
 `;
 
-export const EsqueceuSenhaBotao = styled(Link)`
-  text-decoration: none;
+export const EsqueceuSenhaBotao = styled.button`
   text-align: center;
   padding: 0.6rem 1.2rem;
   font-size: 1.5rem;
-  background-color: #ff3131;
+  background-color: #00b0ff;
   border: none;
   border-radius: 15px;
   color: white;

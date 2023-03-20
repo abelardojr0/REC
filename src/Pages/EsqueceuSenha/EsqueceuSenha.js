@@ -16,6 +16,7 @@ const EsqueceuSenha = () => {
   const [emailEnviado, setEmailEnviado] = React.useState(false);
   const [emailError, setEmailError] = React.useState(false);
   function enviarEmail() {
+    console.log("testando");
     api
       .post("/recuperarSenha", {
         email,
@@ -58,7 +59,7 @@ const EsqueceuSenha = () => {
           required={true}
           setDados={setEmail}
         />
-        <EsqueceuSenhaBotao>Recuperar</EsqueceuSenhaBotao>
+        <EsqueceuSenhaBotao type="submit">Recuperar</EsqueceuSenhaBotao>
       </EsqueceuSenhaContainer>
       <Footer />
     </>

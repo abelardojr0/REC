@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import lupa from "../../Images/lupa2.png";
+import lupa from "../../Images/lupa.png";
 import responsivo, { breakpoints } from "../../Responsivo";
 
 export const HeaderComponent = styled.header`
@@ -106,17 +106,92 @@ export const HeaderLoginBotao = styled.button`
   }
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
-    color: #ff3131;
+    /* color: #ff3131; */
   }
 `;
 
+// export const HeaderPesquisarContainer = styled.form`
+//   width: 40px;
+//   height: 40px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
+// export const HeaderPesquisarContainerBarra = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   gap: 5px;
+//   position: relative;
+//   margin-left: 50px;
+// `;
+// export const HeaderPesquisarInput = styled.input`
+//   font-size: 1rem;
+//   padding: 0.6rem;
+//   border-radius: 15px;
+//   outline: none;
+//   border: 2px solid #f9f9f9;
+//   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+//   display: none;
+//   width: 250px;
+//   margin-right: 100px;
+//   ${responsivo(breakpoints.desktop)} {
+//     font-size: 0.7rem;
+//     margin-left: 150px;
+//   }
+//   ${responsivo(breakpoints.mobile)} {
+//     width: 200px;
+//     font-size: 1rem;
+//     padding-left: 40px;
+//   }
+//   &.ativo {
+//     display: block;
+//     animation: show-rigth 0.5s forwards ease-in-out;
+//   }
+
+//   @keyframes show-rigth {
+//     from {
+//       opacity: 0;
+//       transform: translate3d(20px, 0, 0);
+//     }
+//     to {
+//       opacity: 1;
+//       transform: translate3d(0, 0, 0);
+//     }
+//   }
+// `;
+
+// export const HeaderPesquisarBotao = styled.button`
+//   background-image: url(${lupa});
+//   background-position: center;
+//   background-size: cover;
+//   border-radius: 15px;
+//   background-color: transparent;
+//   border: none;
+//   padding: 0.5rem;
+//   width: 30px;
+//   height: 30px;
+//   position: absolute;
+//   right: 20px;
+//   cursor: pointer;
+//   ${responsivo(breakpoints.desktop)} {
+//     width: 20px;
+//     height: 20px;
+//   }
+//   ${responsivo(breakpoints.mobile)} {
+//     width: 20px;
+//     height: 20px;
+//     left: -20px;
+//   }
+//   &:hover {
+//     transform: scale(1.1);
+//   }
+// `;
+
 export const HeaderPesquisarContainer = styled.form`
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-left: 50px;
 `;
+
 export const HeaderPesquisarContainerBarra = styled.div`
   display: flex;
   justify-content: center;
@@ -132,21 +207,17 @@ export const HeaderPesquisarInput = styled.input`
   border: 2px solid #f9f9f9;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
   display: none;
-  width: 250px;
-  ${responsivo(breakpoints.desktop)} {
-    font-size: 0.7rem;
-    margin-left: 150px;
-  }
-  ${responsivo(breakpoints.mobile)} {
-    width: 200px;
-    font-size: 1rem;
-    padding-left: 40px;
-  }
+  width: 300px;
+  background-color: transparent;
+  padding: 1rem;
+  color: white;
   &.ativo {
     display: block;
     animation: show-rigth 0.5s forwards ease-in-out;
   }
-
+  &::placeholder {
+    color: white;
+  }
   @keyframes show-rigth {
     from {
       opacity: 0;
@@ -167,20 +238,11 @@ export const HeaderPesquisarBotao = styled.button`
   background-color: transparent;
   border: none;
   padding: 0.5rem;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
   position: absolute;
   right: 20px;
   cursor: pointer;
-  ${responsivo(breakpoints.desktop)} {
-    width: 20px;
-    height: 20px;
-  }
-  ${responsivo(breakpoints.mobile)} {
-    width: 20px;
-    height: 20px;
-    left: -20px;
-  }
   &:hover {
     transform: scale(1.1);
   }

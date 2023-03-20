@@ -80,7 +80,7 @@ const Login = ({ setLoginStatus }) => {
         </LoginBotaoFechar>
 
         <LoginFormulario onSubmit={checarLogin}>
-          <LoginTitulo>Entrar</LoginTitulo>
+          <LoginTitulo>Login</LoginTitulo>
           {errorLogin && <LoginMsgErro>Email/Senha incorreto</LoginMsgErro>}
           <Input
             htmlFor={"userEmail"}

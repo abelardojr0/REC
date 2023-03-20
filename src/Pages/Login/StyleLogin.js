@@ -54,6 +54,7 @@ export const LoginFormulario = styled.form`
   align-items: center;
   flex-direction: column;
   width: 100%;
+  gap: 10px;
 `;
 export const LoginTitulo = styled.h1`
   font-size: 2rem;
@@ -64,7 +65,7 @@ export const LoginTitulo = styled.h1`
 `;
 
 export const LoginBotaoEntrar = styled.button`
-  background-color: #ff3131;
+  background-color: #00b0ff;
   outline: none;
   padding: 0.8rem 1.6rem;
   font-size: 1.5rem;
@@ -121,7 +122,7 @@ export const LoginMsgErro = styled.div`
   background-color: #9d001b;
 `;
 export const LoginEsqueceuSenha = styled(Link)`
-  color: blue;
+  color: #003b81;
   font-size: 1rem;
   margin-bottom: 10px;
   text-decoration: none;

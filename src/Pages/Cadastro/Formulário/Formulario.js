@@ -3,6 +3,7 @@ import React from "react";
 import Input from "./Components/Input";
 import {
   Botao,
+  BotaoFalso,
   CadastroMsgDeErro,
   ContainerFormulario,
   FormularioJaTenhoConta,
@@ -17,6 +18,7 @@ import {
 // import { EntrarCom, FormularioSociais } from "../../Login/StyleLogin";
 import { useNavigate } from "react-router-dom";
 import api from "../../../api";
+import Login from "../../Login/Login";
 
 const Formulario = () => {
   const navigate = useNavigate();
@@ -27,6 +29,7 @@ const Formulario = () => {
   const [msgErroEmail, setMsgErroEmail] = React.useState(false);
   const [msgErroSenha, setMsgErroSenha] = React.useState(false);
   const [msgErroSenhaFraca, setMsgErroSenhaFraca] = React.useState(false);
+  const [loginStatus, setLoginStatus] = React.useState(false);
 
   function finalizar(e) {
     e.preventDefault();
@@ -54,11 +57,22 @@ const Formulario = () => {
       setMsgErroSenha(true);
     }
   }
+  function abrirLogin() {
+    if (loginStatus === true) {
+      setLoginStatus(false);
+    } else {
+      setLoginStatus(true);
+    }
+  }
   return (
     <>
+      {loginStatus && (
+        <>
+          <Login setLoginStatus={setLoginStatus} />
+        </>
+      )}
       <ContainerFormulario onSubmit={finalizar}>
         <TituloFormulario>Dados do cadastro</TituloFormulario>
-        <SubtituloFormulario>Dados Pessoais</SubtituloFormulario>
         <Input
           htmlFor={"usuario"}
           texto={"Usuário *"}
@@ -117,7 +131,7 @@ const Formulario = () => {
           <FormularioJaTenhoContaTitulo>
             Já possui uma conta?
           </FormularioJaTenhoContaTitulo>
-          <Botao>Entrar</Botao>
+          <BotaoFalso onClick={abrirLogin}>Entrar</BotaoFalso>
 
           {/* <FormularioSociaisCadastro>
             <EntrarCom style={{ color: "white" }}>Entrar com: </EntrarCom>
