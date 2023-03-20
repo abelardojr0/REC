@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const token = localStorage.getItem("token");
+const token = localStorage.getItem("token") || sessionStorage.getItem("token");
 const api = axios.create({
   baseURL: "https://api-rec.vercel.app",
   headers: {

@@ -22,6 +22,7 @@ import { useMemo } from "react";
 import { useCallback } from "react";
 import { useEffect } from "react";
 import { useJwtToken } from "../../useJwtToken";
+import { Tooltip } from "react-tooltip";
 const img = LinksApi.IMG;
 
 const Card = ({
@@ -235,17 +236,29 @@ const Card = ({
             <CardTitulo to={`/${tipo}/${id}`}>{titulo}</CardTitulo>
             <CardContainerInfos>
               {assistido ? (
-                <CardBotao
-                  onClick={desmarcarAssistido}
-                  src={assistido_img}
-                  alt="icon-assistido"
-                />
+                <>
+                  <CardBotao
+                    id="assistido"
+                    onClick={desmarcarAssistido}
+                    src={assistido_img}
+                    alt="icon-assistido"
+                  />
+                  <Tooltip
+                    anchorSelect="#assistido"
+                    content="Você já assistiu"
+                  />
+                </>
               ) : (
                 <>
                   <CardBotao
+                    id="adicionar"
                     onClick={marcarAssistido}
                     src={adicionar}
                     alt="adicionar"
+                  />
+                  <Tooltip
+                    anchorSelect="#adicionar"
+                    content="Marcar como assistido"
                   />
                   {!adicionadoNaLista && !pageAtual.includes("listaDesejo") ? (
                     <CardBotao
@@ -264,7 +277,8 @@ const Card = ({
               )}
 
               <CardLink to={`/${tipo}/${id}`}>
-                <CardBotao src={detalhes} alt="more" />
+                <CardBotao id="mais_detalhes" src={detalhes} alt="more" />
+                <Tooltip anchorSelect="#mais_detalhes" content="Detalhes" />
               </CardLink>
             </CardContainerInfos>
           </CardDivInfos>

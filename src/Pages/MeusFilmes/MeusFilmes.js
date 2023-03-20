@@ -21,6 +21,7 @@ const MeusFilmes = () => {
 
   const [token] = useJwtToken();
   const tokenTemporario = sessionStorage.getItem("token");
+  console.log(tokenTemporario);
 
   React.useEffect(() => {
     if (token || tokenTemporario) {
