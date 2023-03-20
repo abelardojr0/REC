@@ -1,8 +1,11 @@
 .bm-menu {
   background-color: black;
   padding: 2.5em 1.5em 0;
+  padding-left: 60px;
+  margin-bottom: 100px;
   padding-top: 50px;
   font-size: 1.15em;
+  width: 80vw;
 }
 
 .bm-menu-wrap {
@@ -16,7 +19,7 @@
 .bm-item-list {
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 40px;
 }
 
 .bm-item a {

@@ -3,11 +3,13 @@ import { LinksApi } from "../../ConsultasParaApi";
 import {
   CardBotao,
   CardComponent,
+  CardContainerBotao,
   CardContainerInfos,
   CardContainerNota,
   CardDivInfos,
   CardImagem,
   CardLink,
+  CardTextoBotao,
   CardTitulo,
 } from "./StyleCard";
 import star from "../../Images/estrela.png";
@@ -22,7 +24,7 @@ import { useMemo } from "react";
 import { useCallback } from "react";
 import { useEffect } from "react";
 import { useJwtToken } from "../../useJwtToken";
-import { Tooltip } from "react-tooltip";
+// import { Tooltip } from "react-tooltip";
 const img = LinksApi.IMG;
 
 const Card = ({
@@ -237,49 +239,44 @@ const Card = ({
             <CardContainerInfos>
               {assistido ? (
                 <>
-                  <CardBotao
-                    id="assistido"
-                    onClick={desmarcarAssistido}
-                    src={assistido_img}
-                    alt="icon-assistido"
-                  />
-                  <Tooltip
-                    anchorSelect="#assistido"
-                    content="Você já assistiu"
-                  />
+                  <CardContainerBotao onClick={desmarcarAssistido}>
+                    <CardTextoBotao>Assistido</CardTextoBotao>
+                    <CardBotao src={assistido_img} alt="icon-assistido" />
+                  </CardContainerBotao>
                 </>
               ) : (
                 <>
-                  <CardBotao
-                    id="adicionar"
-                    onClick={marcarAssistido}
-                    src={adicionar}
-                    alt="adicionar"
-                  />
-                  <Tooltip
-                    anchorSelect="#adicionar"
-                    content="Marcar como assistido"
-                  />
+                  <CardContainerBotao onClick={marcarAssistido}>
+                    <CardTextoBotao>Assistir</CardTextoBotao>
+                    <CardBotao src={adicionar} alt="adicionar" />
+                  </CardContainerBotao>
                   {!adicionadoNaLista && !pageAtual.includes("listaDesejo") ? (
-                    <CardBotao
-                      onClick={adicionarNaLista}
-                      src={listaDesejo_img}
-                      alt="icon-lista_desejo"
-                    />
+                    <>
+                      <CardContainerBotao onClick={adicionarNaLista}>
+                        <CardTextoBotao>Adicionar</CardTextoBotao>
+                        <CardBotao
+                          src={listaDesejo_img}
+                          alt="icon-lista_desejo"
+                        />
+                      </CardContainerBotao>
+                    </>
                   ) : (
-                    <CardBotao
-                      onClick={removerDaLista}
-                      src={adicionado}
-                      alt="icon-lista_desejo"
-                    />
+                    <>
+                      <CardContainerBotao onClick={removerDaLista}>
+                        <CardTextoBotao>Adicionado</CardTextoBotao>
+                        <CardBotao src={adicionado} alt="icon-lista_desejo" />
+                      </CardContainerBotao>
+                    </>
                   )}
                 </>
               )}
 
-              <CardLink to={`/${tipo}/${id}`}>
-                <CardBotao id="mais_detalhes" src={detalhes} alt="more" />
-                <Tooltip anchorSelect="#mais_detalhes" content="Detalhes" />
-              </CardLink>
+              <CardContainerBotao>
+                <CardTextoBotao>Detalhes</CardTextoBotao>
+                <CardLink to={`/${tipo}/${id}`}>
+                  <CardBotao id="mais_detalhes" src={detalhes} alt="more" />
+                </CardLink>
+              </CardContainerBotao>
             </CardContainerInfos>
           </CardDivInfos>
         </CardComponent>

@@ -19,7 +19,7 @@ export const CardImagem = styled.img`
     max-width: 60%;
   }
   ${responsivo(breakpoints.mobile)} {
-    max-width: 50%;
+    max-width: 100%;
   }
 `;
 
@@ -37,11 +37,11 @@ export const CardDivInfos = styled.div`
   &.ativo {
     display: flex;
   }
-  ${responsivo(breakpoints.mobile)} {
+  ${responsivo(breakpoints.tablet)} {
     width: 60%;
   }
   ${responsivo(breakpoints.mobile)} {
-    width: 50%;
+    width: 100%;
   }
 `;
 
@@ -79,8 +79,9 @@ export const CardContainerInfos = styled.div`
   height: 100%;
   width: 95%;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   gap: 10px;
   margin-bottom: 5px;
 `;
@@ -112,15 +113,30 @@ export const CardLink = styled(Link)`
     transform: scale(1.05);
   }
 `;
-
-export const CardBotao = styled.img`
-  margin-bottom: 5px;
-  margin-top: 5px;
-  width: 30px;
-  height: 30px;
+export const CardContainerBotao = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  background-color: white;
+  border-radius: 15px;
+  padding: 0.3rem;
+  width: 180px;
   cursor: pointer;
-
   &:hover {
     transform: scale(1.05);
   }
+`;
+export const CardTextoBotao = styled.p`
+  font-size: 1.2rem;
+  color: black;
+  margin-left: 10px;
+  font-family: "Fredoka One", cursive;
+`;
+export const CardBotao = styled.img`
+  margin-bottom: 5px;
+  margin-top: 5px;
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
 `;

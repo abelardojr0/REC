@@ -86,7 +86,24 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
       {tipo === "filme" && (
         <>
           <ContainerCardsTituloSection>{titulo}</ContainerCardsTituloSection>
-          <Carousel cols={colunas} rows={1} gap={"20px"} loop>
+          <Carousel
+            cols={5}
+            mobileBreakpoint={300}
+            responsiveLayout={[
+              {
+                breakpoint: 1000,
+                cols: 3,
+              },
+              {
+                breakpoint: 468,
+                cols: 1,
+                rows: 2,
+              },
+            ]}
+            rows={1}
+            gap={"20px"}
+            loop
+          >
             {lista &&
               lista.map((filme) => (
                 <Carousel.Item key={filme.title}>
@@ -108,7 +125,24 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
       {tipo === "serie" && (
         <>
           <ContainerCardsTituloSection>{titulo}</ContainerCardsTituloSection>
-          <Carousel cols={colunas} rows={1} gap={"20px"} loop>
+          <Carousel
+            cols={5}
+            mobileBreakpoint={300}
+            responsiveLayout={[
+              {
+                breakpoint: 1000,
+                cols: 3,
+              },
+              {
+                breakpoint: 468,
+                cols: 1,
+                rows: 2,
+              },
+            ]}
+            rows={1}
+            gap={"20px"}
+            loop
+          >
             {lista &&
               lista.map((serie) => (
                 <Carousel.Item key={serie.name}>

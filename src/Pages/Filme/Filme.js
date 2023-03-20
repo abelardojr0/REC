@@ -89,7 +89,7 @@ const Filme = () => {
             sinopse={filme.overview}
             duracao={filme.runtime}
           />
-          <div style={{ width: "85%" }}>
+          <div style={{ margin: "0 auto", marginBottom: "50px", width: "80%" }}>
             {similares && (
               <ContainerCards
                 titulo={"Similares"}

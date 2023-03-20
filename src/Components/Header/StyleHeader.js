@@ -70,7 +70,7 @@ export const HeaderLink = styled(Link)`
   gap: 20px;
   font-size: 1.5rem;
   ${responsivo(breakpoints.desktop)} {
-    max-width: 120px;
+    max-width: 150px;
   }
   ${responsivo(breakpoints.tablet)} {
     max-width: 200px;
@@ -111,15 +111,11 @@ export const HeaderLoginBotao = styled.button`
 `;
 
 export const HeaderPesquisarContainer = styled.form`
-  margin-left: 450px;
   width: 40px;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  ${responsivo(breakpoints.desktop)} {
-    margin-left: 0px;
-  }
 `;
 export const HeaderPesquisarContainerBarra = styled.div`
   display: flex;
@@ -136,15 +132,15 @@ export const HeaderPesquisarInput = styled.input`
   border: 2px solid #f9f9f9;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
   display: none;
-  width: 300px;
+  width: 250px;
   ${responsivo(breakpoints.desktop)} {
-    width: 200px;
     font-size: 0.7rem;
+    margin-left: 150px;
   }
   ${responsivo(breakpoints.mobile)} {
-    width: 250px;
+    width: 200px;
     font-size: 1rem;
-    padding-left: 30px;
+    padding-left: 40px;
   }
   &.ativo {
     display: block;
@@ -181,8 +177,9 @@ export const HeaderPesquisarBotao = styled.button`
     height: 20px;
   }
   ${responsivo(breakpoints.mobile)} {
-    /* right: 0; */
-    left: 10px;
+    width: 20px;
+    height: 20px;
+    left: -20px;
   }
   &:hover {
     transform: scale(1.1);
