@@ -17,8 +17,6 @@ export const FilmeConteudo = styled.section`
   gap: 40px;
   margin: 0 auto;
   padding-top: 40px;
-  overflow-x: hidden;
-
   ${responsivo(breakpoints.mobile)} {
     flex-direction: column;
     align-items: center;
@@ -69,6 +67,7 @@ export const FilmeDetalhesLiSinopse = styled.li`
   background-color: gray;
   width: 100%;
   padding: 0.5rem;
+  box-sizing: border-box;
   margin-bottom: 10px;
   border-radius: 5px;
   max-height: 100px;

@@ -18,6 +18,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import api from "../../../api";
 import Login from "../../Login/Login";
+import { ContainerCarregando } from "../../../GlobalStyles";
+import { ClipLoader } from "react-spinners";
 
 const Formulario = () => {
   const navigate = useNavigate();
@@ -29,9 +31,11 @@ const Formulario = () => {
   const [msgErroSenha, setMsgErroSenha] = React.useState(false);
   const [msgErroSenhaFraca, setMsgErroSenhaFraca] = React.useState(false);
   const [loginStatus, setLoginStatus] = React.useState(false);
+  const [carregando, setCarregando] = React.useState(false);
 
   function finalizar(e) {
     e.preventDefault();
+    setCarregando(true);
     if (senha === confirmarSenha) {
       api
         .post("/inserirUsuario", {
@@ -48,12 +52,14 @@ const Formulario = () => {
           } else if (response.data.status === "senhaFraca") {
             setMsgErroSenhaFraca(true);
           }
+          setCarregando(false);
         })
         .catch((error) => {
           console.log(error);
         });
     } else {
       setMsgErroSenha(true);
+      setCarregando(false);
     }
   }
   function abrirLogin() {
@@ -65,6 +71,13 @@ const Formulario = () => {
   }
   return (
     <>
+      {carregando && (
+        <>
+          <ContainerCarregando>
+            <ClipLoader size={100} />
+          </ContainerCarregando>
+        </>
+      )}
       {loginStatus && (
         <>
           <Login setLoginStatus={setLoginStatus} />

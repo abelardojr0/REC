@@ -35,8 +35,9 @@ export const InputComponent = styled.input`
   height: 56px;
   padding: 0.5rem 0.8rem;
   outline: 0;
-  border: 1px solid #dde1d2;
+  border: 1px solid #cde2e0;
   border-radius: 10px;
-  background: #fff;
+  background: #dfe5ef;
   font-size: 16px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 `;

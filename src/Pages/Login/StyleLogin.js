@@ -19,7 +19,7 @@ export const LoginModal = styled.div`
   padding: 40px;
   position: relative;
   margin: 20px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 1);
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -40,7 +40,7 @@ export const LoginBotaoFechar = styled.button`
   position: absolute;
   top: -5px;
   right: -5px;
-  color: #f9f9f9;
+  color: #ff3131;
   border: none;
   cursor: pointer;
   &:hover {
@@ -57,11 +57,14 @@ export const LoginFormulario = styled.form`
   gap: 10px;
 `;
 export const LoginTitulo = styled.h1`
-  font-size: 2rem;
-  color: #000600;
+  font-size: 3rem;
+  color: #051a23;
   text-transform: uppercase;
   margin-bottom: 20px;
   margin-top: 20px;
+`;
+export const LoginLogo = styled.img`
+  max-width: 200px;
 `;
 
 export const LoginBotaoEntrar = styled.button`
@@ -95,7 +98,7 @@ export const LoginLembrarInput = styled.input`
 `;
 export const LoginLembrarLabel = styled.label`
   font-size: 1rem;
-  color: #f9f9f9;
+  color: #1a1412;
   font-style: italic;
 `;
 export const EntrarCom = styled.p`

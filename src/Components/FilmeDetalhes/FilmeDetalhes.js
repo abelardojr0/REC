@@ -150,11 +150,11 @@ const FilmeDetalhes = ({
               </FilmeDetalhesLi>
               {assistido ? (
                 <FilmeDetalhesBotaoAdicionado>
-                  Adicionado
+                  Assistido
                 </FilmeDetalhesBotaoAdicionado>
               ) : (
                 <FilmeDetalhesBotao onClick={adicionarFilme}>
-                  Adicionar
+                  Assistir
                 </FilmeDetalhesBotao>
               )}
             </FilmeDetalhesLista>

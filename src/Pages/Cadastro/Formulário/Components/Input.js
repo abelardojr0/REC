@@ -10,6 +10,7 @@ const Input = ({
   tamanho,
   placeholder,
   setDados,
+  value,
 }) => {
   const [focus, setFocus] = React.useState("");
   function inputFocado() {

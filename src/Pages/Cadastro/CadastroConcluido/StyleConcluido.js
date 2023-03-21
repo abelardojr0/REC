@@ -43,6 +43,9 @@ export const SucessoImagem = styled.img`
   margin-top: 50px;
   align-self: center;
   max-width: 400px;
+  ${responsivo(breakpoints.mobile)} {
+    max-width: 200px;
+  }
 `;
 export const SucessoBotaoEmail = styled.a`
   color: blue;

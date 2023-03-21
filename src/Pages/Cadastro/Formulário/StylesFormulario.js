@@ -25,15 +25,6 @@ export const TituloFormulario = styled.h2`
   font-size: 2.5rem;
   font-weight: bold;
 `;
-
-export const SubtituloFormulario = styled.h3`
-  font-weight: bold;
-  color: #dde1d2;
-  font-size: 1.3rem;
-  margin-bottom: 20px;
-  margin-top: 40px;
-`;
-
 export const Botao = styled.button`
   color: #fff;
   background-color: #00b0ff;
