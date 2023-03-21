@@ -98,21 +98,6 @@ export const CardTitulo = styled(Link)`
   }
 `;
 
-export const CardLink = styled(Link)`
-  text-decoration: none;
-  border: none;
-  gap: 15px;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  img {
-    width: 30px;
-    height: 30px;
-  }
-  &:hover {
-    transform: scale(1.05);
-  }
-`;
 export const CardContainerBotao = styled.div`
   display: flex;
   justify-content: space-between;

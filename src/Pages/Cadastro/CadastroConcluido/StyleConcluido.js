@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import responsivo, { breakpoints } from "../../../Responsivo";
 
 export const SectionSucesso = styled.section`
   margin: 0 auto;
@@ -14,6 +15,10 @@ export const SectionSucesso = styled.section`
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
   background-color: white;
   max-width: 1000px;
+  padding: 1rem;
+  ${responsivo(breakpoints.mobile)} {
+    max-width: 300px;
+  }
   /* height: 100vh; */
 `;
 

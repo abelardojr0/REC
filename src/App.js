@@ -19,6 +19,7 @@ import AtualizarUsuario from "./Pages/MinhaConta/AtualizarUsuario";
 import ChecarEmail from "./Pages/Cadastro/ChecarEmail";
 import Pagina404 from "./Pages/Pagina404/Pagina404";
 import EsqueceuSenha from "./Pages/EsqueceuSenha/EsqueceuSenha";
+import NovaSenha from "./Pages/NovaSenha/NovaSenha";
 function App() {
   return (
     <>
@@ -40,6 +41,7 @@ function App() {
           <Route path="/minhasSeries" element={<MinhasSeries />} />
           <Route path="/listaDesejo" element={<ListaDesejo />} />
           <Route path="/esqueceuSenha" element={<EsqueceuSenha />} />
+          <Route path="/novaSenha" element={<NovaSenha />} />
           <Route path="/minhaConta" element={<MinhaConta />} />
           <Route path="/atualizarConta" element={<AtualizarUsuario />} />
           <Route path="*" element={<Pagina404 />} />

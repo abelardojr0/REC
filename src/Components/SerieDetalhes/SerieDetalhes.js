@@ -38,7 +38,7 @@ const SerieDetalhes = ({
   const tokenTemporario = sessionStorage.getItem("token");
   const [loginStatus, setLoginStatus] = React.useState(false);
   const [carregando, setCarregando] = React.useState(true);
-  const [assistido, setAssistido] = React.useState(false);
+  const [assistidoSerie, setAssistidoSerie] = React.useState(false);
 
   React.useEffect(() => {
     if (token || tokenTemporario) {
@@ -50,9 +50,9 @@ const SerieDetalhes = ({
           setCarregando(false);
           console.log(response);
           if (response.data.status === "sucess") {
-            setAssistido(true);
+            setAssistidoSerie(true);
           } else {
-            setAssistido(false);
+            setAssistidoSerie(false);
           }
         })
         .catch((error) => {
@@ -66,7 +66,7 @@ const SerieDetalhes = ({
   function adicionarSerie() {
     if (token || tokenTemporario) {
       api
-        .post("/inserirFilme", {
+        .post("/inserirSerie", {
           titulo: nome,
           imagem,
           nota,
@@ -75,7 +75,7 @@ const SerieDetalhes = ({
         })
         .then((response) => {
           console.log(response);
-          setAssistido(true);
+          setAssistidoSerie(true);
         })
         .catch((error) => {
           console.log(error);
@@ -147,7 +147,7 @@ const SerieDetalhes = ({
                 Sinopse: <FilmeDetalhesSpan>{sinopse}</FilmeDetalhesSpan>{" "}
               </FilmeDetalhesLiSinopse>
 
-              {assistido ? (
+              {assistidoSerie ? (
                 <FilmeDetalhesBotaoAdicionado>
                   Adicionado
                 </FilmeDetalhesBotaoAdicionado>

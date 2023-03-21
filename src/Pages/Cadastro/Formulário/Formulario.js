@@ -9,7 +9,6 @@ import {
   FormularioJaTenhoConta,
   FormularioJaTenhoContaTitulo,
   // FormularioSociaisCadastro,
-  SubtituloFormulario,
   TituloFormulario,
 } from "./StylesFormulario";
 
@@ -41,7 +40,7 @@ const Formulario = () => {
           senha,
         })
         .then((response) => {
-          console.log(response.data.status);
+          console.log(response);
           if (response.data.status === "sucess") {
             navigate(`/checarEmail?q=${email}`);
           } else if (response.data.status === "fail") {

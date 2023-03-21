@@ -219,28 +219,30 @@ const Header = () => {
       )}
 
       <HeaderLogin>
-        <HeaderPesquisarContainer onSubmit={pesquisar}>
-          <HeaderPesquisarContainerBarra>
-            <HeaderPesquisarInput
-              autoFocus
-              className={ativa}
-              onBlur={esconderPesquisa}
-              type={"text"}
-              name={"pesquisar"}
-              id={"pesquisar"}
-              placeholder={"Buscar por filmes e séries..."}
-              autoComplete="off"
-              onChange={(e) => setSearch(e.target.value)}
-              ref={inputRef}
-              value={search}
-            />
-            <HeaderPesquisarBotao
-              id="pesquisar_botao"
-              onClick={mostrarPesquisa}
-              type="submit"
-            />
-          </HeaderPesquisarContainerBarra>
-        </HeaderPesquisarContainer>
+        {!menuMobile && (
+          <HeaderPesquisarContainer onSubmit={pesquisar}>
+            <HeaderPesquisarContainerBarra>
+              <HeaderPesquisarInput
+                autoFocus
+                className={ativa}
+                onBlur={esconderPesquisa}
+                type={"text"}
+                name={"pesquisar"}
+                id={"pesquisar"}
+                placeholder={"Buscar por filmes e séries..."}
+                autoComplete="off"
+                onChange={(e) => setSearch(e.target.value)}
+                ref={inputRef}
+                value={search}
+              />
+              <HeaderPesquisarBotao
+                id="pesquisar_botao"
+                onClick={mostrarPesquisa}
+                type="submit"
+              />
+            </HeaderPesquisarContainerBarra>
+          </HeaderPesquisarContainer>
+        )}
         {nome_usuario ? (
           <>
             <HeaderMenuUsuario id="menu_aberto" onClick={abrirMenu}>

@@ -8,7 +8,6 @@ import {
   CardContainerNota,
   CardDivInfos,
   CardImagem,
-  CardLink,
   CardTextoBotao,
   CardTitulo,
 } from "./StyleCard";
@@ -24,6 +23,7 @@ import { useMemo } from "react";
 import { useCallback } from "react";
 import { useEffect } from "react";
 import { useJwtToken } from "../../useJwtToken";
+import { useNavigate } from "react-router-dom";
 // import { Tooltip } from "react-tooltip";
 const img = LinksApi.IMG;
 
@@ -44,7 +44,7 @@ const Card = ({
   const pageAtual = useMemo(() => window.location.href, []);
   const [token] = useJwtToken();
   const tokenTemporario = sessionStorage.getItem("token");
-
+  const navigate = useNavigate();
   const verificarListaBanco = useCallback(() => {
     if (!pageAtual.includes("listaDesejo")) {
       if (listaBanco) {
@@ -222,6 +222,10 @@ const Card = ({
         console.log(error);
       });
   }, [titulo, setAdicionadoNaLista, setVisivel, pageAtual]);
+
+  function verDetalhes() {
+    navigate(`/${tipo}/${id}`);
+  }
   return (
     <>
       {visivel && (
@@ -271,11 +275,9 @@ const Card = ({
                 </>
               )}
 
-              <CardContainerBotao>
+              <CardContainerBotao onClick={verDetalhes}>
                 <CardTextoBotao>Detalhes</CardTextoBotao>
-                <CardLink to={`/${tipo}/${id}`}>
-                  <CardBotao id="mais_detalhes" src={detalhes} alt="more" />
-                </CardLink>
+                <CardBotao id="mais_detalhes" src={detalhes} alt="more" />
               </CardContainerBotao>
             </CardContainerInfos>
           </CardDivInfos>

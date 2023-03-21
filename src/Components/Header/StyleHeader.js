@@ -190,6 +190,10 @@ export const HeaderLoginBotao = styled.button`
 
 export const HeaderPesquisarContainer = styled.form`
   margin-left: 50px;
+  ${responsivo(breakpoints.mobile)} {
+    width: 100%;
+    margin-left: 0px;
+  }
 `;
 
 export const HeaderPesquisarContainerBarra = styled.div`
@@ -211,6 +215,10 @@ export const HeaderPesquisarInput = styled.input`
   background-color: transparent;
   padding: 1rem;
   color: white;
+  ${responsivo(breakpoints.mobile)} {
+    min-width: 100% !important;
+    padding-right: 50px;
+  }
   &.ativo {
     display: block;
     animation: show-rigth 0.5s forwards ease-in-out;
@@ -243,6 +251,9 @@ export const HeaderPesquisarBotao = styled.button`
   position: absolute;
   right: 20px;
   cursor: pointer;
+  ${responsivo(breakpoints.mobile)} {
+    right: -5px;
+  }
   &:hover {
     transform: scale(1.1);
   }
