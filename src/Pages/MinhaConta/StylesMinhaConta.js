@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const MinhaContaContainer = styled.section`
@@ -30,8 +29,7 @@ export const MinhaContaTitulo = styled.h1`
   text-transform: uppercase;
   font-weight: bold;
 `;
-export const MinhaContaBotao = styled(Link)`
-  text-decoration: none;
+export const MinhaContaBotao = styled.button`
   text-align: center;
   padding: 0.6rem 1.2rem;
   font-size: 1.5rem;

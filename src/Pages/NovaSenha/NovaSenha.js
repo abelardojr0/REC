@@ -22,7 +22,6 @@ const NovaSenha = () => {
   function atualizarSenha(e) {
     setSenhaRepetida(true);
     e.preventDefault();
-    console.log("teste");
     if (senha === senhaRepetida) {
       api
         .post("/alterarSenha/" + tokenURL, {
