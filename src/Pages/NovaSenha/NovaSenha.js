@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import api from "../../api";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
+import { ContainerCarregando } from "../../GlobalStyles";
 import Input from "../Cadastro/Formulário/Components/Input";
 import { CadastroMsgDeErro } from "../Cadastro/Formulário/StylesFormulario";
 import {
@@ -11,6 +12,7 @@ import {
   MinhaContaTextoSucesso,
   MinhaContaTitulo,
 } from "../MinhaConta/StylesMinhaConta";
+import { ClipLoader } from "react-spinners";
 
 const NovaSenha = () => {
   const [senha, setSenha] = React.useState();
@@ -18,13 +20,13 @@ const NovaSenha = () => {
   const [senhasDiferentes, setSenhasDiferentes] = React.useState(true);
   const [senhaFraca, setSenhaFraca] = React.useState(false);
   const [sucesso, setSucesso] = React.useState();
+  const [carregando, setCarrengando] = React.useState(false);
   const [searchParams] = useSearchParams();
   const tokenURL = searchParams.get("q");
-  console.log(tokenURL);
+
   function atualizarSenha(e) {
     e.preventDefault();
-    console.log(senha);
-    console.log(senhaRepetida);
+    setCarrengando(true);
     if (senha === senhaRepetida) {
       api
         .post("/novaSenha/" + tokenURL, {
@@ -38,16 +40,25 @@ const NovaSenha = () => {
           } else if (response.data.status === "senhaFraca") {
             setSenhaFraca(true);
           }
+          setCarrengando(false);
         })
         .catch((error) => {
           console.log(error);
         });
     } else {
       setSenhasDiferentes(false);
+      setCarrengando(false);
     }
   }
   return (
     <>
+      {carregando && (
+        <>
+          <ContainerCarregando>
+            <ClipLoader size={100} />
+          </ContainerCarregando>
+        </>
+      )}
       <Header />
       <MinhaContaAtualizar onSubmit={atualizarSenha}>
         <MinhaContaTitulo>Redefinir Senha</MinhaContaTitulo>

@@ -2,6 +2,7 @@ import React from "react";
 import api from "../../api";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
+import { ContainerCarregando } from "../../GlobalStyles";
 import Input from "../Cadastro/Formulário/Components/Input";
 import {
   EsqueceuSenhaBotao,
@@ -10,13 +11,17 @@ import {
   EsqueceuSenhaMsgSucesso,
   EsqueceuSenhaTitulo,
 } from "./StylesEsqueceuSenha";
+import { ClipLoader } from "react-spinners";
 
 const EsqueceuSenha = () => {
   const [email, setEmail] = React.useState();
   const [emailEnviado, setEmailEnviado] = React.useState(false);
   const [emailError, setEmailError] = React.useState(false);
+  const [carregando, setCarrengando] = React.useState(false);
+
   function enviarEmail(e) {
     e.preventDefault();
+    setCarrengando(true);
     api
       .post("/recuperarSenha", {
         email,
@@ -29,6 +34,7 @@ const EsqueceuSenha = () => {
           setEmailEnviado(true);
           setEmailError(false);
         }
+        setCarrengando(false);
       })
       .catch((error) => {
         console.log(error);
@@ -36,6 +42,13 @@ const EsqueceuSenha = () => {
   }
   return (
     <>
+      {carregando && (
+        <>
+          <ContainerCarregando>
+            <ClipLoader size={100} />
+          </ContainerCarregando>
+        </>
+      )}
       <Header />
       <EsqueceuSenhaContainer onSubmit={enviarEmail}>
         {emailEnviado && (
@@ -61,7 +74,7 @@ const EsqueceuSenha = () => {
           required={true}
           setDados={setEmail}
         />
-        <EsqueceuSenhaBotao type="submit">Recuperar</EsqueceuSenhaBotao>
+        <EsqueceuSenhaBotao>Recuperar</EsqueceuSenhaBotao>
       </EsqueceuSenhaContainer>
       <Footer />
     </>

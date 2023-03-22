@@ -54,6 +54,8 @@ const Search = () => {
   }
 
   React.useEffect(() => {
+    setSearchFilmes([]);
+    setSearchSeries([]);
     const listaFilmes = `${searchFilme}?${key}&query=${query}&language=pt-BR`;
     buscarFilme(listaFilmes);
     const listaSeries = `${searchSerie}?${key}&query=${query}&language=pt-BR`;
