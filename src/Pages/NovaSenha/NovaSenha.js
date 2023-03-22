@@ -3,7 +3,6 @@ import { useSearchParams } from "react-router-dom";
 import api from "../../api";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
-import { useJwtToken } from "../../useJwtToken";
 import Input from "../Cadastro/Formulário/Components/Input";
 import { CadastroMsgDeErro } from "../Cadastro/Formulário/StylesFormulario";
 import {
@@ -15,34 +14,32 @@ import {
 
 const NovaSenha = () => {
   const [senha, setSenha] = React.useState();
-  const [senhaRepetida, setSenhaRepetida] = React.useState();
+  const [senhaRepetida, setSenhaRepetida] = React.useState(true);
   const [senhaFraca, setSenhaFraca] = React.useState(false);
   const [sucesso, setSucesso] = React.useState();
-  const [token] = useJwtToken();
-  const tokenTemporario = sessionStorage.getItem("token");
   const [searchParams] = useSearchParams();
   const tokenURL = searchParams.get("q");
-  function atualizarBanco(e) {
+  function atualizarSenha(e) {
+    setSenhaRepetida(true);
     e.preventDefault();
+    console.log("teste");
     if (senha === senhaRepetida) {
-      if (token || tokenTemporario) {
-        api
-          .post("/alterarSenha/" + tokenURL, {
-            senha,
-          })
-          .then((response) => {
-            console.log(response);
-            if (response.data.status === "sucess") {
-              setSucesso(true);
-              setSenhaFraca(false);
-            } else if (response.data.status === "senhaFraca") {
-              setSenhaFraca(true);
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
+      api
+        .post("/alterarSenha/" + tokenURL, {
+          senha,
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.data.status === "sucess") {
+            setSucesso(true);
+            setSenhaFraca(false);
+          } else if (response.data.status === "senhaFraca") {
+            setSenhaFraca(true);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
       setSenhaRepetida(false);
     }
@@ -50,7 +47,7 @@ const NovaSenha = () => {
   return (
     <>
       <Header />
-      <MinhaContaAtualizar>
+      <MinhaContaAtualizar onSubmit={atualizarSenha}>
         <MinhaContaTitulo>Redefinir Senha</MinhaContaTitulo>
 
         <Input
@@ -82,7 +79,7 @@ const NovaSenha = () => {
         {!senhaRepetida && (
           <CadastroMsgDeErro>As senhas devem ser iguais.</CadastroMsgDeErro>
         )}
-        <MinhaContaBotao onClick={atualizarBanco}>Atualizar</MinhaContaBotao>
+        <MinhaContaBotao>Atualizar</MinhaContaBotao>
         {sucesso && (
           <MinhaContaTextoSucesso>
             Atualizado com sucesso

@@ -12,7 +12,7 @@ export const MinhaContaContainer = styled.section`
   margin-top: 150px;
 `;
 
-export const MinhaContaAtualizar = styled.section`
+export const MinhaContaAtualizar = styled.form`
   display: flex;
   justify-content: flex-start;
   align-items: center;
