@@ -14,17 +14,20 @@ import {
 
 const NovaSenha = () => {
   const [senha, setSenha] = React.useState();
-  const [senhaRepetida, setSenhaRepetida] = React.useState(true);
+  const [senhaRepetida, setSenhaRepetida] = React.useState();
+  const [senhasDiferentes, setSenhasDiferentes] = React.useState(true);
   const [senhaFraca, setSenhaFraca] = React.useState(false);
   const [sucesso, setSucesso] = React.useState();
   const [searchParams] = useSearchParams();
   const tokenURL = searchParams.get("q");
+  console.log(tokenURL);
   function atualizarSenha(e) {
-    setSenhaRepetida(true);
     e.preventDefault();
+    console.log(senha);
+    console.log(senhaRepetida);
     if (senha === senhaRepetida) {
       api
-        .post("/alterarSenha/" + tokenURL, {
+        .post("/novaSenha/" + tokenURL, {
           senha,
         })
         .then((response) => {
@@ -40,7 +43,7 @@ const NovaSenha = () => {
           console.log(error);
         });
     } else {
-      setSenhaRepetida(false);
+      setSenhasDiferentes(false);
     }
   }
   return (
@@ -75,7 +78,7 @@ const NovaSenha = () => {
           required={true}
           setDados={setSenhaRepetida}
         />
-        {!senhaRepetida && (
+        {!senhasDiferentes && (
           <CadastroMsgDeErro>As senhas devem ser iguais.</CadastroMsgDeErro>
         )}
         <MinhaContaBotao>Atualizar</MinhaContaBotao>
