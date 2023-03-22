@@ -18,13 +18,14 @@ export const MinhaContaAtualizar = styled.section`
   align-items: center;
   flex-direction: column;
   max-width: 400px;
+  gap: 20px;
   height: 100vh;
   margin: 0 auto;
   margin-top: 150px;
 `;
 export const MinhaContaTitulo = styled.h1`
   font-size: 2rem;
-  color: #ff3131;
+  color: #e2e2e2;
   margin-bottom: 20px;
   text-transform: uppercase;
   font-weight: bold;
@@ -34,8 +35,7 @@ export const MinhaContaBotao = styled(Link)`
   text-align: center;
   padding: 0.6rem 1.2rem;
   font-size: 1.5rem;
-  background-color: #ff3131;
-  border: none;
+  background-color: #00b0ff;
   border-radius: 15px;
   color: white;
   font-weight: bold;

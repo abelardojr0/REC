@@ -10,7 +10,6 @@ import {
   LoginLembrarDivisao,
   LoginLembrarInput,
   LoginLembrarLabel,
-  LoginLogo,
   LoginModal,
   LoginModalContainer,
   LoginMsgErro,
@@ -19,7 +18,6 @@ import {
 // import facebook from "../../Images/logo_facebook.png";
 // import google from "../../Images/logo_google.png";
 // import LoginComS ociais from "./LoginComSociais/LoginComSociais";
-import logo from "../../Images/logo.png";
 
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
@@ -82,8 +80,7 @@ const Login = ({ setLoginStatus }) => {
         </LoginBotaoFechar>
 
         <LoginFormulario onSubmit={checarLogin}>
-          {/* <LoginTitulo>Login</LoginTitulo> */}
-          <LoginLogo src={logo} alt="logo" />
+          <LoginTitulo>Login</LoginTitulo>
           {errorLogin && <LoginMsgErro>Email/Senha incorretos</LoginMsgErro>}
           <Input
             htmlFor={"userEmail"}

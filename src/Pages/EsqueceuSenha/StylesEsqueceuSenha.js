@@ -2,12 +2,13 @@ import styled from "styled-components";
 
 export const EsqueceuSenhaContainer = styled.form`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   height: 100vh;
   max-width: 400px;
   margin: 0 auto;
+  margin-top: 150px;
   gap: 20px;
 `;
 export const EsqueceuSenhaTitulo = styled.h1`
@@ -35,16 +36,18 @@ export const EsqueceuSenhaBotao = styled.button`
 `;
 export const EsqueceuSenhaMsgSucesso = styled.div`
   width: 100%;
-  height: 100px;
-  background-color: white;
+  height: 20px;
+  background-color: #fffbf4;
+  border-radius: 15px;
   color: black;
   padding: 1rem;
 `;
 
 export const EsqueceuSenhaMsgError = styled.div`
   width: 100%;
-  height: 100px;
+  height: 20px;
   background-color: #ff3131;
+  border-radius: 15px;
   color: white;
   padding: 1rem;
 `;

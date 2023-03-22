@@ -15,17 +15,19 @@ const EsqueceuSenha = () => {
   const [email, setEmail] = React.useState();
   const [emailEnviado, setEmailEnviado] = React.useState(false);
   const [emailError, setEmailError] = React.useState(false);
-  function enviarEmail() {
-    console.log("testando");
+  function enviarEmail(e) {
+    e.preventDefault();
     api
       .post("/recuperarSenha", {
         email,
       })
       .then((response) => {
+        console.log(response);
         if (response.data.status === "fail") {
           setEmailError(true);
         } else if (response.data.status === "sucess") {
           setEmailEnviado(true);
+          setEmailError(false);
         }
       })
       .catch((error) => {
@@ -44,7 +46,7 @@ const EsqueceuSenha = () => {
 
         {emailError && (
           <EsqueceuSenhaMsgError>
-            Cheque sua caixa de entrada.(Cheque também o span)
+            O e-mail informado é inválido/não possui cadastro.
           </EsqueceuSenhaMsgError>
         )}
 

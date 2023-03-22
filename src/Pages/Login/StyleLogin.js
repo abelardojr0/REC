@@ -5,7 +5,7 @@ import responsivo, { breakpoints } from "../../Responsivo";
 export const LoginModalContainer = styled.div`
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   position: fixed;
   top: 0;
   left: 0;
@@ -19,7 +19,7 @@ export const LoginModal = styled.div`
   padding: 40px;
   position: relative;
   margin: 20px;
-  background-color: rgba(255, 255, 255, 1);
+  background-color: #fffbf4;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -38,13 +38,15 @@ export const LoginBotaoFechar = styled.button`
   height: 40px;
   border-radius: 50%;
   position: absolute;
-  top: -5px;
-  right: -5px;
-  color: #ff3131;
+  top: 0px;
+  right: 0px;
+  color: #9397a0;
   border: none;
   cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.03);
   &:hover {
     transform: scale(1.05);
+    color: #717486;
   }
 `;
 
