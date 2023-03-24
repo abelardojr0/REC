@@ -10,7 +10,7 @@ export const FilmeContainer = styled.article`
   overflow-x: hidden;
 `;
 export const FilmeConteudo = styled.section`
-  width: 60vw;
+  width: 70vw;
   height: 100%;
   display: flex;
   align-items: flex-start;

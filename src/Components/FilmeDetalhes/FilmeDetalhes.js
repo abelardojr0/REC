@@ -65,6 +65,20 @@ const FilmeDetalhes = ({
         .catch((error) => {
           console.log(error);
         });
+
+      api
+        .get("/listaDesejo")
+        .then((response) => {
+          response.data.forEach((item) => {
+            if (item[1] === titulo) {
+              setAdicionado(true);
+            }
+          });
+          setCarregando(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
       setCarregando(false);
     }
@@ -240,7 +254,7 @@ const FilmeDetalhes = ({
                         onClick={removerListaDesejo}
                       >
                         <img src={adicionado_icon} alt="adicionado_icon" />{" "}
-                        Adicionado a Lista
+                        Adicionado
                       </FilmeDetalhesBotaoAdicionado>
                     ) : (
                       <FilmeDetalhesBotao onClick={adicionarListaDesejo}>

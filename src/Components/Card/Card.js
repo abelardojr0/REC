@@ -45,6 +45,7 @@ const Card = ({
   const [token] = useJwtToken();
   const tokenTemporario = sessionStorage.getItem("token");
   const navigate = useNavigate();
+
   const verificarListaBanco = useCallback(() => {
     if (!pageAtual.includes("listaDesejo")) {
       if (listaBanco) {
