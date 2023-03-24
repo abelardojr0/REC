@@ -30,6 +30,7 @@ const EsqueceuSenha = () => {
         console.log(response);
         if (response.data.status === "fail") {
           setEmailError(true);
+          setEmailEnviado(false);
         } else if (response.data.status === "sucess") {
           setEmailEnviado(true);
           setEmailError(false);
@@ -54,7 +55,8 @@ const EsqueceuSenha = () => {
       <EsqueceuSenhaContainer onSubmit={enviarEmail}>
         {emailEnviado && (
           <EsqueceuSenhaMsgSucesso>
-            Cheque sua caixa de entrada.(Cheque também o span)
+            Cheque sua caixa de entrada.
+            <span style={{ fontStyle: "italic" }}>(Cheque também o span)</span>
           </EsqueceuSenhaMsgSucesso>
         )}
 

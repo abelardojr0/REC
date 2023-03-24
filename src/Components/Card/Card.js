@@ -110,7 +110,7 @@ const Card = ({
           .catch((error) => {
             console.log(error);
           });
-      } else {
+      } else if (tipo === "tv") {
         api
           .post("/inserirSerie", {
             titulo,

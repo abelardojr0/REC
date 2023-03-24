@@ -5,7 +5,7 @@ import responsivo, { breakpoints } from "../../Responsivo";
 export const MinhaContaContainer = styled.section`
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
   gap: 50px;
   max-width: 400px;
@@ -69,6 +69,9 @@ export const MinhaContaTextoSucesso = styled.p`
   margin-top: 20px;
   font-size: 1.2rem;
   color: white;
+  background-color: #0f6c0c;
+  padding: 0.8rem 1.4rem;
+  border-radius: 15px;
 `;
 
 export const MinhaContaContainerConfirmacao = styled.div`

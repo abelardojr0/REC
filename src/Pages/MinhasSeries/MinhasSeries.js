@@ -43,6 +43,7 @@ const MinhasSeries = () => {
         });
     }
   }, [token, tokenTemporario]);
+  console.log(minhasSeries);
   return (
     <>
       <Header />
@@ -58,7 +59,7 @@ const MinhasSeries = () => {
             <ResultadoTitulo>Minhas Séries:</ResultadoTitulo>
             <ResultadoLista>
               {minhasSeries &&
-                minhasSeries.map((item, index) => (
+                minhasSeries.map((item) => (
                   <li key={item[0]}>
                     <Card
                       titulo={item[1]}

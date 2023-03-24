@@ -75,11 +75,8 @@ const MudarSenha = () => {
       )}
       <MinhaContaAtualizar onSubmit={trocarSenha}>
         <MinhaContaTitulo>Trocar Senha</MinhaContaTitulo>
-        {senhaFraca && (
-          <CadastroMsgDeErro>
-            Senha fraca, digite uma senha com no minimo um caracter maiúsculo,
-            minúsculo, especial e um número
-          </CadastroMsgDeErro>
+        {checkSenhaMsgErro && (
+          <CadastroMsgDeErro>Senha atual está incorreta</CadastroMsgDeErro>
         )}
         <Input
           htmlFor={"senhaAnterior"}
@@ -92,8 +89,11 @@ const MudarSenha = () => {
           setDados={setSenhaAtual}
           dados={senhaAtual}
         />
-        {checkSenhaMsgErro && (
-          <CadastroMsgDeErro>Senha atual está incorreta</CadastroMsgDeErro>
+        {senhaFraca && (
+          <CadastroMsgDeErro>
+            Senha fraca, digite uma senha com no minimo um caracter maiúsculo,
+            minúsculo, especial e um número
+          </CadastroMsgDeErro>
         )}
         <Input
           htmlFor={"novaSenha"}

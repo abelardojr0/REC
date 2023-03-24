@@ -37,9 +37,9 @@ export const EsqueceuSenhaBotao = styled.button`
 export const EsqueceuSenhaMsgSucesso = styled.div`
   width: 100%;
   height: 20px;
-  background-color: #fffbf4;
+  background-color: #0f6c0c;
   border-radius: 15px;
-  color: black;
+  color: white;
   padding: 1rem;
 `;
 

@@ -6,6 +6,7 @@ import {
   FilmeConteudo,
   FilmeDetalhesBotao,
   FilmeDetalhesBotaoAdicionado,
+  FilmeDetalhesContainerBotoes,
   FilmeDetalhesLi,
   FilmeDetalhesLiSinopse,
   FilmeDetalhesLista,
@@ -18,6 +19,10 @@ import { ClipLoader } from "react-spinners";
 import Login from "../../Pages/Login/Login";
 import api from "../../api";
 import { useJwtToken } from "../../useJwtToken";
+import assistido_icon from "../../Images/assistido.png";
+import assistir_icon from "../../Images/assistir.png";
+import adicionar_icon from "../../Images/adicionar.png";
+import adicionado_icon from "../../Images/adicionado.png";
 
 const img = LinksApi.IMG;
 
@@ -39,6 +44,7 @@ const SerieDetalhes = ({
   const [loginStatus, setLoginStatus] = React.useState(false);
   const [carregando, setCarregando] = React.useState(true);
   const [assistidoSerie, setAssistidoSerie] = React.useState(false);
+  const [adicionado, setAdicionado] = React.useState(false);
 
   React.useEffect(() => {
     if (token || tokenTemporario) {
@@ -65,17 +71,30 @@ const SerieDetalhes = ({
 
   function adicionarSerie() {
     if (token || tokenTemporario) {
+      setCarregando(true);
       api
         .post("/inserirSerie", {
           titulo: nome,
           imagem,
           nota,
-          tipo: "movie",
+          tipo: "tv",
           id_api: id,
         })
         .then((response) => {
           console.log(response);
           setAssistidoSerie(true);
+          setCarregando(false);
+          setAdicionado(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      api
+        .post("/removerListaDesejo", {
+          titulo: nome,
+        })
+        .then((response) => {
+          console.log(response);
         })
         .catch((error) => {
           console.log(error);
@@ -83,6 +102,61 @@ const SerieDetalhes = ({
     } else {
       setLoginStatus(true);
     }
+  }
+  function adicionarListaDesejo() {
+    if (token || tokenTemporario) {
+      setCarregando(true);
+      api
+        .post("/inserirListaDesejo", {
+          titulo: nome,
+          imagem,
+          nota,
+          tipo: "tv",
+          id_api: id,
+        })
+        .then((response) => {
+          console.log(response);
+          setAdicionado(true);
+          setCarregando(false);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      setLoginStatus(true);
+    }
+  }
+
+  function removerSerie() {
+    setCarregando(true);
+    api
+      .post("/removerSerie", {
+        titulo: nome,
+      })
+      .then((response) => {
+        console.log(response);
+        setAssistidoSerie(false);
+        setCarregando(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  function removerListaDesejo() {
+    setCarregando(true);
+    api
+      .post("/removerListaDesejo", {
+        titulo: nome,
+      })
+      .then((response) => {
+        console.log(response);
+        setAdicionado(false);
+        setCarregando(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
   return (
     <>
@@ -147,15 +221,32 @@ const SerieDetalhes = ({
                 Sinopse: <FilmeDetalhesSpan>{sinopse}</FilmeDetalhesSpan>{" "}
               </FilmeDetalhesLiSinopse>
 
-              {assistidoSerie ? (
-                <FilmeDetalhesBotaoAdicionado>
-                  Assistido
-                </FilmeDetalhesBotaoAdicionado>
-              ) : (
-                <FilmeDetalhesBotao onClick={adicionarSerie}>
-                  Assistir
-                </FilmeDetalhesBotao>
-              )}
+              <FilmeDetalhesContainerBotoes>
+                {assistidoSerie ? (
+                  <FilmeDetalhesBotaoAdicionado onClick={removerSerie}>
+                    <img src={assistido_icon} alt="assistido_icon" /> Assistido
+                  </FilmeDetalhesBotaoAdicionado>
+                ) : (
+                  <>
+                    <FilmeDetalhesBotao onClick={adicionarSerie}>
+                      <img src={assistir_icon} alt="assistido_icon" /> Assistir
+                    </FilmeDetalhesBotao>
+                    {adicionado ? (
+                      <FilmeDetalhesBotaoAdicionado
+                        onClick={removerListaDesejo}
+                      >
+                        <img src={adicionado_icon} alt="adicionado_icon" />{" "}
+                        Adicionado a Lista
+                      </FilmeDetalhesBotaoAdicionado>
+                    ) : (
+                      <FilmeDetalhesBotao onClick={adicionarListaDesejo}>
+                        <img src={adicionar_icon} alt="adicionar_icon" /> Lista
+                        de Desejo
+                      </FilmeDetalhesBotao>
+                    )}
+                  </>
+                )}
+              </FilmeDetalhesContainerBotoes>
             </FilmeDetalhesLista>
           </FilmeConteudo>
         </FilmeContainer>

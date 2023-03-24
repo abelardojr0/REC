@@ -82,7 +82,7 @@ export const FilmeDetalhesSpan = styled.span`
 
 export const FilmeDetalhesBotao = styled.button`
   color: #fff;
-  background-color: #00aad9;
+  background-color: #ff3131;
   padding: 1rem 2rem;
   text-align: center;
   font-size: 1.5rem;
@@ -90,8 +90,15 @@ export const FilmeDetalhesBotao = styled.button`
   border-radius: 20px;
   width: 100%;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   &:hover {
     transform: scale(1.02);
+  }
+  img {
+    max-width: 30px;
   }
 `;
 
@@ -106,7 +113,36 @@ export const FilmeDetalhesBotaoAdicionado = styled.button`
   width: 100%;
   margin: 0 auto;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   &:hover {
     transform: scale(1.02);
   }
+  img {
+    max-width: 30px;
+  }
 `;
+
+export const FilmeDetalhesContainerBotoes = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+`;
+// export const FilmeDetalhesBotaoDesejo = styled.button`
+//   color: #fff;
+//   background-color: #ff3131;
+//   padding: 1rem 2rem;
+//   text-align: center;
+//   font-size: 1.5rem;
+//   border: none;
+//   border-radius: 20px;
+//   width: 100%;
+//   cursor: pointer;
+//   &:hover {
+//     transform: scale(1.02);
+//   }
+// `;

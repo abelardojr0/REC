@@ -86,7 +86,7 @@ export const CardContainerInfos = styled.div`
   margin-bottom: 5px;
 `;
 export const CardTitulo = styled(Link)`
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   color: #e2e2e2;
   text-decoration: none;
   text-align: center;
