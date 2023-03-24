@@ -131,6 +131,10 @@ export const FilmeDetalhesContainerBotoes = styled.div`
   align-items: center;
   gap: 10px;
   width: 100%;
+  ${responsivo(breakpoints.mobile)} {
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
 `;
 // export const FilmeDetalhesBotaoDesejo = styled.button`
 //   color: #fff;
