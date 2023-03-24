@@ -10,7 +10,7 @@ const Input = ({
   tamanho,
   placeholder,
   setDados,
-  value,
+  dados,
 }) => {
   const [focus, setFocus] = React.useState("");
   function inputFocado() {
@@ -40,6 +40,7 @@ const Input = ({
             onFocus={inputFocado}
             onBlur={inputDesfocado}
             onChange={atualizar}
+            value={dados}
           />
           <LabelInput className={focus} htmlFor={htmlFor}>
             {texto}

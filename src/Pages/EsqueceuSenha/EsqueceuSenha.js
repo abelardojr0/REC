@@ -33,6 +33,7 @@ const EsqueceuSenha = () => {
         } else if (response.data.status === "sucess") {
           setEmailEnviado(true);
           setEmailError(false);
+          setEmail("");
         }
         setCarrengando(false);
       })
@@ -73,6 +74,7 @@ const EsqueceuSenha = () => {
           tamanho={"grande"}
           required={true}
           setDados={setEmail}
+          dados={email}
         />
         <EsqueceuSenhaBotao>Recuperar</EsqueceuSenhaBotao>
       </EsqueceuSenhaContainer>

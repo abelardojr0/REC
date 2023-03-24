@@ -48,8 +48,10 @@ const AtualizarUsuario = () => {
           if (response.data.status === "sucess") {
             setSucesso(true);
             setModalConfirmacao(false);
+            setNome("");
           } else if (response.data.status === "fail") {
             setSenhaErrada(true);
+            setSenha("");
           }
         })
         .catch((error) => {
@@ -83,6 +85,7 @@ const AtualizarUsuario = () => {
                   tamanho={"grande"}
                   required
                   setDados={setSenha}
+                  dados={senha}
                 />
                 {senhaErrada && (
                   <>
@@ -108,6 +111,7 @@ const AtualizarUsuario = () => {
           tamanho={"grande"}
           required={true}
           setDados={setNome}
+          dados={nome}
         />
         <MinhaContaBotao>Atualizar</MinhaContaBotao>
         {sucesso && (

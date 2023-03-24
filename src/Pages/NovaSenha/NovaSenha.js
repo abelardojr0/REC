@@ -27,6 +27,8 @@ const NovaSenha = () => {
   function atualizarSenha(e) {
     e.preventDefault();
     setCarrengando(true);
+    setSenhasDiferentes(true);
+    setSenhaFraca(false);
     if (senha === senhaRepetida) {
       api
         .post("/novaSenha/" + tokenURL, {
@@ -35,10 +37,15 @@ const NovaSenha = () => {
         .then((response) => {
           console.log(response);
           if (response.data.status === "sucess") {
-            setSucesso(true);
+            setSenhasDiferentes(true);
             setSenhaFraca(false);
+            setSucesso(true);
+            setSenha("");
+            setSenhaRepetida("");
           } else if (response.data.status === "senhaFraca") {
             setSenhaFraca(true);
+            setSenha("");
+            setSenhaRepetida("");
           }
           setCarrengando(false);
         })
@@ -47,6 +54,7 @@ const NovaSenha = () => {
         });
     } else {
       setSenhasDiferentes(false);
+      setSenhaFraca(false);
       setCarrengando(false);
     }
   }
@@ -72,6 +80,7 @@ const NovaSenha = () => {
           tamanho={"grande"}
           required={true}
           setDados={setSenha}
+          dados={senha}
         />
         {senhaFraca && (
           <CadastroMsgDeErro>
@@ -88,6 +97,7 @@ const NovaSenha = () => {
           tamanho={"grande"}
           required={true}
           setDados={setSenhaRepetida}
+          dados={senhaRepetida}
         />
         {!senhasDiferentes && (
           <CadastroMsgDeErro>As senhas devem ser iguais.</CadastroMsgDeErro>

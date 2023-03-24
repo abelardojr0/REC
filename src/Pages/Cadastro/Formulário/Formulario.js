@@ -52,8 +52,11 @@ const Formulario = () => {
             navigate(`/checarEmail?q=${email}`);
           } else if (response.data.status === "fail") {
             setMsgErroEmail(true);
+            setEmail("");
           } else if (response.data.status === "senhaFraca") {
             setMsgErroSenhaFraca(true);
+            setSenha("");
+            setConfirmarSenha("");
           }
           setCarregando(false);
         })
@@ -98,6 +101,7 @@ const Formulario = () => {
           tamanho={"grande"}
           required={true}
           setDados={setNome}
+          dados={nome}
         />
         {msgErroEmail && (
           <CadastroMsgDeErro>Email já existe!</CadastroMsgDeErro>
@@ -111,6 +115,7 @@ const Formulario = () => {
           tamanho={"grande"}
           required
           setDados={setEmail}
+          dados={email}
         />
         {msgErroSenhaFraca && (
           <CadastroMsgDeErro>
@@ -127,6 +132,7 @@ const Formulario = () => {
           tamanho={"grande"}
           required
           setDados={setSenha}
+          dados={senha}
         />
         {msgErroSenha && (
           <CadastroMsgDeErro>Senhas não compativeis</CadastroMsgDeErro>
@@ -140,6 +146,7 @@ const Formulario = () => {
           tamanho={"grande"}
           required
           setDados={setConfirmarSenha}
+          dados={confirmarSenha}
         />
         <Botao type="submit">Cadastrar</Botao>
 

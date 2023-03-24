@@ -52,6 +52,7 @@ const MinhaConta = () => {
             window.location.reload();
           } else {
             setSenhaErrada(true);
+            setSenha("");
           }
         })
         .catch((error) => {
@@ -88,6 +89,7 @@ const MinhaConta = () => {
                   tamanho={"grande"}
                   required
                   setDados={setSenha}
+                  dados={senha}
                 />
                 {senhaErrada && (
                   <>

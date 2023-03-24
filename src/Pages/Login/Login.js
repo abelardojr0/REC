@@ -29,7 +29,6 @@ const Login = ({ setLoginStatus }) => {
   const [errorLogin, setErrorLogin] = React.useState();
   const [lembrar, setLembrar] = React.useState(false);
   const [token, setToken] = useJwtToken(5);
-  console.log(token);
   const navigate = useNavigate();
 
   function fecharModal(e) {
@@ -54,10 +53,13 @@ const Login = ({ setLoginStatus }) => {
         console.log(response);
         if (response.data.status === "fail") {
           setErrorLogin(true);
-        } else {
+          setSenha("");
+          console.log(senha);
+        } else if (response.data.status === "sucess") {
           if (lembrar) {
             setToken(response.data.access_token);
             localStorage.setItem("nome", response.data.nome);
+            console.log(token);
           } else {
             sessionStorage.setItem("nome", response.data.nome);
             sessionStorage.setItem("token", response.data.access_token);
@@ -91,6 +93,7 @@ const Login = ({ setLoginStatus }) => {
             tamanho={"grande"}
             required={true}
             setDados={setEmail}
+            dados={email}
           />
           <Input
             htmlFor={"senhaLogin"}
@@ -101,6 +104,7 @@ const Login = ({ setLoginStatus }) => {
             tamanho={"grande"}
             required
             setDados={setSenha}
+            dados={senha}
           />
           <LoginEsqueceuSenha to="/esqueceuSenha">
             Esqueceu a senha?

@@ -2,6 +2,7 @@ import React from "react";
 import api from "../../api";
 import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
+import { ContainerCarregando } from "../../GlobalStyles";
 import { useJwtToken } from "../../useJwtToken";
 import Input from "../Cadastro/Formulário/Components/Input";
 import { CadastroMsgDeErro } from "../Cadastro/Formulário/StylesFormulario";
@@ -11,17 +12,17 @@ import {
   MinhaContaTextoSucesso,
   MinhaContaTitulo,
 } from "./StylesMinhaConta";
+import { ClipLoader } from "react-spinners";
 
 const MudarSenha = () => {
   const [senha, setSenha] = React.useState();
   const [confirmarSenha, setConfirmarSenha] = React.useState();
   const [senhaAtual, setSenhaAtual] = React.useState();
-  // const [checkSenha, setCheckSenha] = React.useState(false);
   const [checkSenhaMsgErro, setCheckSenhaMsgErro] = React.useState(false);
-
   const [senhaFraca, setSenhaFraca] = React.useState(false);
   const [senhaErrada, setSenhaErrada] = React.useState();
   const [sucesso, setSucesso] = React.useState();
+  const [carregando, setCarregando] = React.useState(false);
   const [token] = useJwtToken();
   const tokenTemporario = sessionStorage.getItem("token");
 
@@ -30,26 +31,10 @@ const MudarSenha = () => {
     setSenhaErrada(false);
     setSenhaFraca(false);
     setCheckSenhaMsgErro(false);
-    // setCheckSenha(false)
 
-    // api
-    //   .post("/checarSenha", {
-    //     senha: senhaAtual,
-    //   })
-    //   .then((response) => {
-    //     if (response.data.status === "sucess") {
-    //       setCheckSenha(true);
-    //     } else if (response.data.status === "fail") {
-    //       setCheckSenha(false);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-
-    // if (checkSenha) {
     if (senha === confirmarSenha) {
       if (token || tokenTemporario) {
+        setCarregando(true);
         api
           .post("/atualizarSenha", {
             senhaAtual,
@@ -59,12 +44,16 @@ const MudarSenha = () => {
             console.log(response);
             if (response.data.status === "sucess") {
               setSucesso(true);
+              setSenha("");
+              setSenhaAtual("");
+              setConfirmarSenha("");
               setSenhaFraca(false);
             } else if (response.data.status === "senhaFraca") {
               setSenhaFraca(true);
             } else if (response.data.status === "fail") {
               setCheckSenhaMsgErro(true);
             }
+            setCarregando(false);
           })
           .catch((error) => {
             console.log(error);
@@ -73,13 +62,17 @@ const MudarSenha = () => {
     } else {
       setSenhaErrada(true);
     }
-    // } else {
-    //   setCheckSenhaMsgErro(true);
-    // }
   }
   return (
     <>
       <Header />
+      {carregando && (
+        <>
+          <ContainerCarregando>
+            <ClipLoader size={100} />
+          </ContainerCarregando>
+        </>
+      )}
       <MinhaContaAtualizar onSubmit={trocarSenha}>
         <MinhaContaTitulo>Trocar Senha</MinhaContaTitulo>
         {senhaFraca && (
@@ -97,6 +90,7 @@ const MudarSenha = () => {
           tamanho={"grande"}
           required={true}
           setDados={setSenhaAtual}
+          dados={senhaAtual}
         />
         {checkSenhaMsgErro && (
           <CadastroMsgDeErro>Senha atual está incorreta</CadastroMsgDeErro>
@@ -110,6 +104,7 @@ const MudarSenha = () => {
           tamanho={"grande"}
           required={true}
           setDados={setSenha}
+          dados={senha}
         />
         {senhaErrada && (
           <CadastroMsgDeErro>As senhas devem ser iguais.</CadastroMsgDeErro>
@@ -123,6 +118,7 @@ const MudarSenha = () => {
           tamanho={"grande"}
           required={true}
           setDados={setConfirmarSenha}
+          dados={confirmarSenha}
         />
         <MinhaContaBotao>Trocar Senha</MinhaContaBotao>
         {sucesso && (
