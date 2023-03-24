@@ -35,8 +35,11 @@ const Formulario = () => {
 
   function finalizar(e) {
     e.preventDefault();
-    setCarregando(true);
-    if (senha === confirmarSenha) {
+    setMsgErroEmail(false);
+    setMsgErroSenha(false);
+    setMsgErroSenhaFraca(false);
+    if (senha === confirmarSenha && msgErroEmail === false) {
+      setCarregando(true);
       api
         .post("/inserirUsuario", {
           nome,
@@ -69,6 +72,7 @@ const Formulario = () => {
       setLoginStatus(true);
     }
   }
+
   return (
     <>
       {carregando && (

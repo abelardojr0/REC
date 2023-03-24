@@ -77,7 +77,7 @@ export const FormularioSociaisCadastro = styled.div`
 `;
 export const CadastroMsgDeErro = styled.div`
   width: 100%;
-  color: #9d001b;
+  color: #ff3131;
   margin-left: 10px;
   margin-bottom: 5px;
 `;

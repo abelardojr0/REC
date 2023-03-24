@@ -4,40 +4,52 @@ import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
 import { useJwtToken } from "../../useJwtToken";
 import Input from "../Cadastro/Formulário/Components/Input";
-import { CadastroMsgDeErro } from "../Cadastro/Formulário/StylesFormulario";
 import {
   MinhaContaAtualizar,
   MinhaContaBotao,
+  MinhaContaContainerConfirmacao,
+  MinhaContaModalBotaoFechar,
+  MinhaContaModalConfirmacao,
+  MinhaContaModalFormulario,
+  MinhaContaModalMsgErro,
   MinhaContaTextoSucesso,
   MinhaContaTitulo,
 } from "./StylesMinhaConta";
 
 const AtualizarUsuario = () => {
   const [nome, setNome] = React.useState();
-  const [email, setEmail] = React.useState();
-  const [senha, setSenha] = React.useState();
-  const [senhaFraca, setSenhaFraca] = React.useState(false);
   const [sucesso, setSucesso] = React.useState();
+  const [modalConfirmacao, setModalConfirmacao] = React.useState(false);
+  const [senha, setSenha] = React.useState();
+  const [senhaErrada, setSenhaErrada] = React.useState(false);
   const [token] = useJwtToken();
   const tokenTemporario = sessionStorage.getItem("token");
 
-  function atualizarBanco(e) {
+  function fecharModal(e) {
+    if (
+      e.target.getAttribute("id") === "modal" ||
+      e.target.getAttribute("id") === "fechar"
+    ) {
+      setModalConfirmacao(false);
+    }
+  }
+
+  function atualizarUsuario(e) {
     e.preventDefault();
     localStorage.setItem("nome", nome);
     if (token || tokenTemporario) {
       api
         .post("/atualizarUsuario", {
           nome,
-          email,
           senha,
         })
         .then((response) => {
           console.log(response);
           if (response.data.status === "sucess") {
             setSucesso(true);
-            setSenhaFraca(false);
-          } else if (response.data.status === "senhaFraca") {
-            setSenhaFraca(true);
+            setModalConfirmacao(false);
+          } else if (response.data.status === "fail") {
+            setSenhaErrada(true);
           }
         })
         .catch((error) => {
@@ -45,10 +57,47 @@ const AtualizarUsuario = () => {
         });
     }
   }
+  function abrirModalConfirmacao(e) {
+    e.preventDefault();
+    setModalConfirmacao(true);
+    setSenhaErrada(false);
+  }
   return (
     <>
       <Header />
-      <MinhaContaAtualizar>
+      {modalConfirmacao && (
+        <>
+          <MinhaContaContainerConfirmacao id="modal" onClick={fecharModal}>
+            <MinhaContaModalConfirmacao>
+              <MinhaContaModalBotaoFechar id="fechar" onClick={fecharModal}>
+                X
+              </MinhaContaModalBotaoFechar>
+              <MinhaContaModalFormulario onSubmit={atualizarUsuario}>
+                Confirme sua senha
+                <Input
+                  htmlFor={"senhaConfirma"}
+                  texto={"Senha"}
+                  tipo={"password"}
+                  nome={"senhaConfirma"}
+                  id={"senhaConfirma"}
+                  tamanho={"grande"}
+                  required
+                  setDados={setSenha}
+                />
+                {senhaErrada && (
+                  <>
+                    <MinhaContaModalMsgErro>
+                      Senha incorreta.
+                    </MinhaContaModalMsgErro>
+                  </>
+                )}
+                <MinhaContaBotao>Atualizar</MinhaContaBotao>
+              </MinhaContaModalFormulario>
+            </MinhaContaModalConfirmacao>
+          </MinhaContaContainerConfirmacao>
+        </>
+      )}
+      <MinhaContaAtualizar onSubmit={abrirModalConfirmacao}>
         <MinhaContaTitulo>Atualizar Usuário</MinhaContaTitulo>
         <Input
           htmlFor={"NovoNome"}
@@ -60,33 +109,7 @@ const AtualizarUsuario = () => {
           required={true}
           setDados={setNome}
         />
-        <Input
-          htmlFor={"novoEmail"}
-          texto={"Novo Email"}
-          tipo={"text"}
-          nome={"novoEmail"}
-          id={"novoEmail"}
-          tamanho={"grande"}
-          required={true}
-          setDados={setEmail}
-        />
-        {senhaFraca && (
-          <CadastroMsgDeErro>
-            Senha fraca, digite uma senha com no minimo um caracter maiúsculo,
-            minúsculo, especial e um número
-          </CadastroMsgDeErro>
-        )}
-        <Input
-          htmlFor={"novaSenha"}
-          texto={"Nova Senha"}
-          tipo={"password"}
-          nome={"novaSenha"}
-          id={"novaSenha"}
-          tamanho={"grande"}
-          required={true}
-          setDados={setSenha}
-        />
-        <MinhaContaBotao onClick={atualizarBanco}>Atualizar</MinhaContaBotao>
+        <MinhaContaBotao>Atualizar</MinhaContaBotao>
         {sucesso && (
           <MinhaContaTextoSucesso>
             Atualizado com sucesso

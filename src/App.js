@@ -20,6 +20,7 @@ import ChecarEmail from "./Pages/Cadastro/ChecarEmail";
 import Pagina404 from "./Pages/Pagina404/Pagina404";
 import EsqueceuSenha from "./Pages/EsqueceuSenha/EsqueceuSenha";
 import NovaSenha from "./Pages/NovaSenha/NovaSenha";
+import MudarSenha from "./Pages/MinhaConta/MudarSenha";
 function App() {
   return (
     <>
@@ -44,6 +45,7 @@ function App() {
           <Route path="/novaSenha" element={<NovaSenha />} />
           <Route path="/minhaConta" element={<MinhaConta />} />
           <Route path="/atualizarConta" element={<AtualizarUsuario />} />
+          <Route path="/mudarSenha" element={<MudarSenha />} />
           <Route path="*" element={<Pagina404 />} />
         </Routes>
       </BrowserRouter>
