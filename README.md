@@ -6,7 +6,7 @@
 
 # :door: Descrição do Projeto
 
-Projeto desenvolvido em React com o objetivo de praticar apreendizado, se trata de um site onde o usuário poderá catalogar seus filmes, séries, animações, tudo que ele assisti ou deseja assistir.
+Projeto desenvolvido em React com o objetivo de praticar apreendizado, se trata de um site onde o usuário poderá catalogar seus filmes, séries, animações, tudo que ele assisti ou deseja assistir!
 
 
 Projeto 100% responsivo!
