@@ -70,7 +70,7 @@ export const LoginLogo = styled.img`
 `;
 
 export const LoginBotaoEntrar = styled.button`
-  background-color: #00b0ff;
+  background-color: #005da8;
   outline: none;
   padding: 0.8rem 1.6rem;
   font-size: 1.5rem;

@@ -6,7 +6,7 @@ export const CategoriasContainer = styled.nav`
   margin-top: 100px;
   width: 100%;
   height: 100px;
-  background-color: #27272a;
+  background-color: #100f0f;
   display: flex;
   justify-content: center;
   align-items: center;

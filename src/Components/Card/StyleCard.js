@@ -84,15 +84,21 @@ export const CardContainerInfos = styled.div`
   flex-direction: column;
   gap: 10px;
   margin-bottom: 5px;
+  ${responsivo(breakpoints.desktop)} {
+    gap: 5px;
+  }
 `;
 export const CardTitulo = styled(Link)`
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: #e2e2e2;
   text-decoration: none;
   text-align: center;
   width: 100%;
   cursor: pointer;
   margin-top: 10px;
+  ${responsivo(breakpoints.desktop)} {
+    font-size: 1.2rem;
+  }
   &:hover {
     text-decoration: underline;
   }
@@ -108,20 +114,35 @@ export const CardContainerBotao = styled.div`
   padding: 0.3rem;
   width: 180px;
   cursor: pointer;
+  ${responsivo(breakpoints.desktop)} {
+    width: 140px;
+    padding: 0.2rem;
+  }
+  ${responsivo(breakpoints.tablet)} {
+    width: 150px;
+    padding: 0.3rem;
+  }
+  ${responsivo(breakpoints.mobile)} {
+    width: 180px;
+    padding: 0.3rem;
+  }
   &:hover {
     transform: scale(1.05);
   }
 `;
 export const CardTextoBotao = styled.p`
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: black;
   margin-left: 10px;
   font-family: "Fredoka One", cursive;
+  ${responsivo(breakpoints.mobile)} {
+    font-size: 1.3rem;
+  }
 `;
 export const CardBotao = styled.img`
   margin-bottom: 5px;
   margin-top: 5px;
   margin-right: 10px;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
 `;

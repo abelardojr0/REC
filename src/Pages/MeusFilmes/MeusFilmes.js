@@ -57,7 +57,13 @@ const MeusFilmes = () => {
       ) : (
         <ResultadoContainer>
           <ResultadoConteudo>
-            <ResultadoTitulo>Meus Filmes:</ResultadoTitulo>
+            {meusFilmes.length === 0 ? (
+              <ResultadoTitulo>
+                Você ainda não selecionou nenhum filme!
+              </ResultadoTitulo>
+            ) : (
+              <ResultadoTitulo>Meus Filmes:</ResultadoTitulo>
+            )}
             <ResultadoLista>
               {meusFilmes &&
                 meusFilmes.map((item) => (

@@ -22,7 +22,7 @@ export const LabelInput = styled.label`
 
   &.ativo {
     transform: translate(0, 5px) scale(0.75);
-    color: #1a1412;
+    color: #005da8;
   }
 `;
 
@@ -30,14 +30,14 @@ export const InputComponent = styled.input`
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
   font-size: 0.8rem;
-  background-color: transparent;
+  background-color: #e8f0fe;
+  color: black;
   width: 100%;
   height: 56px;
   padding: 0.5rem 0.8rem;
   outline: 0;
   border: 1px solid #cde2e0;
   border-radius: 10px;
-  background: #dfe5ef;
   font-size: 16px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 `;

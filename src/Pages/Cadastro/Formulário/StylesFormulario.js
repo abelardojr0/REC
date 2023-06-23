@@ -27,7 +27,7 @@ export const TituloFormulario = styled.h2`
 `;
 export const Botao = styled.button`
   color: #fff;
-  background-color: #00b0ff;
+  background-color: #005da8;
   padding: 1rem 2rem;
   text-align: center;
   font-size: 1.5rem;
@@ -42,7 +42,7 @@ export const Botao = styled.button`
 
 export const BotaoFalso = styled.div`
   color: #fff;
-  background-color: #00b0ff;
+  background-color: #005da8;
   padding: 1rem 2rem;
   text-align: center;
   font-size: 1.5rem;

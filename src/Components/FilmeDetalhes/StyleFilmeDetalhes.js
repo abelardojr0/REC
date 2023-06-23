@@ -1,12 +1,15 @@
 import styled from "styled-components";
 import responsivo, { breakpoints } from "../../Responsivo";
+import fundo from "../../Images/fundo.png";
 
 export const FilmeContainer = styled.article`
-  height: 100vh;
-  background-color: #424150;
+  /* height: 100vh; */
+  background-image: url(${fundo});
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
   width: 100%;
-  padding-top: 100px;
-  margin-bottom: 60px;
+  padding-top: 120px;
   overflow-x: hidden;
 `;
 export const FilmeConteudo = styled.section`
@@ -49,26 +52,25 @@ export const FilmeDetalhesLista = styled.ul`
   justify-content: space-between;
   align-items: flex-start;
   flex-direction: column;
+  height: 600px;
 `;
 
 export const FilmeDetalhesLi = styled.li`
   color: #005da8;
   font-size: 1.2rem;
-  background-color: gray;
+  background-color: #1f1e2d;
   width: 100%;
   padding: 0.5rem;
-  margin-bottom: 10px;
   border-radius: 5px;
 `;
 
 export const FilmeDetalhesLiSinopse = styled.li`
   color: #005da8;
   font-size: 1.2rem;
-  background-color: gray;
-  width: 100%;
+  background-color: #1f1e2d;
+  width: 102%;
   padding: 0.5rem;
   box-sizing: border-box;
-  margin-bottom: 10px;
   border-radius: 5px;
   max-height: 100px;
   overflow: hidden;
@@ -81,8 +83,8 @@ export const FilmeDetalhesSpan = styled.span`
 `;
 
 export const FilmeDetalhesBotao = styled.button`
-  color: #fff;
-  background-color: #ff3131;
+  color: #000;
+  background-color: #f9f9f6;
   padding: 1rem 2rem;
   text-align: center;
   font-size: 1.5rem;
@@ -95,7 +97,7 @@ export const FilmeDetalhesBotao = styled.button`
   align-items: center;
   gap: 10px;
   &:hover {
-    transform: scale(1.02);
+    color: red;
   }
   img {
     max-width: 30px;
@@ -118,7 +120,7 @@ export const FilmeDetalhesBotaoAdicionado = styled.button`
   align-items: center;
   gap: 10px;
   &:hover {
-    transform: scale(1.02);
+    color: #062406;
   }
   img {
     max-width: 30px;
@@ -130,23 +132,9 @@ export const FilmeDetalhesContainerBotoes = styled.div`
   justify-content: center;
   align-items: center;
   gap: 10px;
-  width: 100%;
+  width: 102%;
   ${responsivo(breakpoints.mobile)} {
     flex-direction: column;
     margin-bottom: 20px;
   }
 `;
-// export const FilmeDetalhesBotaoDesejo = styled.button`
-//   color: #fff;
-//   background-color: #ff3131;
-//   padding: 1rem 2rem;
-//   text-align: center;
-//   font-size: 1.5rem;
-//   border: none;
-//   border-radius: 20px;
-//   width: 100%;
-//   cursor: pointer;
-//   &:hover {
-//     transform: scale(1.02);
-//   }
-// `;

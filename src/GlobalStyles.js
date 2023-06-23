@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
+import fundo from "./Images/fundo.png";
 export const GlobalStyles = createGlobalStyle`
   body{
     font-family: "Kanit", sans-serif;
@@ -6,6 +7,11 @@ export const GlobalStyles = createGlobalStyle`
     height: 100%;
     background-color: #1b1c1f;
     overflow-x: hidden;
+    background-image: url(${fundo});
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 100vh;
   }
   #root{
     width: 100vw;

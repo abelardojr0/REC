@@ -37,7 +37,7 @@ export const MinhaContaBotao = styled.button`
   padding: 0.9rem 1.2rem;
   text-decoration: none;
   font-size: 1.5rem;
-  background-color: #ff3131;
+  background-color: #a90e0c;
   border: none;
   border-radius: 15px;
   color: white;
@@ -54,7 +54,7 @@ export const MinhaContaBotaoAtualizar = styled.button`
   padding: 0.9rem 1.2rem;
   text-decoration: none;
   font-size: 1.5rem;
-  background-color: #00b0ff;
+  background-color: #005da8;
   border: none;
   border-radius: 15px;
   color: white;
@@ -130,7 +130,7 @@ export const MinhaContaModalFormulario = styled.form`
 `;
 
 export const MinhaContaModalBotaoEntrar = styled.button`
-  background-color: #00b0ff;
+  background-color: #005da8;
   outline: none;
   border: none;
   padding: 0.8rem 1.6rem;

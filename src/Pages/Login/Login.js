@@ -15,19 +15,20 @@ import {
   LoginMsgErro,
   LoginTitulo,
 } from "./StyleLogin";
-// import facebook from "../../Images/logo_facebook.png";
 // import google from "../../Images/logo_google.png";
 // import LoginComS ociais from "./LoginComSociais/LoginComSociais";
-
+import { ClipLoader } from "react-spinners";
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
 import { useJwtToken } from "../../useJwtToken";
+import { ContainerCarregando } from "../../GlobalStyles";
 
 const Login = ({ setLoginStatus }) => {
   const [email, setEmail] = React.useState();
   const [senha, setSenha] = React.useState();
   const [errorLogin, setErrorLogin] = React.useState();
   const [lembrar, setLembrar] = React.useState(false);
+  const [carregando, setCarregando] = React.useState(false);
   const [token, setToken] = useJwtToken(5);
   const navigate = useNavigate();
 
@@ -44,6 +45,7 @@ const Login = ({ setLoginStatus }) => {
   }
   function checarLogin(e) {
     e.preventDefault();
+    setCarregando(true);
     api
       .post("/usuarios", {
         email,
@@ -69,6 +71,7 @@ const Login = ({ setLoginStatus }) => {
           navigate("/");
           window.location.reload(true);
         }
+        setCarregando(false);
       })
       .catch((error) => {
         console.log(error);
@@ -119,8 +122,15 @@ const Login = ({ setLoginStatus }) => {
             />
             <LoginLembrarLabel htmlFor={"lembrar"}>Lembre-me</LoginLembrarLabel>
           </LoginLembrarDivisao>
-
-          <LoginBotaoEntrar>Entrar</LoginBotaoEntrar>
+          {carregando ? (
+            <LoginBotaoEntrar>
+              Entrando
+              <ClipLoader size={15} />
+            </LoginBotaoEntrar>
+          ) : (
+            <LoginBotaoEntrar>Entrar </LoginBotaoEntrar>
+          )}
+          {/* <LoginBotaoEntrar>Entrar</LoginBotaoEntrar> */}
 
           {/* <EntrarCom>Entrar com: </EntrarCom> */}
           {/* <FormularioSociais>

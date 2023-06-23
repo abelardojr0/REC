@@ -45,7 +45,13 @@ const ListaDesejo = () => {
       ) : (
         <ResultadoContainer>
           <ResultadoConteudo>
-            <ResultadoTitulo>Minha Lista de Desejos:</ResultadoTitulo>
+            {listaDesejo.length === 0 ? (
+              <ResultadoTitulo>
+                Você ainda não selecionou nenhum item!
+              </ResultadoTitulo>
+            ) : (
+              <ResultadoTitulo>Minha Lista de Desejo:</ResultadoTitulo>
+            )}
             <ResultadoLista>
               {listaDesejo &&
                 listaDesejo.map((item) => (

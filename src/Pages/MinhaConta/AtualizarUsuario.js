@@ -4,6 +4,7 @@ import Footer from "../../Components/Footer/Footer";
 import Header from "../../Components/Header/Header";
 import { useJwtToken } from "../../useJwtToken";
 import Input from "../Cadastro/Formulário/Components/Input";
+import { ClipLoader } from "react-spinners";
 import {
   MinhaContaAtualizar,
   MinhaContaBotao,
@@ -24,6 +25,7 @@ const AtualizarUsuario = () => {
   const [senhaErrada, setSenhaErrada] = React.useState(false);
   const [token] = useJwtToken();
   const tokenTemporario = sessionStorage.getItem("token");
+  const [carregando, setCarregando] = React.useState(false);
 
   function fecharModal(e) {
     if (
@@ -36,7 +38,7 @@ const AtualizarUsuario = () => {
 
   function atualizarUsuario(e) {
     e.preventDefault();
-    localStorage.setItem("nome", nome);
+    setCarregando(true);
     if (token || tokenTemporario) {
       api
         .post("/atualizarUsuario", {
@@ -45,14 +47,16 @@ const AtualizarUsuario = () => {
         })
         .then((response) => {
           console.log(response);
-          if (response.data.status === "sucess") {
+          if (response.data.status === "success") {
             setSucesso(true);
             setModalConfirmacao(false);
             setNome("");
+            localStorage.setItem("nome", nome);
           } else if (response.data.status === "fail") {
             setSenhaErrada(true);
             setSenha("");
           }
+          setCarregando(false);
         })
         .catch((error) => {
           console.log(error);
@@ -94,7 +98,14 @@ const AtualizarUsuario = () => {
                     </MinhaContaModalMsgErro>
                   </>
                 )}
-                <MinhaContaBotao>Atualizar</MinhaContaBotao>
+                {carregando ? (
+                  <MinhaContaBotao>
+                    Atualizando
+                    <ClipLoader size={15} />
+                  </MinhaContaBotao>
+                ) : (
+                  <MinhaContaBotao>Atualizar </MinhaContaBotao>
+                )}
               </MinhaContaModalFormulario>
             </MinhaContaModalConfirmacao>
           </MinhaContaContainerConfirmacao>

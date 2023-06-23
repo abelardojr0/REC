@@ -88,6 +88,10 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
                 cols: 3,
               },
               {
+                breakpoint: 768,
+                cols: 1,
+              },
+              {
                 breakpoint: 468,
                 cols: 1,
                 rows: 2,
@@ -125,6 +129,10 @@ const ContainerCards = ({ titulo, lista, tipo }) => {
               {
                 breakpoint: 1000,
                 cols: 3,
+              },
+              {
+                breakpoint: 768,
+                cols: 1,
               },
               {
                 breakpoint: 468,

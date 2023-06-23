@@ -43,7 +43,6 @@ const MinhasSeries = () => {
         });
     }
   }, [token, tokenTemporario]);
-  console.log(minhasSeries);
   return (
     <>
       <Header />
@@ -56,7 +55,13 @@ const MinhasSeries = () => {
       ) : (
         <ResultadoContainer>
           <ResultadoConteudo>
-            <ResultadoTitulo>Minhas Séries:</ResultadoTitulo>
+            {minhasSeries.length === 0 ? (
+              <ResultadoTitulo>
+                Você ainda não selecionou nenhuma série!
+              </ResultadoTitulo>
+            ) : (
+              <ResultadoTitulo>Minhas Séries:</ResultadoTitulo>
+            )}
             <ResultadoLista>
               {minhasSeries &&
                 minhasSeries.map((item) => (

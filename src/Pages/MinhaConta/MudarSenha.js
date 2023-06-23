@@ -42,7 +42,7 @@ const MudarSenha = () => {
           })
           .then((response) => {
             console.log(response);
-            if (response.data.status === "sucess") {
+            if (response.data.status === "success") {
               setSucesso(true);
               setSenha("");
               setSenhaAtual("");
@@ -66,13 +66,6 @@ const MudarSenha = () => {
   return (
     <>
       <Header />
-      {carregando && (
-        <>
-          <ContainerCarregando>
-            <ClipLoader size={100} />
-          </ContainerCarregando>
-        </>
-      )}
       <MinhaContaAtualizar onSubmit={trocarSenha}>
         <MinhaContaTitulo>Trocar Senha</MinhaContaTitulo>
         {checkSenhaMsgErro && (
@@ -120,7 +113,14 @@ const MudarSenha = () => {
           setDados={setConfirmarSenha}
           dados={confirmarSenha}
         />
-        <MinhaContaBotao>Trocar Senha</MinhaContaBotao>
+        {carregando ? (
+          <MinhaContaBotao>
+            Trocando
+            <ClipLoader size={15} />
+          </MinhaContaBotao>
+        ) : (
+          <MinhaContaBotao>Trocar Senha</MinhaContaBotao>
+        )}
         {sucesso && (
           <MinhaContaTextoSucesso>
             Atualizado com sucesso

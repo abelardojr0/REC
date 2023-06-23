@@ -1,8 +1,12 @@
 import styled from "styled-components";
 import responsivo, { breakpoints } from "../../Responsivo";
+import fundo from "../../Images/fundo.png";
 
 export const ResultadoContainer = styled.article`
-  background-color: #424150;
+  background-image: url(${fundo});
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
   width: 100%;
   height: 100%;
   min-height: 500px;
@@ -47,7 +51,7 @@ export const ResultadoTitulo = styled.h1`
   font-size: 3rem;
   color: white;
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 60px;
   ${responsivo(breakpoints.tablet)} {
     text-align: center;
     font-size: 2.5rem;

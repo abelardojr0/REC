@@ -95,6 +95,7 @@ const Header = () => {
     }
   }
   window.addEventListener("click", fecharMenu);
+
   React.useEffect(() => {
     if (window.innerWidth <= 768) {
       setMenuMobile(true);

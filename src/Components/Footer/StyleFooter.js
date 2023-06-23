@@ -2,7 +2,7 @@ import styled from "styled-components";
 import responsivo, { breakpoints } from "../../Responsivo";
 
 export const FooterComponent = styled.footer`
-  background-color: #000600;
+  background-color: #030303;
   height: 100%;
   max-height: 200px;
   border-top: 1px solid #304644;
